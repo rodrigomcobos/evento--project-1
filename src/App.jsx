@@ -1,11 +1,16 @@
 import React from 'react'
+import Navbar from './components/NavBar'
+import SearchBar from './components/SearchBar'
+import CustomSlider from './components/Slider';
 
 const App = () => {
   return (
-    <div className='bg-slate-400'>
-      <h1 className="text-3xl font-bold underline">
-        Evento! Project 1
-      </h1>
+    <div>
+      <Navbar />
+      <div className="mt-6">
+        <SearchBar />
+        <CustomSlider />
+      </div>
     </div>
 
   )

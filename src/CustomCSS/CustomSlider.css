@@ -1,0 +1,23 @@
+/* CustomSlider.css */
+.slick-dots {
+    @apply absolute bottom-8 flex space-x-2;
+}
+
+.slick-dots li {
+    @apply mx-1;
+}
+
+.slick-dots button {
+    @apply w-3 h-3 bg-white rounded-full;
+}
+
+.slick-dots .slick-active button {
+    @apply bg-white;
+}
+
+.custom-bg {
+    background-image: url('/assets/slides/slide-1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
