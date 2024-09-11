@@ -9,7 +9,7 @@ const AdBanner = () => {
                 style={{ backgroundImage: `url(${placeholderImage})` }}
             >
                 {/* Text Section */}
-                <div className="absolute right-20 top-1/2 transform -translate-y-1/2 flex flex-col items-center">
+                <div className="absolute right-14 top-1/2 transform -translate-y-1/2 flex flex-col items-center">
                     <h2 className="text-3xl font-bold">Imagine Dragons</h2>
                     <h3 className="text-2xl">LOOM</h3>
                     <h2 className='text-lg font-light'>WORLD TOUR</h2>

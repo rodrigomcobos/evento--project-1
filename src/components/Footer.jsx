@@ -8,7 +8,7 @@ const Footer = () => {
             <footer className="bg-gray-800 text-gray-200 py-12 px-12">
                 <div className="container max-w-[52rem] mx-auto">
                     {/* Columns */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:items-center gap-12 mb-8">
+                    <div className="grid grid-cols-2 md:grid-cols-3 sm:grid-cols-2 sm:items-center gap-12 mb-8">
 
                         {/* Column 1: Logo and Social Links */}
                         <div className="flex flex-col items-start">
