@@ -1,6 +1,6 @@
 /* Style the dots container */
 .slick-dots {
-    @apply absolute bottom-4 flex justify-center space-x-2 bg-transparent;
+    @apply absolute bottom-4 flex justify-center space-x-2;
 }
 
 /* Style individual dot list items */
@@ -15,6 +15,14 @@
 
 /* Active dot button styling (make it bigger) */
 .slick-dots .slick-active button {
-    @apply w-4 h-4 bg-white !important;
+    @apply w-4 h-4 bg-white overflow-hidden !important;
     transition: all 0.8s ease-in-out; /* Smooth transition when active */
 }
+
+.slick-dots li button:before {
+    color: transparent;
+  }
+
+  .slick-dots .slick-active button:before {
+    color: transparent !important;
+  }

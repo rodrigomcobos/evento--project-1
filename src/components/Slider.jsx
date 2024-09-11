@@ -9,12 +9,15 @@ import '../CustomCSS/CustomSlider.css'; // Import the custom CSS
 const CustomSlider = () => {
     const settings = {
         dots: true,
+        dotsClass: 'slick-dots',
         infinite: true,
         speed: 800,
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 5000,
+        pauseOnHover: true,
+        swipeToSlide: true,
     };
 
     return (
