@@ -90,11 +90,16 @@ const EventsSection = () => {
             <section className="w-auto mt-24">
                 <div className=" mx-auto">
                     {/* Title and Location Button */}
-                    <div className="flex items-center px-4 mb-6 space-x-2">
-                        <h2 className="text-lg font-bold">Events near</h2>
-                        <button className="text-indigo-500 border-2 border-indigo-500 rounded-full px-4 py-2 flex items-center hover:bg-gradient-to-r from-indigo-600 to-blue-400 hover:text-white hover:font-bold transition duration-[400] text-xs w-auto">
-                            Lehi, UT <FaEdit className="ml-2" />
-                        </button>
+                    <div className="flex items-center justify-between px-4 mb-6">
+                        <div className="flex items-center space-x-2">
+                            <h2 className="text-lg font-bold">Events near</h2>
+                            <button className="text-indigo-500 border-2 border-indigo-500 rounded-full px-4 py-2 flex items-center hover:bg-gradient-to-r from-indigo-600 to-blue-400 hover:text-white font-bold transition duration-300 text-xs w-auto">
+                                Lehi, UT <FaEdit className="ml-2" />
+                            </button>
+                        </div>
+                        <a href="#all-events" className="hover:text-indigo-500 transition duration-300 text-xs font-bold">
+                            See all events
+                        </a>
                     </div>
 
                     {/* Events Cards Grid */}
@@ -149,12 +154,15 @@ const EventsSection = () => {
             <section className="w-auto mt-12">
                 <div className=" mx-auto">
                     {/* Title and Location Button */}
-                    <div className="flex items-center px-4 mb-6 space-x-2">
+                    <div className="flex items-center justify-between px-4 mb-6">
                         <h2 className="text-lg font-bold">Upcoming Events</h2>
+                        <a href="#upcoming-events" className="hover:text-indigo-500 transition duration-300 text-xs font-bold">
+                            See all events
+                        </a>
                     </div>
 
                     {/* Events Cards Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-10 ">
+                    <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-12 px-10 ">
                         {upcoming.map((event, index) => (
 
                             // Event Image

@@ -1,7 +1,7 @@
 // Slider.jsx
 import React, { Component } from 'react';
 import Slider from 'react-slick';
-import { FaStar } from 'react-icons/fa';
+import { FaRegStar } from 'react-icons/fa';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../CustomCSS/CustomSlider.css'; // Import the custom CSS
@@ -10,11 +10,11 @@ const CustomSlider = () => {
     const settings = {
         dots: true,
         infinite: true,
-        speed: 500,
+        speed: 800,
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplay: false,
-        autoplaySpeed: 3000,
+        autoplay: true,
+        autoplaySpeed: 5000,
     };
 
     return (
@@ -31,7 +31,7 @@ const CustomSlider = () => {
                                     <h2 className="text-white text-3xl font-bold mb-4">
                                         Salt Lake City Annual Music Festival
                                     </h2>
-                                    <button className="w-auto max-w-fit text-xs px-6 py-2 border border-white text-white rounded-full hover:bg-white hover:font-bold hover:text-indigo-900 transition">
+                                    <button className="w-auto max-w-fit text-xs px-6 py-2 border border-white text-white rounded-full hover:bg-white font-bold hover:text-indigo-900 transition duration-300">
                                         See Tickets
                                     </button>
                                 </div>
@@ -40,7 +40,7 @@ const CustomSlider = () => {
                                 <div className="w-screen h-full relative flex items-center justify-end">
                                     {/* Likes count */}
                                     <div className="absolute text-[0.6rem] top-4 right-6 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full flex items-center">
-                                        2.1K <FaStar className="ml-2 border-white" />
+                                        2.1K <FaRegStar className="ml-2 border-white" />
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@ const CustomSlider = () => {
                                     <h2 className="text-white text-3xl font-bold mb-4">
                                         FIFA World Cup Championship 2024
                                     </h2>
-                                    <button className="w-auto max-w-fit text-xs px-6 py-2 border border-white text-white rounded-full hover:bg-white hover:font-bold hover:text-indigo-900 transition">
+                                    <button className="w-auto max-w-fit text-xs px-6 py-2 border border-white text-white rounded-full hover:bg-white font-bold hover:text-indigo-900 transition duration-300">
                                         See Tickets
                                     </button>
                                 </div>
@@ -64,7 +64,7 @@ const CustomSlider = () => {
                                 <div className="w-screen h-full relative flex items-center justify-end">
                                     {/* Likes count */}
                                     <div className="absolute text-[0.6rem] top-4 right-6 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full flex items-center">
-                                        2.1K <FaStar className="ml-2 border-white" />
+                                        2.1K <FaRegStar className="ml-2 border-white" />
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@ const CustomSlider = () => {
                                     <h2 className="text-white text-3xl font-bold mb-4">
                                         National Rodeo Finals
                                     </h2>
-                                    <button className="w-auto max-w-fit text-xs px-6 py-2 border border-white text-white rounded-full hover:bg-white hover:font-bold hover:text-indigo-900 transition">
+                                    <button className="w-auto max-w-fit text-xs px-6 py-2 border border-white text-white rounded-full hover:bg-white font-bold hover:text-indigo-900 transition duration-300">
                                         See Tickets
                                     </button>
                                 </div>
@@ -88,7 +88,7 @@ const CustomSlider = () => {
                                 <div className="w-screen h-full relative flex items-center justify-end">
                                     {/* Likes count */}
                                     <div className="absolute text-[0.6rem] top-4 right-6 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full flex items-center">
-                                        2.1K <FaStar className="ml-2 border-white" />
+                                        2.1K <FaRegStar className="ml-2 border-white" />
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@ const CustomSlider = () => {
                                     <h2 className="text-white text-3xl font-bold mb-4">
                                         Nascar National Championship Semi-Finals
                                     </h2>
-                                    <button className="w-auto max-w-fit text-xs px-6 py-2 border border-white text-white rounded-full hover:bg-white  hover:text-indigo-900 hover:font-bold transition">
+                                    <button className="w-auto max-w-fit text-xs px-6 py-2 border border-white text-white rounded-full hover:bg-white  hover:text-indigo-900 font-bold transition duration-300">
                                         See Tickets
                                     </button>
                                 </div>
@@ -112,7 +112,7 @@ const CustomSlider = () => {
                                 <div className="w-screen h-full relative flex items-center justify-end">
                                     {/* Likes count */}
                                     <div className="absolute text-[0.6rem] top-4 right-6 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full flex items-center">
-                                        2.1K <FaStar className="ml-2 border-white" />
+                                        2.1K <FaRegStar className="ml-2 border-white" />
                                     </div>
                                 </div>
                             </div>
