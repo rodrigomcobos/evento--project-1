@@ -4,6 +4,7 @@ import SearchBar from './components/SearchBar'
 import CustomSlider from './components/Slider';
 import EventsSection from './components/EventsSection';
 import Footer from './components/Footer';
+import AdBanner from './components/AdBanner';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <SearchBar />
         <CustomSlider />
         <EventsSection />
+        <AdBanner />
         <Footer />
       </div>
     </div>

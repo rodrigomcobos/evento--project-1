@@ -154,7 +154,7 @@ const EventsSection = () => {
 
 
             {/* Upcoming Events Section */}
-            <section className="w-auto mt-12 mb-16">
+            <section className="w-auto mt-12 mb-8">
                 <div className=" mx-auto">
                     {/* Title and Location Button */}
                     <div className="flex items-center justify-between px-4 mb-6">

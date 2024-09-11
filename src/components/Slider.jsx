@@ -14,7 +14,7 @@ const CustomSlider = () => {
         speed: 800,
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 5000,
         pauseOnHover: true,
         swipeToSlide: true,
@@ -25,8 +25,9 @@ const CustomSlider = () => {
     return (
         <div className='px-4'>
             <div className="mt-8 max-w-[54rem] mx-auto">
-                <div className="relative max-w-[75rem] mx-auto rounded-2xl overflow-hidden shadow-lg bg-gradient-to-r from-indigo-800 to-blue-400">
+                <div className="relative max-w-[75rem] h-[27rem] mx-auto rounded-2xl overflow-hidden shadow-lg">
                     <Slider {...settings}>
+
                         {/* Slide 1 */}
                         <div className="relative h-[27rem] bg-right bg-cover bg-clip-border bg-image-1">
                             <div className="absolute inset-0 flex h-auto">
