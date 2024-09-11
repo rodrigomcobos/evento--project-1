@@ -82,10 +82,11 @@ const EventsSection = () => {
             seatsLeft: 8,
             ticketPrice: 'Free',
         },
-    ]
+    ];
 
     return (
         <div className='px-4 max-w-[58rem] mx-auto'>
+
             {/* Events Near Me Section */}
             <section className="w-auto mt-24">
                 <div className=" mx-auto">
@@ -97,52 +98,54 @@ const EventsSection = () => {
                                 Lehi, UT <FaEdit className="ml-2" />
                             </button>
                         </div>
-                        <a href="#all-events" className="hover:text-indigo-500 transition duration-300 text-xs font-bold">
+                        <a href="#all-events" className="hover:text-indigo-500  transition duration-300 text-xs font-bold">
                             See all events
                         </a>
                     </div>
 
                     {/* Events Cards Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-12 px-10 ">
+                    <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-8 px-8">
                         {events.map((event, index) => (
 
-                            // Event Image
-                            <div key={index} className="bg-white rounded-lg">
-                                <img
-                                    src={event.image}
-                                    alt="Event"
-                                    className="w-full h-40 object-cover rounded-md mb-4"
-                                />
+                            // Wrap the card in a link
+                            <div className='border-[10px] border-white'>
+                                <a href="#" key={index} className="block bg-white rounded-lg hover:text-indigo-600">
+                                    <img
+                                        src={event.image}
+                                        alt="Event"
+                                        className="w-full h-40 object-cover rounded-md mb-4"
+                                    />
 
-                                {/* Event Title */}
-                                <h3 className="font-bold text-sm mb-2">
-                                    {event.title}
-                                </h3>
+                                    {/* Event Title */}
+                                    <h3 className="font-bold text-sm mb-2 ">
+                                        {event.title}
+                                    </h3>
 
-                                {/* Hosted By */}
-                                <p className="text-xs text-gray-500 mb-4">
-                                    Hosted by: {event.hostedBy}
-                                </p>
+                                    {/* Hosted By */}
+                                    <p className="text-xs text-gray-500 mb-4">
+                                        Hosted by: {event.hostedBy}
+                                    </p>
 
-                                {/* Event Date */}
-                                <div className="flex items-center mb-2 text-gray-600 text-xs">
-                                    <FaCalendarAlt className="mr-2" />
-                                    <span>{event.date}</span>
-                                </div>
-
-                                {/* Seat Details */}
-                                <div className="flex items-center justify-between text-xs pb-14">
-                                    <div className="flex items-center text-red-500">
-                                        <MdEventSeat className="mr-1" />
-                                        {event.seatsLeft} Seats Left
+                                    {/* Event Date */}
+                                    <div className="flex items-center mb-2 text-gray-600 text-xs">
+                                        <FaCalendarAlt className="mr-2" />
+                                        <span>{event.date}</span>
                                     </div>
 
-                                    {/* Ticket Price */}
-                                    <div className="flex items-center text-green-500">
-                                        <FaTicketAlt className="mr-1" />
-                                        {event.ticketPrice}
+                                    {/* Seat Details */}
+                                    <div className="flex items-center justify-between text-xs pb-14">
+                                        <div className="flex items-center text-red-500">
+                                            <MdEventSeat className="mr-1" />
+                                            {event.seatsLeft} Seats Left
+                                        </div>
+
+                                        {/* Ticket Price */}
+                                        <div className="flex items-center text-green-500">
+                                            <FaTicketAlt className="mr-1" />
+                                            {event.ticketPrice}
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         ))}
                     </div>
@@ -165,44 +168,47 @@ const EventsSection = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-12 px-10 ">
                         {upcoming.map((event, index) => (
 
-                            // Event Image
-                            <div key={index} className="bg-white rounded-lg">
-                                <img
-                                    src={event.image}
-                                    alt="Event"
-                                    className="w-full h-40 object-cover rounded-md mb-4"
-                                />
+                            // Wrap the card in a link
+                            <div className='border-[10px] border-white'>
+                                <a href="#" key={index} className="block bg-white rounded-lg hover:text-indigo-600">
+                                    <img
+                                        src={event.image}
+                                        alt="Event"
+                                        className="w-full h-40 object-cover rounded-md mb-4"
+                                    />
 
-                                {/* Event Title */}
-                                <h3 className="font-bold text-sm mb-2">
-                                    {event.title}
-                                </h3>
+                                    {/* Event Title */}
+                                    <h3 className="font-bold text-sm mb-2">
+                                        {event.title}
+                                    </h3>
 
-                                {/* Hosted By */}
-                                <p className="text-xs text-gray-500 mb-4">
-                                    Hosted by: {event.hostedBy}
-                                </p>
+                                    {/* Hosted By */}
+                                    <p className="text-xs text-gray-500 mb-4">
+                                        Hosted by: {event.hostedBy}
+                                    </p>
 
-                                {/* Event Date */}
-                                <div className="flex items-center mb-2 text-gray-600 text-xs">
-                                    <FaCalendarAlt className="mr-2" />
-                                    <span>{event.date}</span>
-                                </div>
-
-                                {/* Seat Details */}
-                                <div className="flex items-center justify-between text-xs pb-14">
-                                    <div className="flex items-center text-red-500">
-                                        <MdEventSeat className="mr-1" />
-                                        {event.seatsLeft} Seats Left
+                                    {/* Event Date */}
+                                    <div className="flex items-center mb-2 text-gray-600 text-xs">
+                                        <FaCalendarAlt className="mr-2" />
+                                        <span>{event.date}</span>
                                     </div>
 
-                                    {/* Ticket Price */}
-                                    <div className="flex items-center text-green-500">
-                                        <FaTicketAlt className="mr-1" />
-                                        {event.ticketPrice}
+                                    {/* Seat Details */}
+                                    <div className="flex items-center justify-between text-xs pb-14">
+                                        <div className="flex items-center text-red-500">
+                                            <MdEventSeat className="mr-1" />
+                                            {event.seatsLeft} Seats Left
+                                        </div>
+
+                                        {/* Ticket Price */}
+                                        <div className="flex items-center text-green-500">
+                                            <FaTicketAlt className="mr-1" />
+                                            {event.ticketPrice}
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
+
                         ))}
                     </div>
                 </div>

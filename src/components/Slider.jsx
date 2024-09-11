@@ -18,6 +18,8 @@ const CustomSlider = () => {
         autoplaySpeed: 5000,
         pauseOnHover: true,
         swipeToSlide: true,
+        adaptiveHeight: true,
+        fade: true,
     };
 
     return (
