@@ -5,7 +5,8 @@ import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
 import Navbar from '../components/NavBar';
 import Footer from '../components/Footer';
 import ProfileDetails from '../components/ProfileDetails';
-import BillingInfo from '../components/BillingInfo';
+// Strip will handle payment info for secure payment
+// import BillingInfo from '../components/BillingInfo';
 import MyReviews from '../components/MyReviews';
 import UpcomingEvents from '../components/UpcomingEvents';
 import PastEvents from '../components/PastEvents';
@@ -27,7 +28,7 @@ const ProfilePage = () => {
                 <div className="w-1/4 bg-white p-6 border-r-2 border-gray-100">
                     <div className="flex flex-col items-center">
                         <div className=" mb-4 flex items-center justify-center">
-                            <FaUserCircle className="text-blue-500 text-5xl" />
+                            <FaUserCircle className="text-blue-500 text-6xl" />
                         </div>
                         <p className="text-xs text-gray-500">Welcome Back!</p>
                         {/* Here will be the user's name */}
@@ -47,7 +48,9 @@ const ProfilePage = () => {
                             <h3 className="text-gray-700 font-semibold text-sm">My Profile</h3>
                             <ul className="pl-4 mt-2">
                                 <li className="text-gray-600 hover:text-indigo-600 cursor-pointer text-xs">Profile Details</li>
-                                <li className="text-gray-600 hover:text-indigo-600 cursor-pointe text-xs">Billing Information</li>
+
+                                {/* We'll let Stripe handle this */}
+                                {/* <li className="text-gray-600 hover:text-indigo-600 cursor-pointe text-xs">Billing Information</li> */}
                                 <li className="text-gray-600 hover:text-indigo-600 cursor-pointer text-xs">My Reviews</li>
                             </ul>
                         </div>
@@ -61,10 +64,13 @@ const ProfilePage = () => {
                 </div>
 
 
-                {/* WILL NEED TO MOVE THIS INTO A COMPONENT SO WE CAN USE IT DEPENDING ON WHICH SIDEBAR LINK IS CLICKED */}
-                {/* Profile Details Section - Move this into a component ProfileDetails.jsx */}
+                {/* THIS WILL CHANGE DEPENDING ON THE WHICH SIDEBAR TAB IS CLICKED */}
+                {/* My Bookings Tab */}
+                <UpcomingEvents />
+                <PastEvents />
+                {/* My Profile Tab */}
                 <ProfileDetails />
-
+                <MyReviews />
             </div>
             <Footer />
         </>

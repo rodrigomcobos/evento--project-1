@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../components/NavBar'
 import Footer from '../components/Footer'
 
-const AboutUs = () => {
+const AllEventsPage = () => {
     return (
         <div>
             <Navbar />
@@ -11,4 +11,4 @@ const AboutUs = () => {
     )
 }
 
-export default AboutUs
+export default AllEventsPage

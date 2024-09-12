@@ -2,7 +2,7 @@ import React from 'react'
 
 const PastEvents = () => {
     return (
-        <div>PastEvents</div>
+        <div></div>
     )
 }
 
