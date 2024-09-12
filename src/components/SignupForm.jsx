@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub } from 'react-icons/fa';
-import placeholderImage from '../assets/slides/loginbackground.jpg';
+import backgroundImage from '../assets/slides/loginbackground.png';
 
 const SignupForm = () => {
 
@@ -12,14 +12,14 @@ const SignupForm = () => {
     return (
         <div
             className="min-h-screen flex items-center justify-center bg-cover bg-center"
-            style={{ backgroundImage: `url(${placeholderImage})` }}
+            style={{ backgroundImage: `url(${backgroundImage})` }}
         >
             <div className="bg-white bg-opacity-80 max-w-3xl w-full rounded-lg shadow-lg p-10 grid grid-cols-1 md:grid-cols-2 gap-14">
 
                 {/* Column 1: Welcome Back */}
                 <div className="flex flex-col justify-center">
                     <h2 className="text-3xl font-bold mb-4">Welcome to Evento!</h2>
-                    <p className="text-xs text-gray-600 mb-6">
+                    <p className="text-xs text-gray-600 mb-6 pr-6">
                         Evento! is a global ticketing and event platform. It serves a wide range of event types, including concerts, festivals, conferences, workshops, and more.
                     </p>
                     <div className="flex space-x-3">
