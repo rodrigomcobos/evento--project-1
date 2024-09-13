@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub } from 'react-icons/fa';
 import backgroundImage from '../assets/slides/loginbackground.png';
+import transparentLogo from '../assets/slides/transparentlogo.png'; // Import the logo
 
-const LoginPage = () => {
+const SignInForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -11,9 +12,15 @@ const LoginPage = () => {
 
     return (
         <div
-            className="min-h-screen flex items-center justify-center bg-cover bg-bottom-right"
+            className="min-h-screen px-6 flex items-center justify-center bg-cover bg-bottom-right relative"
             style={{ backgroundImage: `url(${backgroundImage})` }}
         >
+            {/* Transparent Logo */}
+            <img
+                src={transparentLogo}
+                alt="Logo"
+                className="absolute bottom-10 right-10 z-0 w-[30%] h-auto"
+            />
             <div className="bg-white bg-opacity-80 max-w-5xl w-full rounded-lg shadow-lg p-10 grid grid-cols-1 md:grid-cols-2 gap-14">
 
                 {/* Column 1: Welcome Back */}
@@ -92,4 +99,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default SignInForm;

@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub } from 'react-icons/fa';
 import backgroundImage from '../assets/slides/loginbackground.png';
+import transparentLogo from '../assets/slides/transparentlogo.png'; // Import the logo
 
 const SignupForm = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
+    // State for form fields
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -13,17 +20,30 @@ const SignupForm = () => {
         if (password !== confirmPassword) {
             alert("Passwords don't match!");
         } else {
-            console.log('Signed up');
+            // Log form data
+            console.log({
+                firstName,
+                lastName,
+                email,
+                phone,
+                password,
+            });
         }
     };
 
     return (
         <div
-            className="min-h-screen flex items-center justify-center bg-cover bg-bottom-right"
+            className="min-h-screen p-6 flex items-center justify-center bg-cover bg-bottom-right relative"
             style={{ backgroundImage: `url(${backgroundImage})` }}
         >
-            <div className="bg-white bg-opacity-80 max-w-5xl w-full rounded-lg shadow-lg p-10 grid grid-cols-1 md:grid-cols-2 gap-14">
+            {/* Transparent Logo */}
+            <img
+                src={transparentLogo}
+                alt="Logo"
+                className="absolute bottom-10 right-10 z-0 w-[30%] h-auto"
+            />
 
+            <div className="bg-white bg-opacity-80 max-w-5xl w-full rounded-lg shadow-lg p-10 grid grid-cols-1 md:grid-cols-2 gap-14 relative z-10">
                 {/* Column 1: Welcome */}
                 <div className="flex flex-col justify-center">
                     <h2 className="text-4xl font-bold mb-4">Welcome to Evento!</h2>
@@ -56,6 +76,8 @@ const SignupForm = () => {
                             <input
                                 type="text"
                                 required
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
                         </div>
@@ -66,6 +88,8 @@ const SignupForm = () => {
                             <input
                                 type="text"
                                 required
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
                         </div>
@@ -76,6 +100,8 @@ const SignupForm = () => {
                             <input
                                 type="email"
                                 required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
                         </div>
@@ -86,6 +112,8 @@ const SignupForm = () => {
                             <input
                                 type="tel"
                                 required
+                                value={phone}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
                         </div>
@@ -99,7 +127,7 @@ const SignupForm = () => {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
-                                    className="w-full px-4 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                                    className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                                 />
                                 <button
                                     type="button"
@@ -120,7 +148,7 @@ const SignupForm = () => {
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                     required
-                                    className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                                    className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                                 />
                                 <button
                                     type="button"

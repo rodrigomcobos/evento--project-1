@@ -10,13 +10,21 @@ const User = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false, // Do not allow null values
+    },
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false, // Do not allow null values
     },
     email: {
       type: DataTypes.STRING,
       unique: true, // Must be unique
+      allowNull: false, // Do not allow null values
+    },
+    phone: {
+      type: DataTypes.STRING,
       allowNull: false, // Do not allow null values
     },
     password: {
@@ -47,9 +55,7 @@ const User = sequelize.define(
 );
 
 // Instance method to check if the password is valid
-// This method is available on each User instance
 User.prototype.validPassword = async function (password) {
-  // Compare the provided password with the hashed password in the database
   return await bcrypt.compare(password, this.password);
 };
 
