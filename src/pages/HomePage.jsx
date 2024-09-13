@@ -11,18 +11,15 @@ import Footer from '../components/Footer';
 
 const HomePage = () => {
     return (
-        <div>
+        <>
             <Navbar />
-            <div className="mt-6">
-                <SearchBar />
-                <CustomSlider />
-                <EventsSection />
-                <UpcomingEventsSection />
-                <AdBanner />
-                <Footer />
-            </div>
-        </div>
-
+            <SearchBar />
+            <CustomSlider />
+            <EventsSection />
+            <UpcomingEventsSection />
+            <AdBanner />
+            <Footer />
+        </>
     )
 }
 

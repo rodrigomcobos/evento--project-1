@@ -36,24 +36,24 @@ const Navbar = () => {
             <nav className="bg-white max-w-6xl mx-auto pt-6 flex justify-between align-middle">
                 {/* Left Side: Logo and Event Links */}
                 <div className="flex items-center">
-                    <img src={logo} alt="Logo" className="w-[140px] mr-6" />
+                    <img src={logo} alt="Logo" className="w-[145px] mr-6" />
                     <ul className="hidden md:flex space-x-4">
-                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-sm">Sports</a></li>
-                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-sm">Concerts</a></li>
-                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-sm">Theater</a></li>
-                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-sm">Festivals</a></li>
+                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Sports</a></li>
+                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Concerts</a></li>
+                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Theater</a></li>
+                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Festivals</a></li>
                     </ul>
                 </div>
 
                 {/* Right Side: User Links */}
                 <div className="hidden md:flex items-center justify-between space-x-4">
                     <ul className="flex space-x-4">
-                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-sm">Explore</a></li>
-                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-sm">Favorites</a></li>
-                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-sm">My Bookings</a></li>
+                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Explore</a></li>
+                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Favorites</a></li>
+                        <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">My Bookings</a></li>
                     </ul>
                     <div className="flex items-center space-x-2">
-                        <a href="#" className="hover:text-blue-500 text-sm transition duration-300">Sign In</a>
+                        <a href="#" className="hover:text-blue-500 text-md transition duration-300">Sign In</a>
                         <FaUserCircle className="h-8 w-8 text-blue-500" />
                     </div>
                 </div>

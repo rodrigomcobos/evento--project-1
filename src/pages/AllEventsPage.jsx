@@ -4,10 +4,10 @@ import Footer from '../components/Footer'
 
 const AllEventsPage = () => {
     return (
-        <div>
+        <>
             <Navbar />
             <Footer />
-        </div>
+        </>
     )
 }
 

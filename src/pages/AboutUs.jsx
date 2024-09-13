@@ -13,7 +13,7 @@ import TimeImg from '../assets/slides/time.png'
 
 const AboutUs = () => {
     return (
-        <div>
+        <>
             <Navbar />
             {/* About Us Strip */}
             <section className="bg-gradient-to-r from-indigo-900 via-blue-500 to-blue-400  text-white text-center py-24 mt-8 px-6 max-w-6xl mx-auto rounded-none md:rounded-3xl" >
@@ -142,7 +142,7 @@ const AboutUs = () => {
                     <h2 className="text-3xl font-semibold mb-12">Thank you for Visiting Evento!</h2>
                     <a target='_blank'
                         href="https://github.com/rodrigomcobos/evento--project-1"
-                        className="bg-indigo-500 text-white py-4 px-8 rounded-full inline-block hover:bg-indigo-600"
+                        className="min-w-min px-8 py-4 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full"
                     >
                         Visit this website's repo on GitHub
                     </a>
@@ -150,7 +150,7 @@ const AboutUs = () => {
             </div>
 
             <Footer />
-        </div>
+        </>
     )
 }
 

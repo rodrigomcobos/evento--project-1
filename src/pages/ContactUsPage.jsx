@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 
 const ContactUsPage = () => {
     return (
-        <div>
+        <>
             <Navbar />
 
             {/* Contact Us Page */}
@@ -52,19 +52,19 @@ const ContactUsPage = () => {
 
                 <form className="ml-auto space-y-4">
                     <input type='text' placeholder='Name'
-                        className="w-full rounded-md py-3 px-4 bg-gray-100 text-gray-800 text-sm outline-blue-500 focus:bg-transparent" />
+                        className="w-full border p-3 rounded-md text-md" />
                     <input type='email' placeholder='Email'
-                        className="w-full rounded-md py-3 px-4 bg-gray-100 text-gray-800 text-sm outline-blue-500 focus:bg-transparent" />
+                        className="w-full border p-3 rounded-md text-md" />
                     <input type='text' placeholder='Subject'
-                        className="w-full rounded-md py-3 px-4 bg-gray-100 text-gray-800 text-sm outline-blue-500 focus:bg-transparent" />
+                        className="w-full border p-3 rounded-md text-md" />
                     <textarea placeholder='Message' rows="6"
-                        className="w-full rounded-md px-4 bg-gray-100 text-gray-800 text-sm pt-3 outline-blue-500 focus:bg-transparent"></textarea>
+                        className="w-full border p-3 rounded-md text-md"></textarea>
                     <button type='button'
                         className="min-w-min px-8 py-2 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full">Send</button>
                 </form>
             </div>
             <Footer />
-        </div>
+        </>
     )
 }
 

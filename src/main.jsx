@@ -20,7 +20,7 @@ createRoot(document.getElementById('root')).render(
     {/* <AboutUs /> */}
     {/* <EventPage /> */}
     {/* <ProfilePage /> */}
-    {/* <PaymentPage /> */}
-    <ContactUsPage />
+    <PaymentPage />
+    {/* <ContactUsPage /> */}
   </StrictMode>,
 )

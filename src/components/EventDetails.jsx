@@ -87,7 +87,7 @@ const EventDetails = () => {
                     </div>
 
                     {/* Get Tickets Button */}
-                    <button className="min-w-min px-8 py-2 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full">
+                    <button className="min-w-min px-8 py-3 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full">
                         Get Tickets
                     </button>
                 </div>

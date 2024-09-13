@@ -6,12 +6,12 @@ import UpcomingEventsSection from '../components/UpcomingEventsSection'
 
 const EventPage = () => {
     return (
-        <div>
+        <>
             <Navbar />
             <EventDetails />
             <UpcomingEventsSection />
             <Footer />
-        </div>
+        </>
     )
 }
 

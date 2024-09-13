@@ -4,10 +4,10 @@ import SingUpForm from '../components/SignUpForm'
 
 const LogInPage = () => {
     return (
-        <div>
+        <>
             <SignInForm />
             {/* <SingUpForm /> */}
-        </div>
+        </>
     )
 }
 
