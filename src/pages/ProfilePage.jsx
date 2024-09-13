@@ -5,8 +5,7 @@ import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
 import Navbar from '../components/NavBar';
 import Footer from '../components/Footer';
 import ProfileDetails from '../components/ProfileDetails';
-// Strip will handle payment info for secure payment
-// import BillingInfo from '../components/BillingInfo';
+import BillingInfo from '../components/BillingInfo';
 import MyReviews from '../components/MyReviews';
 import UpcomingEvents from '../components/UpcomingEvents';
 import PastEvents from '../components/PastEvents';
@@ -23,7 +22,7 @@ const ProfilePage = () => {
             <Navbar />
 
             {/* SIDEBAR SECTION - THIS WILL STAY THE SAME IN ALL PAGES */}
-            <div className="flex min-h-screen mt-14 mb-16 max-w-5xl mx-auto">
+            <div className="flex min-h-screen mt-14 mb-14 max-w-6xl mx-auto">
                 {/* Left Sidebar */}
                 <div className="w-1/4 bg-white p-6 border-r-2 border-gray-100">
                     <div className="flex flex-col items-center">
@@ -50,7 +49,7 @@ const ProfilePage = () => {
                                 <li className="text-gray-600 hover:text-indigo-600 cursor-pointer text-md">Profile Details</li>
 
                                 {/* We'll let Stripe handle this */}
-                                {/* <li className="text-gray-600 hover:text-indigo-600 cursor-pointe text-md">Billing Information</li> */}
+                                <li className="text-gray-600 hover:text-indigo-600 cursor-pointe text-md">Billing Information</li>
                                 <li className="text-gray-600 hover:text-indigo-600 cursor-pointer text-md">My Reviews</li>
                             </ul>
                         </div>
@@ -70,6 +69,7 @@ const ProfilePage = () => {
                 <PastEvents />
                 {/* My Profile Tab */}
                 <ProfileDetails />
+                <BillingInfo />
                 <MyReviews />
             </div>
             <Footer />

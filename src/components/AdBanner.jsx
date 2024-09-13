@@ -3,9 +3,9 @@ import placeholderImage from '../assets/slides/adbanner.jpg';
 
 const AdBanner = () => {
     return (
-        <div className="flex justify-center items-center w-full pb-16 px-4">
+        <section className="flex justify-center items-center w-full pb-16 px-4">
             <div
-                className="relative w-[72rem] h-[24rem] bg-cover text-white rounded-2xl shadow-lg bg-left"
+                className="relative w-[72rem] h-[24rem] bg-cover text-white rounded-[2rem] shadow-lg bg-left"
                 style={{ backgroundImage: `url(${placeholderImage})` }}
             >
                 {/* Text Section */}
@@ -21,7 +21,7 @@ const AdBanner = () => {
                     </button>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

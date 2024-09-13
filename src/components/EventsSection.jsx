@@ -61,7 +61,7 @@ const EventsSection = () => {
         <div className="max-w-6xl mx-auto mt-24 mb-24">
             {/* Events Near Me Section */}
             {/* Title and Location Button */}
-            <div className="flex items-center justify-between px-4 mb-9">
+            <section className="flex items-center justify-between px-4 mb-9">
                 <div className="flex items-center space-x-2">
                     <h2 className="text-2xl font-bold">Events near</h2>
                     <button className="text-indigo-500 border-2 border-indigo-500 rounded-full px-4 py-2 flex items-center hover:bg-gradient-to-r from-indigo-600 to-blue-400 hover:text-white font-bold transition duration-300 text-md w-auto">
@@ -72,10 +72,10 @@ const EventsSection = () => {
                 <a href="#all-events" className="hover:text-indigo-500  transition duration-300 text-md font-bold">
                     See all events
                 </a>
-            </div>
+            </section>
 
             {/* Events Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-12 px-10">
+            <section className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-12 px-10">
                 {events.map((event, index) => (
 
                     // Wrap the card in a link
@@ -119,7 +119,7 @@ const EventsSection = () => {
                         </a>
                     </div>
                 ))}
-            </div>
+            </section>
         </div>
     );
 };

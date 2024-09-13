@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaDiscord, FaGithub, FaLinkedinIn, FaBehance } from 'react-icons/fa';
 import Navbar from '../components/NavBar'
 import Footer from '../components/Footer'
 import RodrigoPhoto from '../assets/slides/rodrigo.jpeg'
@@ -16,9 +17,11 @@ const AboutUs = () => {
         <>
             <Navbar />
             {/* About Us Strip */}
-            <section className="bg-gradient-to-r from-indigo-400 to-cyan-400  text-white text-center py-24 mt-8 px-6 max-w-6xl mx-auto rounded-none md:rounded-3xl" >
-                <h1 className="text-4xl font-bold">About Us</h1>
-            </section>
+            <div className='px-4'>
+                <section className="bg-gradient-to-r from-indigo-400 to-cyan-400 text-white text-center [text-shadow:_0_2px_0_rgb(0_0_0_/25%)] sm:py-24 py-14 mt-8 px-6 max-w-6xl mx-auto rounded-3xl">
+                    <h1 className="text-4xl font-bold">About Us</h1>
+                </section>
+            </div>
 
             {/* Main Content */}
             <div className="mx-auto px-6 py-12 space-y-12 max-w-6xl mb-24">
@@ -29,6 +32,9 @@ const AboutUs = () => {
                         For more than 12 years, Evento! has been the top marketplace for fans to buy and sell tickets. We remain committed to offering peace of mind through our guarantee, exceptional customer service, and innovative features that ensure your satisfaction. This website was created as a project for a fictional company, integrating both backend and frontend to deliver a smooth experience—from browsing events to testing our purchasing process. Please note, this site is for demonstration educational purposes only, and any tickets purchased are not real. We are not affiliated with any company or organization displayed on this site.
                     </p>
                 </section>
+
+                {/* Separation line */}
+                <hr className="border-gray-300" />
 
                 {/* Our guarantee */}
                 <section className='py-12'>
@@ -59,7 +65,8 @@ const AboutUs = () => {
 
                 {/* Above and beyond */}
                 <section className='py-12'>
-                    <h2 className="text-3xl font-semibold mb-12 flex justify-center items-center">Above and beyond our guarantee, we offer:</h2>
+                    <h2 className="text-3xl font-semibold mb-2 flex justify-center items-center">Above and beyond our guarantee, we offer:</h2>
+                    <p className='text-sm text-gray-400 flex justify-center items-center mb-10'>** This is a demo site, none of these terms are real or applicable **</p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {/* Card 1 */}
                         <div className="bg-white p-6 flex flex-col items-center justify-center">
@@ -100,6 +107,18 @@ const AboutUs = () => {
                             <img src={RodrigoPhoto} alt="team member" className="w-[10rem] h-[10rem] rounded-full mx-auto mb-4" />
                             <h3 className="text-2xl font-semibold mb-2">Rodrigo Cobos</h3>
                             <p className="text-gray-600">Web Developer</p>
+                            {/* Social Media Links */}
+                            <div className="flex space-x-4 my-4 justify-center">
+                                <a href="https://www.linkedin.com/in/rodrigomcobos/" target="_blank" rel="noreferrer" className="hover:text-blue-700">
+                                    <FaLinkedinIn size={20} />
+                                </a>
+                                <a href="https://behance.net" target="_blank" rel="noreferrer" className="hover:text-blue-400">
+                                    <FaBehance size={20} />
+                                </a>
+                                <a href="https://github.com/rodrigomcobos" target="_blank" rel="noreferrer" className="hover:text-pink-500">
+                                    <FaGithub size={20} />
+                                </a>
+                            </div>
                             <p className="text-gray-600 mt-2">Web developer that coded this website. Rodrigo has poured a lot of time and effort creating this project utilizing the PERN stack and TailwindCSS for styling.</p>
                         </div>
                         {/* Team Card 2 */}
@@ -107,6 +126,15 @@ const AboutUs = () => {
                             <img src={SeanPhoto} alt="team member" className="w-[10rem] h-[10rem] rounded-full mx-auto mb-4" />
                             <h3 className="text-2xl font-semibold mb-2">Sean Fagan</h3>
                             <p className="text-gray-600">DevMountain - Instructor</p>
+                            {/* Social Media Links */}
+                            <div className="flex space-x-4 my-4 justify-center">
+                                <a href="https://www.linkedin.com/in/sean-p-fagan/" target="_blank" rel="noreferrer" className="hover:text-blue-700">
+                                    <FaLinkedinIn size={20} />
+                                </a>
+                                <a href="https://github.com/seanthewonderful" target="_blank" rel="noreferrer" className="hover:text-pink-500">
+                                    <FaGithub size={20} />
+                                </a>
+                            </div>
                             <p className="text-gray-600 mt-2">Instructor at DevMountain in Lehi, UT. Sean has been teaching web development since 2023 and has come from a backend engineering background using Python.</p>
                         </div>
                         {/* Team Card 3 */}
@@ -114,10 +142,22 @@ const AboutUs = () => {
                             <img src={ScottPhoto} alt="team member" className="w-[10rem] h-[10rem] rounded-full mx-auto mb-4" />
                             <h3 className="text-2xl font-semibold mb-2">Scott Sutherland</h3>
                             <p className="text-gray-600">DevMountain - Instructor</p>
+                            {/* Social Media Links */}
+                            <div className="flex space-x-4 my-4 justify-center">
+                                <a href="https://www.linkedin.com/in/scott-r-sutherland/" target="_blank" rel="noreferrer" className="hover:text-blue-700">
+                                    <FaLinkedinIn size={20} />
+                                </a>
+                                <a href="https://github.com/suthyscott" target="_blank" rel="noreferrer" className="hover:text-pink-500">
+                                    <FaGithub size={20} />
+                                </a>
+                            </div>
                             <p className="text-gray-600 mt-2">Instructor and mentor at DevMountain in Lehi, UT. Scott has been teaching web development since 2021, and has come from a frontend engineering background.</p>
                         </div>
                     </div>
                 </section>
+
+                {/* Separation line */}
+                <hr className="border-gray-300" />
 
                 {/* Join us */}
                 <section className='py-12'>

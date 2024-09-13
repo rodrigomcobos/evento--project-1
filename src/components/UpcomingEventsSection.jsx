@@ -33,7 +33,7 @@ const UpcomingEventsSection = () => {
     ];
 
     return (
-        <div>{/* Upcoming Events Section */}
+        <>{/* Upcoming Events Section */}
             <section className="max-w-6xl mx-auto mb-14">
                 <div className=" mx-auto">
                     {/* Title and Location Button */}
@@ -45,7 +45,7 @@ const UpcomingEventsSection = () => {
                     </div>
 
                     {/* Upcoming Events Cards Grid */}
-                    <div>
+                    <section>
                         <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-12 px-10 ">
                             {upcoming.map((event, index) => (
 
@@ -92,11 +92,11 @@ const UpcomingEventsSection = () => {
 
                             ))}
                         </div>
-                    </div>
+                    </section>
 
                 </div>
             </section>
-        </div>
+        </>
     )
 }
 

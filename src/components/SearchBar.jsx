@@ -14,7 +14,7 @@ const SearchBar = () => {
     };
 
     return (
-        <div className='px-4 my-12'>
+        <section className='px-4 my-12'>
             <div className="flex bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-600 items-center bg-gray-100 rounded-full gap-4 p-[2px] w-auto max-w-4xl mx-auto shadow-md">
                 <div className='rounded-full p-3 bg-white h-full w-full flex items-center justify-between'>
                     <FaSearch className="text-gray-500 mr-3" />
@@ -36,7 +36,7 @@ const SearchBar = () => {
                 </button>
             </div> */}
             </div>
-        </div>
+        </section>
     );
 };
 

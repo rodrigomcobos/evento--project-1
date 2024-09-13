@@ -9,9 +9,11 @@ const ContactUsPage = () => {
             <Navbar />
 
             {/* Contact Us Page */}
-            <section className="bg-gradient-to-r from-indigo-400 to-cyan-400  text-white text-center py-24 mt-8 px-6 max-w-6xl mx-auto rounded-none md:rounded-3xl" >
-                <h1 className="text-4xl font-bold">Contact Us</h1>
-            </section>
+            <div className='px-4'>
+                <section className="bg-gradient-to-r from-indigo-400 to-cyan-400 text-white text-center [text-shadow:_0_2px_0_rgb(0_0_0_/25%)] py-24 mt-8 px-6 max-w-6xl mx-auto rounded-3xl">
+                    <h1 className="text-4xl font-bold">Contact Us</h1>
+                </section>
+            </div>
 
             <div className="grid sm:grid-cols-2 items-start gap-16 p-4 mx-auto max-w-4xl bg-white pt-24 pb-48">
                 <div>

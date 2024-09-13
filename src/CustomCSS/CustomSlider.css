@@ -10,12 +10,12 @@
 
 /* Style the dot buttons (inactive state) */
 .slick-dots button {
-    @apply w-2 h-2 bg-gray-300 rounded-full transition-all duration-300 ease-in-out !important;
+    @apply w-3 h-3 bg-gray-300 rounded-full transition-all duration-300 ease-in-out !important;
 }
 
 /* Active dot button styling (make it bigger) */
 .slick-dots .slick-active button {
-    @apply w-4 h-4 bg-white overflow-hidden !important;
+    @apply w-5 h-5 bg-white overflow-hidden !important;
     transition: all 0.8s ease-in-out; /* Smooth transition when active */
 }
 

@@ -12,8 +12,9 @@ const EventDetails = () => {
     return (
         <div className=" flex flex-col mt-14 mb-32">
             <div className="flex flex-col max-w-7xl mx-auto md:flex-row p-6 md:px-20 md:py-10">
+
                 {/* Left Column */}
-                <div className="md:w-2/3 w-full md:pr-8 mb-10 md:mb-0">
+                <section className="md:w-2/3 w-full md:pr-8 mb-10 md:mb-0">
                     {/* Event Name */}
                     <h1 className="text-2xl sm:text-4xl font-bold mb-4">Salt Lake City Annual Music Festival</h1>
 
@@ -37,10 +38,10 @@ const EventDetails = () => {
                             Join us for the annual music festival in Salt Lake City. Experience live performances by top artists and immerse yourself in the vibrant atmosphere. Fun, music, and memories await you!
                         </p>
                     </div>
-                </div>
+                </section>
 
                 {/* Right Column */}
-                <div className="md:w-1/3 w-full bg-gray-100 p-6 rounded-lg shadow-lg">
+                <section className="md:w-1/3 w-full bg-gray-100 p-6 rounded-lg shadow-lg">
                     {/* Event Date & Time */}
                     <div className="mb-4">
                         <div className="flex items-center mb-2">
@@ -90,7 +91,7 @@ const EventDetails = () => {
                     <button className="min-w-min px-8 py-3 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full">
                         Get Tickets
                     </button>
-                </div>
+                </section>
             </div>
         </div>
     );
