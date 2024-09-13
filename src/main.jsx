@@ -13,14 +13,14 @@ import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <HomePage /> */}
+    <HomePage />
     {/* <App /> */}
     {/* <SignInForm /> */}
     {/* <SignUpForm /> */}
     {/* <AboutUs /> */}
     {/* <EventPage /> */}
     {/* <ProfilePage /> */}
-    <PaymentPage />
+    {/* <PaymentPage /> */}
     {/* <ContactUsPage /> */}
   </StrictMode>,
 )

@@ -30,7 +30,7 @@ const CustomSlider = () => {
                         <div className="relative h-[27rem] bg-right bg-cover bg-clip-border bg-image-1">
                             <div className="absolute inset-0 flex flex-col-reverse md:flex-row h-full">
                                 {/* Left side content with slanted edge */}
-                                <div className="bg-gradient-to-r from-indigo-900 via-blue-500 to-blue-400 w-1/2 sm:w-[80%] h-full flex flex-col justify-center p-6 sm:p-10 clip-slant">
+                                <div className="bg-gradient-to-r from-indigo-400 to-cyan-400 w-1/2 sm:w-[80%] h-full flex flex-col justify-center p-6 sm:p-10 clip-slant">
                                     <p className='text-white'>Concerts</p>
                                     <h2 className="text-white text-xl sm:text-3xl font-bold mb-4 mr-14">
                                         Salt Lake City Annual Music Festival
@@ -56,7 +56,7 @@ const CustomSlider = () => {
                         <div className="relative h-[27rem] bg-right bg-cover bg-clip-border bg-image-2">
                             <div className="absolute inset-0 flex flex-col-reverse md:flex-row h-full">
                                 {/* Left side content with slanted edge */}
-                                <div className="bg-gradient-to-r from-indigo-900 via-blue-500 to-blue-400 w-1/2 sm:w-[80%] h-full flex flex-col justify-center p-6 sm:p-10 clip-slant">
+                                <div className="bg-gradient-to-r from-indigo-400 to-cyan-400 w-1/2 sm:w-[80%] h-full flex flex-col justify-center p-6 sm:p-10 clip-slant">
                                     <p className='text-white'>Sports</p>
                                     <h2 className="text-white text-xl sm:text-3xl font-bold mb-4 mr-14">
                                         FIFA Worldcup Championship Semi-Finals
@@ -82,7 +82,7 @@ const CustomSlider = () => {
                         <div className="relative h-[27rem] bg-right bg-cover bg-clip-border bg-image-3">
                             <div className="absolute inset-0 flex flex-col-reverse md:flex-row h-full">
                                 {/* Left side content with slanted edge */}
-                                <div className="bg-gradient-to-r from-indigo-900 via-blue-500 to-blue-400 w-1/2 sm:w-[80%] h-full flex flex-col justify-center p-6 sm:p-10 clip-slant">
+                                <div className="bg-gradient-to-r from-indigo-400 to-cyan-400 w-1/2 sm:w-[80%] h-full flex flex-col justify-center p-6 sm:p-10 clip-slant">
                                     <p className='text-white'>Rodeo</p>
                                     <h2 className="text-white text-xl sm:text-3xl font-bold mb-4 mr-14">
                                         PBR National Rodeo 2025
@@ -108,7 +108,7 @@ const CustomSlider = () => {
                         <div className="relative h-[27rem] bg-right bg-cover bg-clip-border bg-image-4">
                             <div className="absolute inset-0 flex flex-col-reverse md:flex-row h-full">
                                 {/* Left side content with slanted edge */}
-                                <div className="bg-gradient-to-r from-indigo-900 via-blue-500 to-blue-400 w-1/2 sm:w-[80%] h-full flex flex-col justify-center p-6 sm:p-10 clip-slant">
+                                <div className="bg-gradient-to-r from-indigo-400 to-cyan-400 w-1/2 sm:w-[80%] h-full flex flex-col justify-center p-6 sm:p-10 clip-slant">
                                     <p className='text-white'>Racing</p>
                                     <h2 className="text-white text-xl sm:text-3xl font-bold mb-4 mr-14">
                                         NASCAR National Championship Finals
@@ -134,7 +134,7 @@ const CustomSlider = () => {
                         <div className="relative h-[27rem] bg-right bg-cover bg-clip-border bg-image-5">
                             <div className="absolute inset-0 flex flex-col-reverse md:flex-row h-full">
                                 {/* Left side content with slanted edge */}
-                                <div className="bg-gradient-to-r from-indigo-900 via-blue-500 to-blue-400 w-1/2 sm:w-[80%] h-full flex flex-col justify-center p-6 sm:p-10 clip-slant">
+                                <div className="bg-gradient-to-r from-indigo-400 to-cyan-400 w-1/2 sm:w-[80%] h-full flex flex-col justify-center p-6 sm:p-10 clip-slant">
                                     <p className='text-white'>Wrestling</p>
                                     <h2 className="text-white text-xl sm:text-3xl font-bold mb-4 mr-5">
                                         Wrestlemania 2025 - Salt Lake City Stadium

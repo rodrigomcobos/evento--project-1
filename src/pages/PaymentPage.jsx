@@ -54,9 +54,10 @@ const PaymentPage = () => {
 
     return (
         <>
+
             <Navbar />
             {/* Payment Strip */}
-            <section className="bg-gradient-to-r from-indigo-900 via-blue-500 to-blue-400 text-white text-center py-24 mt-8 px-6 max-w-6xl mx-auto rounded-none md:rounded-3xl">
+            <section className="bg-gradient-to-r bg-gradient-to-r from-indigo-400 to-cyan-400 text-white text-center py-24 mt-8 px-6 max-w-6xl mx-auto rounded-none md:rounded-3xl">
                 <h1 className="text-4xl font-bold">Checkout</h1>
             </section>
 

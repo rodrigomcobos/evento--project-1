@@ -79,7 +79,7 @@ const EventsSection = () => {
                 {events.map((event, index) => (
 
                     // Wrap the card in a link
-                    <div className='border-[10px] border-white'>
+                    <div className='border-[10px] border-white' key={index}>
                         <a href="#" key={index} className="block bg-white rounded-lg hover:text-indigo-600">
                             <img
                                 src={event.image}
