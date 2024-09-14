@@ -90,7 +90,7 @@ const SignInForm = () => {
                         Are you new here?
                     </a>
 
-                    <p className="text-xs text-center text-gray-500 mt-6">
+                    <p className="text-sm text-center text-gray-500 mt-6">
                         By clicking on "Sign In" you agree to the <br /> <a href="#terms" className="underline">Terms of Service</a> | <a href="#privacy" className="underline">Privacy Policy</a>
                     </p>
                 </div>

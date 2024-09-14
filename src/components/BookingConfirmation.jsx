@@ -1,12 +1,14 @@
 import React from 'react'
+import Navbar from './NavBar'
+import Footer from './Footer'
 
-const PaymentConfirmation = () => {
+const BookingConfirmation = () => {
     return (
         <>
-            {/* Payment Strip */}
+            <NavBar />
             <section className='relative px-4'>
                 <div className="relative bg-gradient-to-r from-indigo-400 to-cyan-400 text-white text-center [text-shadow:_0_2px_0_rgb(0_0_0_/25%)] sm:py-24 py-14 mt-8 px-6 max-w-6xl mx-auto rounded-3xl">
-                    <h1 className="text-4xl font-bold">Payment Confirmation</h1>
+                    <h1 className="text-4xl font-bold">Booking Confirmation</h1>
 
                     {/* Transparent logo positioned at the bottom right */}
                     <div className="absolute bottom-0 right-0 h-full w-full pointer-events-none">
@@ -25,8 +27,9 @@ const PaymentConfirmation = () => {
                     </div>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }
 
-export default PaymentConfirmation
+export default BookingConfirmation

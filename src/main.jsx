@@ -9,6 +9,7 @@ import EventPage from './pages/EventPage.jsx'
 import AboutUs from './pages/AboutUs.jsx'
 import PaymentPage from './pages/PaymentPage.jsx'
 import ContactUsPage from './pages/ContactUsPage.jsx'
+import EventSeatModal from './components/EventSeatModal.jsx'
 import './index.css'
 
 createRoot(document.getElementById('root')).render(
@@ -18,9 +19,10 @@ createRoot(document.getElementById('root')).render(
     {/* <SignInForm /> */}
     {/* <SignUpForm /> */}
     {/* <AboutUs /> */}
-    {/* <EventPage /> */}
-    <ProfilePage />
+    <EventPage />
+    {/* <ProfilePage /> */}
     {/* <PaymentPage /> */}
     {/* <ContactUsPage /> */}
+    {/* <EventSeatModal /> */}
   </StrictMode>,
 )

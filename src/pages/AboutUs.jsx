@@ -2,6 +2,8 @@ import React from 'react'
 import { FaDiscord, FaGithub, FaLinkedinIn, FaBehance } from 'react-icons/fa';
 import Navbar from '../components/NavBar'
 import Footer from '../components/Footer'
+
+// Photo/Img Imports
 import RodrigoPhoto from '../assets/slides/rodrigo.jpeg'
 import SeanPhoto from '../assets/slides/sean.jpeg'
 import ScottPhoto from '../assets/slides/scott.jpeg'
@@ -11,17 +13,34 @@ import Team3Photo from '../assets/slides/team3.jpg'
 import DiscountImg from '../assets/slides/discount.png'
 import MoneyImg from '../assets/slides/money.png'
 import TimeImg from '../assets/slides/time.png'
+import TransparentLogo from '../assets/slides/transparentlogo.png'
 
 const AboutUs = () => {
     return (
         <>
             <Navbar />
             {/* About Us Strip */}
-            <div className='px-4'>
-                <section className="bg-gradient-to-r from-indigo-400 to-cyan-400 text-white text-center [text-shadow:_0_2px_0_rgb(0_0_0_/25%)] sm:py-24 py-14 mt-8 px-6 max-w-6xl mx-auto rounded-3xl">
+            <section className='relative px-4'>
+                <div className="relative bg-gradient-to-r from-indigo-400 to-cyan-400 text-white text-center [text-shadow:_0_2px_0_rgb(0_0_0_/25%)] sm:py-24 py-14 mt-8 px-6 max-w-6xl mx-auto rounded-3xl">
                     <h1 className="text-4xl font-bold">About Us</h1>
-                </section>
-            </div>
+
+                    {/* Transparent logo positioned at the bottom right */}
+                    <div className="absolute bottom-0 right-0 h-full w-full pointer-events-none">
+                        <img
+                            src={TransparentLogo}
+                            alt="Logo"
+                            className="object-cover opacity-25%"
+                            style={{
+                                position: 'absolute',
+                                bottom: '-30px',  // Ensures half of the logo is shown
+                                right: '-30px',   // Moves it slightly off-screen
+                                width: '50%',
+                                maxWidth: '275px', // Control the max size of the logo
+                            }}
+                        />
+                    </div>
+                </div>
+            </section>
 
             {/* Main Content */}
             <div className="mx-auto px-6 py-12 space-y-12 max-w-6xl mb-24">

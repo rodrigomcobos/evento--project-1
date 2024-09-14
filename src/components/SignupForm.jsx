@@ -45,7 +45,7 @@ const SignupForm = () => {
 
             <div className="bg-white bg-opacity-80 max-w-5xl w-full rounded-lg shadow-lg p-10 grid grid-cols-1 md:grid-cols-2 gap-14 relative z-10">
                 {/* Column 1: Welcome */}
-                <div className="flex flex-col justify-center">
+                <section className="flex flex-col justify-center">
                     <h2 className="text-4xl font-bold mb-4">Welcome to Evento!</h2>
                     <p className="text-md text-gray-600 mb-6 pr-6">
                         Evento! is a global ticketing and event platform. It serves a wide range of event types, including concerts, festivals, conferences, workshops, and more.
@@ -64,10 +64,10 @@ const SignupForm = () => {
                             <FaGithub size={24} />
                         </a>
                     </div>
-                </div>
+                </section>
 
                 {/* Column 2: Sign Up */}
-                <div className="flex flex-col justify-center">
+                <section className="flex flex-col justify-center">
                     <h2 className="text-2xl font-bold mb-6">Sign Up</h2>
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {/* First Name */}
@@ -77,6 +77,7 @@ const SignupForm = () => {
                                 type="text"
                                 required
                                 value={firstName}
+                                placeholder='John'
                                 onChange={(e) => setFirstName(e.target.value)}
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
@@ -89,6 +90,7 @@ const SignupForm = () => {
                                 type="text"
                                 required
                                 value={lastName}
+                                placeholder='Doe'
                                 onChange={(e) => setLastName(e.target.value)}
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
@@ -101,6 +103,7 @@ const SignupForm = () => {
                                 type="email"
                                 required
                                 value={email}
+                                placeholder='john.doe@me.com'
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
@@ -113,6 +116,7 @@ const SignupForm = () => {
                                 type="tel"
                                 required
                                 value={phone}
+                                placeholder='***-***-****'
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
@@ -125,6 +129,7 @@ const SignupForm = () => {
                                 <input
                                     type={passwordVisible ? 'text' : 'password'}
                                     value={password}
+                                    placeholder='Create a password'
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
                                     className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
@@ -146,6 +151,7 @@ const SignupForm = () => {
                                 <input
                                     type={confirmPasswordVisible ? 'text' : 'password'}
                                     value={confirmPassword}
+                                    placeholder='Confirm your password'
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                     required
                                     className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
@@ -173,7 +179,7 @@ const SignupForm = () => {
                     <p className="text-sm text-center text-gray-500 mt-6">
                         By clicking on "Sign Up Now" you agree to the <br /> <a href="#terms" className="underline">Terms of Service</a> | <a href="#privacy" className="underline">Privacy Policy</a>
                     </p>
-                </div>
+                </section>
             </div>
         </div>
     );
