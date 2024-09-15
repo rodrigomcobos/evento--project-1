@@ -9,7 +9,7 @@ const PaymentConfirmation = () => {
                     <h1 className="text-4xl font-bold">Payment Confirmation</h1>
 
                     {/* Transparent logo positioned at the bottom right */}
-                    <div className="absolute bottom-0 right-0 h-full w-full pointer-events-none">
+                    <div className="absolute bottom-0 right-0 h-full w-full pointer-events-none overflow-hidden">
                         <img
                             src={TransparentLogo}
                             alt="Logo"

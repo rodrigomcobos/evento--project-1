@@ -7,9 +7,9 @@ import HomePage from './pages/HomePage.jsx'
 import ProfilePage from './pages/ProfilePage.jsx'
 import EventPage from './pages/EventPage.jsx'
 import AboutUs from './pages/AboutUs.jsx'
+import BookingConfirmation from './pages/BookingConfirmation.jsx'
 import PaymentPage from './pages/PaymentPage.jsx'
 import ContactUsPage from './pages/ContactUsPage.jsx'
-import EventSeatModal from './components/EventSeatModal.jsx'
 import './index.css'
 
 createRoot(document.getElementById('root')).render(
@@ -19,10 +19,10 @@ createRoot(document.getElementById('root')).render(
     {/* <SignInForm /> */}
     {/* <SignUpForm /> */}
     {/* <AboutUs /> */}
-    <EventPage />
+    {/* <EventPage /> */}
+    <BookingConfirmation />
     {/* <ProfilePage /> */}
     {/* <PaymentPage /> */}
     {/* <ContactUsPage /> */}
-    {/* <EventSeatModal /> */}
   </StrictMode>,
 )

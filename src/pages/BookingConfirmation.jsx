@@ -1,6 +1,7 @@
 import React from 'react'
-import Navbar from './NavBar'
-import Footer from './Footer'
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
+import TransparentLogo from '../assets/slides/transparentlogo.png';
 
 const BookingConfirmation = () => {
     return (
@@ -11,7 +12,7 @@ const BookingConfirmation = () => {
                     <h1 className="text-4xl font-bold">Booking Confirmation</h1>
 
                     {/* Transparent logo positioned at the bottom right */}
-                    <div className="absolute bottom-0 right-0 h-full w-full pointer-events-none">
+                    <div className="absolute bottom-0 right-0 h-full w-full pointer-events-none overflow-hidden">
                         <img
                             src={TransparentLogo}
                             alt="Logo"
