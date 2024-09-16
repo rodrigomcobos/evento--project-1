@@ -91,6 +91,13 @@ const EventSeatModal = ({ isOpen, closeModal }) => {
                         </select>
 
                         <h2 className="text-2xl font-bold">Where do you want to sit?</h2>
+                        {/* Legend */}
+                        <p className="text-sm text-gray-400 mt-2">
+                            <span className="text-gray-500 font-bold">U</span> $ -{' '}
+                            <span className="text-gray-500 font-bold">M</span> $$ -{' '}
+                            <span className="text-gray-500 font-bold">L</span> $$$ -{' '}
+                            <span className="text-gray-500 font-bold">FLOOR</span> $$$$
+                        </p>
                         <select
                             className="border p-3 rounded-md"
                             value={seatZone}
@@ -124,14 +131,6 @@ const EventSeatModal = ({ isOpen, closeModal }) => {
                                 </option>
                             ))}
                         </select>
-
-                        {/* Legend */}
-                        <p className="text-sm text-gray-500 mt-2">
-                            <span className="text-gray-700 font-bold">U</span> $ -{' '}
-                            <span className="text-gray-700 font-bold">M</span> $$ -{' '}
-                            <span className="text-gray-700 font-bold">L</span> $$$ -{' '}
-                            <span className="text-gray-700 font-bold">FLOOR</span> $$$$
-                        </p>
 
                         <button
                             onClick={() => {

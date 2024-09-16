@@ -7,12 +7,12 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
-    // Function to toggle the menu
+    // Function to toggle the menu when the hamburger icon is clicked
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    // Close the menu when clicking outside of it
+    // Close the menu when clicking outside of it in mobile mode
     useEffect(() => {
         const handleOutsideClick = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {

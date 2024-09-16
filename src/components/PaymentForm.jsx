@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import '../CustomCSS/CustomSlider.css';
+import TransparentLogo from '../assets/slides/transparentlogo.png';
 
 const PaymentForm = () => {
     // Form Data that will be submitted

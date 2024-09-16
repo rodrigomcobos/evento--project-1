@@ -24,6 +24,7 @@
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
     "react-leaflet": "^4.2.1",
+    "react-router-dom": "^6.26.2",
     "stripe": "^16.10.0"
   }
 }
