@@ -1,12 +1,12 @@
 import React from 'react'
 import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub, FaMailBulk } from 'react-icons/fa'
-import Navbar from '../components/NavBar'
+import SearchNavBar from '../components/SearchNavBar'
 import Footer from '../components/Footer'
 
 const ContactUsPage = () => {
     return (
         <>
-            <Navbar />
+            <SearchNavBar />
 
             {/* Contact Us Page */}
             <section className='relative px-4'>

@@ -58,7 +58,7 @@ const EventsSection = () => {
     ];
 
     return (
-        <div className="max-w-6xl mx-auto mt-24 mb-24">
+        <section className="max-w-6xl mx-auto mt-24 mb-24">
             {/* Events Near Me Section */}
             {/* Title and Location Button */}
             <section className="flex items-center justify-between px-4 mb-9">
@@ -103,18 +103,11 @@ const EventsSection = () => {
                                 <span>{event.date}</span>
                             </div>
 
-                            {/* Seat Details */}
-                            <div className="flex align-middle justify-end text-md pb-14">
-                                <div className="flex items-center text-red-500">
-                                    <MdEventSeat className="mr-1" />
-                                    {event.seatsLeft} Seats Left
-                                </div>
-                            </div>
                         </a>
                     </div>
                 ))}
             </section>
-        </div>
+        </section>
     );
 };
 

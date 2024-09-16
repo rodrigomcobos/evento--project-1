@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaDiscord, FaGithub, FaLinkedinIn, FaBehance } from 'react-icons/fa';
-import Navbar from '../components/NavBar'
+import SearchNavBar from '../components/SearchNavBar'
 import Footer from '../components/Footer'
 
 // Photo/Img Imports
@@ -18,7 +18,7 @@ import TransparentLogo from '../assets/slides/transparentlogo.png'
 const AboutUs = () => {
     return (
         <>
-            <Navbar />
+            <SearchNavBar />
             {/* About Us Strip */}
             <section className='relative px-4'>
                 <div className="relative bg-gradient-to-r from-indigo-400 to-cyan-400 text-white text-center [text-shadow:_0_2px_0_rgb(0_0_0_/25%)] sm:py-24 py-14 mt-8 px-6 max-w-6xl mx-auto rounded-3xl">

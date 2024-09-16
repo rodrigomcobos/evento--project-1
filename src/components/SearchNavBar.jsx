@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle, FaSearch } from 'react-icons/fa';
 import { FiMenu, FiX } from 'react-icons/fi';
 import logo from '../assets/logo.png';
 
-const Navbar = () => {
+const SearchNavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -31,6 +31,17 @@ const Navbar = () => {
         };
     }, [isMenuOpen]);
 
+    const [isFocused, setIsFocused] = useState(false);
+
+    const handleFocus = () => {
+        setIsFocused(true);
+    };
+
+    const handleBlur = () => {
+        setIsFocused(false);
+    };
+
+
     return (
         <>
             <div className="flex gap-2 max-sm:flex-col items-center justify-center text-center bg-gradient-to-r from-indigo-400 to-cyan-400 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/25%)]  px-4 py-2 font-[sans-serif]">
@@ -42,17 +53,28 @@ const Navbar = () => {
                     Visit the Repo
                 </a>
             </div>
-            <div className='px-4'>
+            {/* Nav Bar */}
+            <div className='px-4 mb-6'>
                 <nav className="bg-white max-w-6xl mx-auto pt-6 flex justify-between align-middle">
                     {/* Left Side: Logo and Event Links */}
                     <div className="flex items-center">
-                        <img src={logo} alt="Logo" className="w-[145px] mr-6" />
-                        <ul className="hidden md:flex space-x-4">
-                            <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Sports</a></li>
-                            <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Concerts</a></li>
-                            <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Theater</a></li>
-                            <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Festivals</a></li>
-                        </ul>
+                        <img src={logo} alt="Logo" className="w-[145px]" />
+                        {/* Search Bar */}
+                        <div className='px-4'>
+                            <div className="flex bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-600 items-center bg-gray-100 rounded-full p-[2px] w-auto sm:w-dvw max-w-[350px] shadow-md">
+                                <div className='rounded-full p-3 bg-white h-full w-full flex items-center justify-between'>
+                                    <FaSearch className="text-gray-500 mr-3" />
+                                    <input
+                                        type="text"
+                                        className="bg-transparent outline-none w-full text-md"
+                                        placeholder={isFocused ? '' : 'Search events, artists, teams, and more'}
+                                        onFocus={handleFocus}
+                                        onBlur={handleBlur}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     {/* Right Side: User Links */}
@@ -111,4 +133,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default SearchNavBar;

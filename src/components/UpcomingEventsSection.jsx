@@ -1,6 +1,5 @@
 import React from 'react'
 import { FaCalendarAlt, FaTicketAlt } from 'react-icons/fa';
-import { MdEventSeat } from 'react-icons/md';
 import placeholderImage from '../assets/slides/placeholder.png';
 
 const UpcomingEventsSection = () => {
@@ -72,14 +71,6 @@ const UpcomingEventsSection = () => {
                                         <div className="flex items-center mb-2 text-gray-600 text-md">
                                             <FaCalendarAlt className="mr-2" />
                                             <span>{event.date}</span>
-                                        </div>
-
-                                        {/* Seat Details */}
-                                        <div className="flex align-middle justify-end text-md pb-14">
-                                            <div className="flex items-center text-red-500">
-                                                <MdEventSeat className="mr-1" />
-                                                {event.seatsLeft} Seats Left
-                                            </div>
                                         </div>
                                     </a>
                                 </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from '../components/NavBar';
+import SearchNavbar from '../components/SearchNavBar';
 import Footer from '../components/Footer';
 import EventDetails from '../components/EventDetails';
 import UpcomingEventsSection from '../components/UpcomingEventsSection';
@@ -20,7 +20,7 @@ const EventPage = () => {
 
     return (
         <>
-            <Navbar />
+            <SearchNavbar />
             <EventDetails openModal={openModal} />
             <ReviewList />
             <EventDisclaimer />

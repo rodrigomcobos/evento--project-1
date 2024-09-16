@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from '../components/NavBar';
+import SearchNavbar from '../components/SearchNavBar';
 import Footer from '../components/Footer';
 import PaymentForm from '../components/PaymentForm';
 import PaymentConfirmation from '../components/PaymentConfirmation';
@@ -9,7 +9,7 @@ import '../CustomCSS/CustomSlider.css';
 const PaymentPage = () => {
     return (
         <>
-            <Navbar />
+            <SearchNavbar />
             {/* Step 1: Confirm booking information */}
             {/* <BookingConfirmation /> */}
 

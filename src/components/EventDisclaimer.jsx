@@ -9,7 +9,7 @@ const accordionData = [
     },
     {
         question: 'Are tickets guaranteed on Evento?',
-        answer: `Every order is 100% guaranteed on Evento. Evento’s exclusive Guarantee ensures valid tickets or your money back...`,
+        answer: `Every order is 100% guaranteed on Evento. Evento’s exclusive Guarantee ensures valid tickets or your money back.`,
     },
     {
         question: 'How long does it take to get my tickets after purchase?',
@@ -21,11 +21,11 @@ const accordionData = [
     },
     {
         question: 'What happens if my event is canceled?',
-        answer: `We'll email you when an event is canceled. We’ll add a credit worth 100% of the total amount you paid for the impacted event.`,
+        answer: `We'll email you when an event is canceled. We’ll add a credit worth 100% of the total amount you paid for the impacted event. We will process the refund to your original payment method within 5 days.`,
     },
     {
         question: 'What happens if my event is rescheduled?',
-        answer: 'We\'ll email you when the details are confirmed and will include any info we have on the rescheduled date in the email.',
+        answer: `We'll email you when the details are confirmed and will include any info we have on the rescheduled date in the email. Although Evento isn't responsible for event date changes, if you can't attend the new date, you can resell your tickets and give someone else the chance to go.`,
     },
 ];
 const EventDisclaimer = () => {

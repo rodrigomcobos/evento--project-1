@@ -35,7 +35,7 @@ const EventDetails = ({ openModal, eventLocationZip }) => {
         details: 'Join us for the annual music festival in Salt Lake City. Experience live performances by top artists and immerse yourself in the vibrant atmosphere. Fun, music, and memories await you!',
         date: 'May 15, 2023',
         time: '10:00 AM - 5:00 PM',
-        location: eventLocationZip, // Displaying the zip code or city name
+        location: 'Salt Lake City, UT', // Displaying the zip code or city name, Setting the default to Salt Lake City
         rating: '2.1k',
         availableSeats: 100,
         capacity: 200,

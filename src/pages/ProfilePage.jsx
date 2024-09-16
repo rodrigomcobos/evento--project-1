@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
 
 // Components
-import Navbar from '../components/NavBar';
+import SearchNavBar from '../components/SearchNavBar';
 import Footer from '../components/Footer';
 import ProfileDetails from '../components/ProfileDetails';
 import BillingInfo from '../components/BillingInfo';
@@ -19,7 +19,7 @@ const ProfilePage = () => {
 
     return (
         <>
-            <Navbar />
+            <SearchNavBar />
 
             {/* SIDEBAR SECTION - THIS WILL STAY THE SAME IN ALL PAGES */}
             <div className="flex min-h-screen mt-14 mb-14 max-w-6xl mx-auto">

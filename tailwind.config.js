@@ -9,6 +9,7 @@ export default {
         'image-3': "url('/src/assets/slides/slide-3.png')",
         'image-4': "url('/src/assets/slides/slide-4.png')",
         'image-5': "url('/src/assets/slides/slide-5.png')",
+        'events-background': "url('/src/assets/slides/eventsBackground.png')",
       },
     },
   },
