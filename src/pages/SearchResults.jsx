@@ -3,8 +3,6 @@ import SearchNavBar from '../components/SearchNavBar';
 import Footer from '../components/Footer';
 import UpcomingEventsSection from '../components/UpcomingEventsSection';
 import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import SearchFilter from '../components/SearchFilter';
 
 const SearchResults = () => {
