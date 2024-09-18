@@ -63,8 +63,8 @@ const ProfileDetails = () => {
     return (
         <>
             {/* Right Content */}
-            <div className="min-w-[55dvw] p-10">
-                <h1 className="text-3xl font-semibold mb-8">My Profile</h1>
+            <div className="min-w-[50dvw] p-10">
+                <h1 className="text-3xl font-semibold mb-8">Profile Details</h1>
 
                 {/* My Info Section */}
                 <section className="mb-8">

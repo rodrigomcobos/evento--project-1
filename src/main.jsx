@@ -1,8 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-import SignInForm from './components/SignInForm.jsx'
-import SignUpForm from './components/SignUpForm.jsx'
+import LogInPage from './pages/LogInPage.jsx'
 import HomePage from './pages/HomePage.jsx'
 import ProfilePage from './pages/ProfilePage.jsx'
 import EventPage from './pages/EventPage.jsx'
@@ -17,13 +16,12 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* <HomePage /> */}
     {/* <App /> */}
-    {/* <SignInForm /> */}
-    {/* <SignUpForm /> */}
     {/* <AboutUs /> */}
+    {/* <LogInPage /> */}
     {/* <EventPage /> */}
     {/* <ExplorePage /> */}
-    <SearchResults />
-    {/* <ProfilePage /> */}
+    {/* <SearchResults /> */}
+    <ProfilePage />
     {/* <PaymentPage /> */}
     {/* <ContactUsPage /> */}
   </StrictMode>,

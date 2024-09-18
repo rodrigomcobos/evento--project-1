@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
+import { FaUserCircle, FaSignOutAlt, FaTicketAlt, FaRegIdCard } from 'react-icons/fa';
 
 // Components
 import SearchNavBar from '../components/SearchNavBar';
@@ -35,8 +35,12 @@ const ProfilePage = () => {
 
                         {/* My Bookings */}
                         <div className="mt-8 w-full flex justify-center flex-col">
-                            <h3 className="text-gray-700 font-semibold text-lg">My Bookings</h3>
-                            <ul className="pl-4 mt-2">
+                            <div className='flex items-center gap-2'>
+                                <FaTicketAlt className="text-gray-500 text-2xl" />
+                                <h3 className="text-gray-700 font-semibold text-lg">My Bookings</h3>
+                            </div>
+
+                            <ul className="pl-8 mt-2">
                                 <li className="text-gray-600 hover:text-indigo-600 cursor-pointer text-md">Upcoming Events</li>
                                 <li className="text-gray-600 hover:text-indigo-600 cursor-pointer text-md">Past Events</li>
                             </ul>
@@ -44,8 +48,12 @@ const ProfilePage = () => {
 
                         {/* My Profile */}
                         <div className="mt-8 w-full">
-                            <h3 className="text-gray-700 font-semibold text-lg">My Profile</h3>
-                            <ul className="pl-4 mt-2">
+                            <div className='flex items-center gap-2'>
+                                <FaRegIdCard className="text-gray-500 text-2xl" />
+                                <h3 className="text-gray-700 font-semibold text-lg">My Profile</h3>
+                            </div>
+
+                            <ul className="pl-8 mt-2">
                                 <li className="text-gray-600 hover:text-indigo-600 cursor-pointer text-md">Profile Details</li>
 
                                 {/* We'll let Stripe handle this */}
@@ -65,10 +73,10 @@ const ProfilePage = () => {
 
                 {/* THIS WILL CHANGE DEPENDING ON THE WHICH SIDEBAR TAB IS CLICKED */}
                 {/* My Bookings Tab */}
-                <UpcomingEvents />
-                <PastEvents />
+                {/* <UpcomingEvents /> */}
+                {/* <PastEvents /> */}
                 {/* My Profile Tab */}
-                <ProfileDetails />
+                {/* <ProfileDetails /> */}
                 <BillingInfo />
                 <MyReviews />
             </div>
