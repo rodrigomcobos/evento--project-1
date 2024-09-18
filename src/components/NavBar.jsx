@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import { FaUserCircle } from 'react-icons/fa';
 import { FiMenu, FiX } from 'react-icons/fi';
 import logo from '../assets/logo.png';
 
-const Navbar = () => {
+const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -48,21 +49,21 @@ const Navbar = () => {
                     <div className="flex items-center">
                         <img src={logo} alt="Logo" className="w-[145px] mr-6" />
                         <ul className="hidden md:flex space-x-4">
-                            <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Sports</a></li>
-                            <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Concerts</a></li>
-                            <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Theater</a></li>
-                            <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Festivals</a></li>
+                            <li><Link to="/show-all-events" className="hover:text-blue-500 transition duration-300 text-md">Sports</Link></li>
+                            <li><Link to="/show-all-events" className="hover:text-blue-500 transition duration-300 text-md">Concerts</Link></li>
+                            <li><Link to="/show-all-events" className="hover:text-blue-500 transition duration-300 text-md">Theater</Link></li>
+                            <li><Link to="/show-all-events" className="hover:text-blue-500 transition duration-300 text-md">Festivals</Link></li>
                         </ul>
                     </div>
 
                     {/* Right Side: User Links */}
                     <div className="hidden md:flex items-center justify-between space-x-4">
                         <ul className="flex space-x-4">
-                            <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Explore</a></li>
-                            <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">My Bookings</a></li>
+                            <li><Link to="/explore" className="hover:text-blue-500 transition duration-300 text-md">Explore</Link></li>
+                            <li><Link to="/profile" className="hover:text-blue-500 transition duration-300 text-md">My Bookings</Link></li>
                         </ul>
                         <div className="flex items-center space-x-2">
-                            <a href="#" className="hover:text-blue-500 text-md transition duration-300">Sign In</a>
+                            <Link to="/login" className="hover:text-blue-500 text-md transition duration-300">Sign In</Link>
                             <FaUserCircle className="h-8 w-8 text-blue-500" />
                         </div>
                     </div>
@@ -90,16 +91,16 @@ const Navbar = () => {
                                 </div>
 
                                 <ul className="space-y-4">
-                                    <li><a href="#" className="text-lg font-bold">Sports</a></li>
-                                    <li><a href="#" className="text-lg font-bold">Concerts</a></li>
-                                    <li><a href="#" className="text-lg font-bold">Theater</a></li>
-                                    <li><a href="#" className="text-lg font-bold">Festivals</a></li>
+                                    <li><Link to="/show-all-events" className="text-lg font-bold">Sports</Link></li>
+                                    <li><Link to="/show-all-events" className="text-lg font-bold">Concerts</Link></li>
+                                    <li><Link to="/show-all-events" className="text-lg font-bold">Theater</Link></li>
+                                    <li><Link to="/show-all-events" className="text-lg font-bold">Festivals</Link></li>
                                 </ul>
 
                                 <ul className="space-y-4 mt-8">
-                                    <li><a href="#" className="text-lg font-bold">Explore</a></li>
-                                    <li><a href="#" className="text-lg font-bold">My Bookings</a></li>
-                                    <li><a href="#" className="text-lg font-bold">Sign In</a></li>
+                                    <li><Link to="/explore" className="text-lg font-bold">Explore</Link></li>
+                                    <li><Link to="/profile" className="text-lg font-bold">My Bookings</Link></li>
+                                    <li><Link to="/login" className="text-lg font-bold">Sign In</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -107,8 +108,7 @@ const Navbar = () => {
                 </nav>
             </div>
         </>
-
     );
 };
 
-export default Navbar;
+export default NavBar;

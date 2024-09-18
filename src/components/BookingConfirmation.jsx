@@ -1,6 +1,4 @@
 import React from 'react'
-import NavBar from './NavBar';
-import Footer from './Footer';
 import TransparentLogo from '../assets/slides/transparentlogo.png';
 import placeholderImage from '../assets/slides/slide-1.png';
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaTicketAlt } from 'react-icons/fa';

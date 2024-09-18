@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaDiscord, FaGithub, FaLinkedinIn, FaBehance } from 'react-icons/fa';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import logo from '../assets/logo.png';
 
 const Footer = () => {
@@ -35,13 +36,13 @@ const Footer = () => {
                             <h3 className="font-bold text-lg mb-4">Your Account</h3>
                             <ul className="space-y-1">
                                 <li>
-                                    <a href="/signup" className="hover:underline text-sm">Sign up</a>
+                                    <Link to="/signup" className="hover:underline text-sm">Sign Up</Link>
                                 </li>
                                 <li>
-                                    <a href="/login" className="hover:underline text-sm">Log in</a>
+                                    <Link to="/login" className="hover:underline text-sm">Log In</Link>
                                 </li>
                                 <li>
-                                    <a href="/contact" className="hover:underline text-sm">Contact Us</a>
+                                    <Link to="/contact" className="hover:underline text-sm">Contact Us</Link>
                                 </li>
                             </ul>
                         </div>
@@ -51,13 +52,13 @@ const Footer = () => {
                             <h3 className="font-bold text-lg mb-4">About Us</h3>
                             <ul className="space-y-1">
                                 <li>
-                                    <a href="/about" className="hover:underline text-sm">About Us</a>
+                                    <Link to="/about" className="hover:underline text-sm">About Us</Link>
                                 </li>
                                 <li>
-                                    <a href="/privacy" className="hover:underline text-sm">Privacy Policy</a>
+                                    <Link to="/privacy" className="hover:underline text-sm">Privacy Policy</Link>
                                 </li>
                                 <li>
-                                    <a href="/purchase-policy" className="hover:underline text-sm">Purchase Policy</a>
+                                    <Link to="/purchase-policy" className="hover:underline text-sm">Purchase Policy</Link>
                                 </li>
                             </ul>
                         </div>
@@ -70,7 +71,6 @@ const Footer = () => {
                 </div>
             </footer>
         </>
-
     );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaUserCircle, FaSearch } from 'react-icons/fa';
 import { FiMenu, FiX } from 'react-icons/fi';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 import logo from '../assets/logo.png';
 
 const SearchNavBar = () => {
@@ -41,10 +42,9 @@ const SearchNavBar = () => {
         setIsFocused(false);
     };
 
-
     return (
         <>
-            <div className="flex gap-2 max-sm:flex-col items-center justify-center text-center bg-gradient-to-r from-indigo-400 to-cyan-400 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/25%)]  px-4 py-2 font-[sans-serif]">
+            <div className="flex gap-2 max-sm:flex-col items-center justify-center text-center bg-gradient-to-r from-indigo-400 to-cyan-400 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/25%)] px-4 py-2 font-[sans-serif]">
                 <p className="text-base">This is a demo website.</p>
                 <a target='_blank'
                     href="https://github.com/rodrigomcobos/evento--project-1"
@@ -56,9 +56,11 @@ const SearchNavBar = () => {
             {/* Nav Bar */}
             <div className='px-4 mb-6'>
                 <nav className="bg-white max-w-6xl mx-auto pt-6 flex justify-between align-middle">
-                    {/* Left Side: Logo and Event Links */}
+                    {/* Left Side: Logo and Search Bar */}
                     <div className="flex items-center">
-                        <img src={logo} alt="Logo" className="w-[145px]" />
+                        <Link to="/">
+                            <img src={logo} alt="Logo" className="w-[145px]" />
+                        </Link>
                         {/* Search Bar */}
                         <div className='px-4'>
                             <div className="flex bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-600 items-center bg-gray-100 rounded-full p-[2px] w-auto sm:w-dvw max-w-[350px] shadow-md">
@@ -74,17 +76,16 @@ const SearchNavBar = () => {
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     {/* Right Side: User Links */}
                     <div className="hidden md:flex items-center justify-between space-x-4">
                         <ul className="flex space-x-4">
-                            <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">Explore</a></li>
-                            <li><a href="#" className="hover:text-blue-500 transition duration-300 text-md">My Bookings</a></li>
+                            <li><Link to="/explore" className="hover:text-blue-500 transition duration-300 text-md">Explore</Link></li>
+                            <li><Link to="/profile" className="hover:text-blue-500 transition duration-300 text-md">My Bookings</Link></li>
                         </ul>
                         <div className="flex items-center space-x-2">
-                            <a href="#" className="hover:text-blue-500 text-md transition duration-300">Sign In</a>
+                            <Link to="/login" className="hover:text-blue-500 text-md transition duration-300">Sign In</Link>
                             <FaUserCircle className="h-8 w-8 text-blue-500" />
                         </div>
                     </div>
@@ -112,16 +113,16 @@ const SearchNavBar = () => {
                                 </div>
 
                                 <ul className="space-y-4">
-                                    <li><a href="#" className="text-lg font-bold">Sports</a></li>
-                                    <li><a href="#" className="text-lg font-bold">Concerts</a></li>
-                                    <li><a href="#" className="text-lg font-bold">Theater</a></li>
-                                    <li><a href="#" className="text-lg font-bold">Festivals</a></li>
+                                    <li><Link to="/show-all-events" className="text-lg font-bold">Sports</Link></li>
+                                    <li><Link to="/show-all-events" className="text-lg font-bold">Concerts</Link></li>
+                                    <li><Link to="/show-all-events" className="text-lg font-bold">Theater</Link></li>
+                                    <li><Link to="/show-all-events" className="text-lg font-bold">Festivals</Link></li>
                                 </ul>
 
                                 <ul className="space-y-4 mt-8">
-                                    <li><a href="#" className="text-lg font-bold">Explore</a></li>
-                                    <li><a href="#" className="text-lg font-bold">My Bookings</a></li>
-                                    <li><a href="#" className="text-lg font-bold">Sign In</a></li>
+                                    <li><Link to="/explore" className="text-lg font-bold">Explore</Link></li>
+                                    <li><Link to="/profile" className="text-lg font-bold">My Bookings</Link></li>
+                                    <li><Link to="/login" className="text-lg font-bold">Sign In</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -129,7 +130,6 @@ const SearchNavBar = () => {
                 </nav>
             </div>
         </>
-
     );
 };
 

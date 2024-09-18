@@ -3,7 +3,7 @@ import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub } from 'react-icons/fa';
 import backgroundImage from '../assets/slides/loginbackground.png';
 import transparentLogo from '../assets/slides/transparentlogo.png'; // Import the logo
 
-const SignupForm = () => {
+const SignUpForm = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
@@ -185,4 +185,4 @@ const SignupForm = () => {
     );
 };
 
-export default SignupForm;
+export default SignUpForm;
