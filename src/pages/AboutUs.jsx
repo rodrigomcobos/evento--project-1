@@ -2,6 +2,8 @@ import React from 'react'
 import { FaDiscord, FaGithub, FaLinkedinIn, FaBehance } from 'react-icons/fa';
 import SearchNavBar from '../components/SearchNavBar'
 import Footer from '../components/Footer'
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
+
 
 // Photo/Img Imports
 import RodrigoPhoto from '../assets/slides/rodrigo.jpeg'
@@ -72,11 +74,16 @@ const AboutUs = () => {
                     </ul>
 
                     <p className='text-md text-center'>Check the full buyer Terms & Conditions <a href="#">here</a>.</p><br />
+                    <p className='text-md text-center'> Please note: Only tickets bought or sold through Evento platforms are covered by this guarantee.<br /></p>
+                    <div className='flex justify-center items-center'>
+                        <p className='text-md text-center'>
+                            Read the full policy&nbsp;
+                        </p>
+                        <Link to="/purchase-policy" >
+                            <a className='text-indigo-500' href="/purchase-policy">here</a>.
+                        </Link>
+                    </div>
 
-                    <p className='text-md text-center'>
-                        Please note: Only tickets bought or sold through Evento platforms are covered by this guarantee.<br />
-                        Read the full policy <a className='text-indigo-500' href="#">here</a>.
-                    </p>
                 </section>
 
                 {/* Separation line */}
@@ -185,7 +192,12 @@ const AboutUs = () => {
                         <p className="text-md text-gray-600 mb-4 text-center">
                             Are you ready to help us connect people with the world of live experiences? We’re always on the lookout for candidates who are driven, courageous, inventive, diverse and live the Evento brand. But let's not forget that this company is fictional, sorry there are no jobs. <br />But want to learn web development? Then contact DevMountain <a className='text-indigo-500' href="https://devmountain.com/" target='_blank'>on this link here.</a>
                         </p>
-                        <a href="/contact" className="text-indigo-500 text-xl">Contact us to join &gt;</a>
+                        <Link to="/contact">
+                            <a href="/contact" className="text-indigo-500 text-xl">
+                                Contact Us to Join
+                            </a>
+                        </Link>
+
                     </div>
 
 
