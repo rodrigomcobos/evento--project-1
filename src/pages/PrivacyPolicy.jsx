@@ -1,8 +1,13 @@
 import React from 'react'
+import SearchNavBar from '../components/SearchNavBar';
+import Footer from '../components/Footer';
 
 const PrivacyPolicy = () => {
     return (
-        <div>This is PrivacyPolicy</div>
+        <div>
+            <SearchNavBar />
+            <Footer />
+        </div>
     )
 }
 

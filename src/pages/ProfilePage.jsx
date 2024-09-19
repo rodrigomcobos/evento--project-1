@@ -76,12 +76,12 @@ const ProfilePage = () => {
                 {/* <UpcomingEvents /> */}
                 {/* <PastEvents /> */}
                 {/* My Profile Tab */}
-                {/* <ProfileDetails /> */}
+                <ProfileDetails />
 
                 {/* I will add this component later, will be added as a bonus functionality */}
                 {/* <BillingInfo /> */}
 
-                <MyReviews />
+                {/* <MyReviews /> */}
             </div>
             <Footer />
         </>
