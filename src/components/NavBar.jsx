@@ -49,10 +49,10 @@ const NavBar = () => {
                     <div className="flex items-center">
                         <img src={logo} alt="Logo" className="w-[145px] mr-6" />
                         <ul className="hidden md:flex space-x-4">
-                            <li><Link to="/show-all-events" className="hover:text-blue-500 transition duration-300 text-md">Sports</Link></li>
-                            <li><Link to="/show-all-events" className="hover:text-blue-500 transition duration-300 text-md">Concerts</Link></li>
-                            <li><Link to="/show-all-events" className="hover:text-blue-500 transition duration-300 text-md">Theater</Link></li>
-                            <li><Link to="/show-all-events" className="hover:text-blue-500 transition duration-300 text-md">Festivals</Link></li>
+                            <li><Link to="/events" className="hover:text-blue-500 transition duration-300 text-md">Sports</Link></li>
+                            <li><Link to="/events" className="hover:text-blue-500 transition duration-300 text-md">Concerts</Link></li>
+                            <li><Link to="/events" className="hover:text-blue-500 transition duration-300 text-md">Theater</Link></li>
+                            <li><Link to="/events" className="hover:text-blue-500 transition duration-300 text-md">Festivals</Link></li>
                         </ul>
                     </div>
 

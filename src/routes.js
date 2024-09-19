@@ -13,7 +13,7 @@ import PageNotFound from './pages/PageNotFound.jsx'; // Optional: For handling 4
 
 const routes = [
   { path: '/', component: HomePage },
-  { path: '/events/:category', component: ShowAllEvents }, // Updated route with dynamic category
+  { path: '/events', component: ShowAllEvents }, // Updated route with dynamic category
   { path: '/explore', component: ExplorePage },
   { path: '/profile', component: ProfilePage },
   { path: '/login', component: LogInPage },

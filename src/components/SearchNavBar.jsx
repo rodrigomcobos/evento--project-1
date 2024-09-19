@@ -113,10 +113,10 @@ const SearchNavBar = () => {
                                 </div>
 
                                 <ul className="space-y-4">
-                                    <li><Link to="/show-all-events" className="text-lg font-bold">Sports</Link></li>
-                                    <li><Link to="/show-all-events" className="text-lg font-bold">Concerts</Link></li>
-                                    <li><Link to="/show-all-events" className="text-lg font-bold">Theater</Link></li>
-                                    <li><Link to="/show-all-events" className="text-lg font-bold">Festivals</Link></li>
+                                    <li><Link to="/events" className="text-lg font-bold">Sports</Link></li>
+                                    <li><Link to="/events" className="text-lg font-bold">Concerts</Link></li>
+                                    <li><Link to="/events" className="text-lg font-bold">Theater</Link></li>
+                                    <li><Link to="/events" className="text-lg font-bold">Festivals</Link></li>
                                 </ul>
 
                                 <ul className="space-y-4 mt-8">
