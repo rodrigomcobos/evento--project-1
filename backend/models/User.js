@@ -1,67 +1,42 @@
-// models/User.js
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db.js';
-import { hashPassword } from '../config/bcryptConfig.js';
+import { Model, DataTypes } from 'sequelize';
 
-const User = sequelize.define(
-  'User',
-  {
+class User extends Model {
+  static attributes = {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
     },
-    name: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     email: {
       type: DataTypes.STRING,
-      unique: true,
       allowNull: false,
-    },
-    phone: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    role_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'Roles',
-        key: 'id',
-      },
+    first_name: {
+      type: DataTypes.STRING,
     },
-    card_number: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
+    last_name: {
+      type: DataTypes.STRING,
     },
-    expiration: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    cvv: {
-      type: DataTypes.STRING(3),
-      allowNull: true,
-    },
-  },
-  {
-    hooks: {
-      beforeCreate: async (user) => {
-        if (user.password) {
-          user.password = await hashPassword(user.password);
-        }
-      },
-      beforeUpdate: async (user) => {
-        if (user.password) {
-          user.password = await hashPassword(user.password);
-        }
-      },
-    },
+  };
+
+  static associate(models) {
+    this.hasMany(models.Booking);
+    this.hasMany(models.Review);
+    this.belongsTo(models.Role);
   }
-);
+}
 
 export default User;

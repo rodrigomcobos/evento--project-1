@@ -1,91 +1,176 @@
-import { Sequelize } from 'sequelize';
-import { User, Role, Event, Booking, Review, Payment } from '../models';
+import {
+  db,
+  User,
+  Event,
+  Booking,
+  Review,
+  Role,
+  Payment,
+} from '../models/index.js';
+import bcrypt from 'bcrypt';
 
-// Create roles and users to seed the database
+// ... rest of your seed.js file remains the same
+
 const seed = async () => {
   try {
-    // 1. Sync the database schema
-    await Sequelize.sync({ force: true });
-    console.log('Database synced!');
+    // Sync all models with the database
+    await db.sync({ force: true });
+    console.log('Database synced');
 
-    // 2. Create roles
-    const adminRole = await Role.create({ role_name: 'admin' });
-    const userRole = await Role.create({ role_name: 'user' });
-    console.log('Roles created!');
+    // Create roles
+    const [adminRole, userRole] = await Promise.all([
+      Role.create({ name: 'admin', description: 'Administrator' }),
+      Role.create({ name: 'user', description: 'Regular user' }),
+    ]);
+    console.log('Roles created');
 
-    // 3. Create users
-    const adminUser = await User.create({
-      name: 'Admin',
-      email: 'admin@example.com',
-      password: await bcrypt.hash('adminpassword', 10),
-      role_id: adminRole.id,
+    // Create users
+    const passwordHash = await bcrypt.hash('password123', 10);
+    const [admin, user1, user2] = await Promise.all([
+      User.create({
+        username: 'admin',
+        email: 'admin@example.com',
+        password: passwordHash,
+        first_name: 'Admin',
+        last_name: 'User',
+        role_id: adminRole.id,
+      }),
+      User.create({
+        username: 'user1',
+        email: 'user1@example.com',
+        password: passwordHash,
+        first_name: 'John',
+        last_name: 'Doe',
+        role_id: userRole.id,
+      }),
+      User.create({
+        username: 'user2',
+        email: 'user2@example.com',
+        password: passwordHash,
+        first_name: 'Jane',
+        last_name: 'Smith',
+        role_id: userRole.id,
+      }),
+    ]);
+    console.log('Users created');
+
+    // Create events
+    const [event1, event2] = await Promise.all([
+      Event.create({
+        title: 'Summer Concert',
+        description: 'A night of great music',
+        date: new Date('2023-07-15'),
+        location: 'Central Park',
+        capacity: 1000,
+        price: 50.0,
+        image_url: 'https://example.com/concert.jpg',
+      }),
+      Event.create({
+        title: 'Tech Conference',
+        description: 'Learn about the latest technologies',
+        date: new Date('2023-09-20'),
+        location: 'Convention Center',
+        capacity: 500,
+        price: 100.0,
+        image_url: 'https://example.com/conference.jpg',
+      }),
+    ]);
+    console.log('Events created');
+
+    // Create bookings
+    const [booking1, booking2] = await Promise.all([
+      Booking.create({
+        user_id: user1.id,
+        event_id: event1.id,
+        status: 'confirmed',
+      }),
+      Booking.create({
+        user_id: user2.id,
+        event_id: event2.id,
+        status: 'pending',
+      }),
+    ]);
+    console.log('Bookings created');
+
+    // Create reviews
+    await Promise.all([
+      Review.create({
+        user_id: user1.id,
+        event_id: event1.id,
+        rating: 5,
+        comment: 'Great concert!',
+      }),
+      Review.create({
+        user_id: user2.id,
+        event_id: event2.id,
+        rating: 4,
+        comment: 'Informative conference',
+      }),
+    ]);
+    console.log('Reviews created');
+
+    // Create payments
+    await Promise.all([
+      Payment.create({
+        booking_id: booking1.id,
+        amount: 50.0,
+        payment_method: 'credit_card',
+        status: 'completed',
+        transaction_id: 'txn_123456',
+      }),
+      Payment.create({
+        booking_id: booking2.id,
+        amount: 100.0,
+        payment_method: 'paypal',
+        status: 'pending',
+        transaction_id: 'txn_789012',
+      }),
+    ]);
+    console.log('Payments created');
+
+    // Test queries
+    console.log('\nRunning test queries:');
+
+    // Test User model
+    const testUser = await User.findOne({
+      where: { username: 'user1' },
+      include: [Role],
     });
+    console.log('Test User:', testUser.toJSON());
 
-    const regularUser = await User.create({
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-      password: await bcrypt.hash('password123', 10),
-      role_id: userRole.id,
+    // Test Event model
+    const testEvent = await Event.findOne({
+      where: { title: 'Summer Concert' },
+      include: [Booking, Review],
     });
-    console.log('Users created!');
+    console.log('Test Event:', testEvent.toJSON());
 
-    // 4. Create events
-    const event1 = await Event.create({
-      name: 'Music Festival',
-      description: 'An awesome outdoor music festival.',
-      date: '2024-10-01',
-      location: 'New York',
-      capacity: 500,
-      available_seats: 500,
+    // Test Booking model
+    const testBooking = await Booking.findOne({
+      where: { status: 'confirmed' },
+      include: [User, Event, Payment],
     });
+    console.log('Test Booking:', testBooking.toJSON());
 
-    const event2 = await Event.create({
-      name: 'Tech Conference',
-      description: 'Annual tech conference featuring industry leaders.',
-      date: '2024-11-15',
-      location: 'San Francisco',
-      capacity: 300,
-      available_seats: 300,
+    // Test Review model
+    const testReview = await Review.findOne({
+      where: { rating: 5 },
+      include: [User, Event],
     });
-    console.log('Events created!');
+    console.log('Test Review:', testReview.toJSON());
 
-    // 5. Create bookings
-    await Booking.create({
-      user_id: regularUser.id,
-      event_id: event1.id,
-      booking_date: new Date(),
-      status: 'confirmed',
+    // Test Payment model
+    const testPayment = await Payment.findOne({
+      where: { status: 'completed' },
+      include: [Booking],
     });
+    console.log('Test Payment:', testPayment.toJSON());
 
-    await Booking.create({
-      user_id: regularUser.id,
-      event_id: event2.id,
-      booking_date: new Date(),
-      status: 'confirmed',
-    });
-    console.log('Bookings created!');
-
-    // 6. Create reviews
-    await Review.create({
-      user_id: regularUser.id,
-      event_id: event1.id,
-      rating: 5,
-      review_text: 'Fantastic event, highly recommend!',
-      review_date: new Date(),
-    });
-    console.log('Reviews created!');
-
-    // 7. Create payments
-    await Payment.create({
-      booking_id: 1,
-      payment_status: 'completed',
-      amount: 50.0,
-    });
-    console.log('Payments created!');
-
-    console.log('Seeding completed!');
+    console.log('Seeding and tests completed successfully');
   } catch (error) {
-    console.error('Error seeding the database:', error);
+    console.error('Error seeding database:', error);
+  } finally {
+    await db.close();
   }
 };
 

@@ -1,75 +1,40 @@
-// models/Payment.js
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db.js';
-import { hashPassword } from '../config/bcryptConfig.js';
+import { Model, DataTypes } from 'sequelize';
 
-const Payment = sequelize.define(
-  'Payment',
-  {
+class Payment extends Model {
+  static attributes = {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
     },
     booking_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'Bookings',
-        key: 'id',
-      },
-    },
-    payment_status: {
-      type: DataTypes.ENUM('pending', 'completed', 'failed'),
+      type: DataTypes.UUID,
       allowNull: false,
     },
     amount: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
-    payment_id: {
+    payment_date: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    payment_method: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    card_number: {
+    status: {
+      type: DataTypes.ENUM('pending', 'completed', 'failed'),
+      defaultValue: 'pending',
+    },
+    transaction_id: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
     },
-    expiration: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    cvv: {
-      type: DataTypes.STRING(3),
-      allowNull: false,
-    },
-  },
-  {
-    hooks: {
-      beforeCreate: async (payment) => {
-        if (payment.card_number) {
-          payment.card_number = await hashPassword(payment.card_number);
-        }
-        if (payment.expiration) {
-          payment.expiration = await hashPassword(payment.expiration);
-        }
-        if (payment.cvv) {
-          payment.cvv = await hashPassword(payment.cvv);
-        }
-      },
-      beforeUpdate: async (payment) => {
-        if (payment.card_number) {
-          payment.card_number = await hashPassword(payment.card_number);
-        }
-        if (payment.expiration) {
-          payment.expiration = await hashPassword(payment.expiration);
-        }
-        if (payment.cvv) {
-          payment.cvv = await hashPassword(payment.cvv);
-        }
-      },
-    },
+  };
+
+  static associate(models) {
+    this.belongsTo(models.Booking);
   }
-);
+}
 
 export default Payment;

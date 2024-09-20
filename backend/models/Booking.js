@@ -1,49 +1,35 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db.js';
+import { Model, DataTypes } from 'sequelize';
 
-const Booking = sequelize.define('Booking', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  user_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: 'Users',
-      key: 'id',
+class Booking extends Model {
+  static attributes = {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
     },
-  },
-  event_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: 'Events',
-      key: 'id',
+    user_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
     },
-  },
-  booking_date: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  status: {
-    type: DataTypes.ENUM('confirmed', 'canceled'),
-    allowNull: false,
-  },
-  date: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  location: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  payment_id: {
-    type: DataTypes.STRING,
-    references: {
-      model: 'Payments',
-      key: 'id',
+    event_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
     },
-  },
-});
+    booking_date: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    status: {
+      type: DataTypes.ENUM('pending', 'confirmed', 'cancelled'),
+      defaultValue: 'pending',
+    },
+  };
+
+  static associate(models) {
+    this.belongsTo(models.User);
+    this.belongsTo(models.Event);
+    this.hasOne(models.Payment);
+  }
+}
 
 export default Booking;

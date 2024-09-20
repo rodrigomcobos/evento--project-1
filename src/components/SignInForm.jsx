@@ -3,11 +3,21 @@ import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub } from 'react-icons/fa';
 import backgroundImage from '../assets/slides/loginbackground.png';
 import transparentLogo from '../assets/slides/transparentlogo.png'; // Import the logo
 
-const SignInForm = () => {
+const SignInForm = ({ toggleForm }) => {  // Accept toggleForm prop
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
+    const [passwordVisible, setPasswordVisible] = useState(false);  // Password visibility toggle
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Logged in');
+        // Log form data for now, you can replace this with API call later
+        console.log({
+            email,
+            password,
+            rememberMe,
+        });
     };
 
     return (
@@ -49,33 +59,54 @@ const SignInForm = () => {
                 <div className="flex flex-col justify-center">
                     <h2 className="text-2xl font-bold mb-6">Sign In</h2>
                     <form onSubmit={handleSubmit} className="space-y-6">
+                        {/* Email Address */}
                         <div>
                             <label className="block text-md font-medium text-gray-700 mb-2">Email Address</label>
                             <input
                                 type="email"
                                 required
+                                value={email}
+                                placeholder='john.doe@me.com'
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
                         </div>
 
+                        {/* Password */}
                         <div>
                             <label className="block text-md font-medium text-gray-700 mb-2">Password</label>
-                            <input
-                                type="password"
-                                required
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
-                            />
+                            <div className="relative">
+                                <input
+                                    type={passwordVisible ? 'text' : 'password'}
+                                    value={password}
+                                    placeholder='Enter your password'
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setPasswordVisible(!passwordVisible)}
+                                    className="absolute inset-y-0 right-2 text-sm text-gray-500 focus:outline-none"
+                                >
+                                    {passwordVisible ? 'Hide' : 'Show'}
+                                </button>
+                            </div>
                         </div>
 
+                        {/* Remember Me */}
                         <div className="flex items-center">
                             <input
                                 type="checkbox"
                                 id="rememberMe"
+                                checked={rememberMe}
+                                onChange={() => setRememberMe(!rememberMe)}
                                 className="mr-2"
                             />
                             <label htmlFor="rememberMe" className="text-md text-gray-600">Remember Me</label>
                         </div>
 
+                        {/* Submit Button */}
                         <button
                             type="submit"
                             className="min-w-min px-8 py-2 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full"
@@ -86,7 +117,12 @@ const SignInForm = () => {
                         </button>
                     </form>
 
-                    <a href="#new" className="block text-md text-indigo-400 hover:text-indigo-800 mt-2">
+                    {/* Toggle to Sign Up */}
+                    <a
+                        href="#new"
+                        className="block text-md text-indigo-400 hover:text-indigo-800 mt-2"
+                        onClick={toggleForm}  // Call toggleForm on click
+                    >
                         Are you new here?
                     </a>
 

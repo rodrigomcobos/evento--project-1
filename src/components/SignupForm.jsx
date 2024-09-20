@@ -3,7 +3,7 @@ import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub } from 'react-icons/fa';
 import backgroundImage from '../assets/slides/loginbackground.png';
 import transparentLogo from '../assets/slides/transparentlogo.png'; // Import the logo
 
-const SignUpForm = () => {
+const SignUpForm = ({ toggleForm }) => {  // Added toggleForm prop
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
@@ -11,7 +11,7 @@ const SignUpForm = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    const [phone, setPhone] = useState('');  // Changed from setPhoneNumber
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -117,7 +117,7 @@ const SignUpForm = () => {
                                 required
                                 value={phone}
                                 placeholder='***-***-****'
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                onChange={(e) => setPhone(e.target.value)}  // Updated setPhone
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
                         </div>
@@ -175,6 +175,10 @@ const SignUpForm = () => {
                             </div>
                         </button>
                     </form>
+
+                    <p className="text-sm text-center text-gray-500 mt-6">
+                        Already have an account? <a href="#signin" onClick={toggleForm} className="underline text-indigo-500">Sign In here</a>
+                    </p>
 
                     <p className="text-sm text-center text-gray-500 mt-6">
                         By clicking on "Sign Up Now" you agree to the <br /> <a href="#terms" className="underline">Terms of Service</a> | <a href="#privacy" className="underline">Privacy Policy</a>
