@@ -26,9 +26,11 @@ class User extends Model {
     },
     first_name: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     last_name: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
   };
 

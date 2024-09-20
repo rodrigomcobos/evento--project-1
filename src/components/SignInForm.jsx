@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { signIn, clearError } from '../redux/userSlice';
 import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub } from 'react-icons/fa';
 import backgroundImage from '../assets/slides/loginbackground.png';
-import transparentLogo from '../assets/slides/transparentlogo.png'; // Import the logo
+import transparentLogo from '../assets/slides/transparentlogo.png';
 
-const SignInForm = ({ toggleForm }) => {  // Accept toggleForm prop
-
+const SignInForm = ({ toggleForm }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
-    const [passwordVisible, setPasswordVisible] = useState(false);  // Password visibility toggle
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
-    const handleSubmit = (e) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { loading, error } = useSelector((state) => state.user);
+
+    useEffect(() => {
+        // Clear any existing errors when the component mounts
+        dispatch(clearError());
+    }, [dispatch]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Log form data for now, you can replace this with API call later
-        console.log({
-            email,
-            password,
-            rememberMe,
-        });
+        try {
+            const resultAction = await dispatch(signIn({ email, password })).unwrap();
+            console.log('Successfully Signed In');
+            navigate('/profile');
+        } catch (err) {
+            console.error('Failed to sign in:', err);
+            // Error is now handled in the Redux slice, no need to set it here
+        }
     };
 
     return (
@@ -106,22 +119,25 @@ const SignInForm = ({ toggleForm }) => {  // Accept toggleForm prop
                             <label htmlFor="rememberMe" className="text-md text-gray-600">Remember Me</label>
                         </div>
 
+                        {/* Error message */}
+                        {error && <p className="text-red-500">{error}</p>}
+
                         {/* Submit Button */}
                         <button
                             type="submit"
                             className="min-w-min px-8 py-2 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full"
+                            disabled={loading}
                         >
                             <div className="flex items-center justify-center px-2">
-                                Sign In
+                                {loading ? 'Signing In...' : 'Sign In'}
                             </div>
                         </button>
                     </form>
 
                     {/* Toggle to Sign Up */}
-                    <a
-                        href="#new"
+                    <a href="#new"
                         className="block text-md text-indigo-400 hover:text-indigo-800 mt-2"
-                        onClick={toggleForm}  // Call toggleForm on click
+                        onClick={toggleForm}
                     >
                         Are you new here?
                     </a>

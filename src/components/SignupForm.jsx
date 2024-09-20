@@ -1,33 +1,57 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { signUp } from '../redux/userSlice';
 import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub } from 'react-icons/fa';
 import backgroundImage from '../assets/slides/loginbackground.png';
-import transparentLogo from '../assets/slides/transparentlogo.png'; // Import the logo
+import transparentLogo from '../assets/slides/transparentlogo.png';
 
 const SignUpForm = ({ toggleForm }) => {  // Added toggleForm prop
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-
-    // State for form fields
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');  // Changed from setPhoneNumber
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [formError, setFormError] = useState(null);  // Renamed to formError
 
-    const handleSubmit = (e) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { loading, error: reduxError } = useSelector((state) => state.user);  // Renamed to reduxError
+
+    // ... rest of your component
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Basic form validation
         if (password !== confirmPassword) {
-            alert("Passwords don't match!");
-        } else {
-            // Log form data
-            console.log({
-                firstName,
-                lastName,
+            setFormError("Passwords don't match!");
+            return;
+        }
+        if (password.length < 6) {
+            setFormError("Password must be at least 6 characters long.");
+            return;
+        }
+
+        try {
+            const resultAction = await dispatch(signUp({
+                username,
+                first_name: firstName,
+                last_name: lastName,
                 email,
                 phone,
-                password,
-            });
+                password
+            })).unwrap();
+
+            console.log('Sign-up successful:', resultAction);
+            navigate('/profile');
+        } catch (err) {
+            console.error('Error during sign-up:', err);
+            setFormError(err.message || 'An unexpected error occurred. Please try again.');
         }
     };
 
@@ -77,7 +101,7 @@ const SignUpForm = ({ toggleForm }) => {  // Added toggleForm prop
                                 type="text"
                                 required
                                 value={firstName}
-                                placeholder='John'
+                                placeholder='Your First Name'
                                 onChange={(e) => setFirstName(e.target.value)}
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
@@ -90,7 +114,7 @@ const SignUpForm = ({ toggleForm }) => {  // Added toggleForm prop
                                 type="text"
                                 required
                                 value={lastName}
-                                placeholder='Doe'
+                                placeholder='Your Last Name'
                                 onChange={(e) => setLastName(e.target.value)}
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
@@ -103,8 +127,21 @@ const SignUpForm = ({ toggleForm }) => {  // Added toggleForm prop
                                 type="email"
                                 required
                                 value={email}
-                                placeholder='john.doe@me.com'
+                                placeholder='Your email'
                                 onChange={(e) => setEmail(e.target.value)}
+                                className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                            />
+                        </div>
+
+                        {/* Username */}
+                        <div>
+                            <label className="block text-md font-medium text-gray-700 mb-2">Username</label>
+                            <input
+                                type="text"
+                                required
+                                value={username}
+                                placeholder='Create Username'
+                                onChange={(e) => setUsername(e.target.value)}
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
                         </div>
@@ -117,7 +154,7 @@ const SignUpForm = ({ toggleForm }) => {  // Added toggleForm prop
                                 required
                                 value={phone}
                                 placeholder='***-***-****'
-                                onChange={(e) => setPhone(e.target.value)}  // Updated setPhone
+                                onChange={(e) => setPhone(e.target.value)}
                                 className="w-full px-4 py-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
                             />
                         </div>
@@ -166,12 +203,18 @@ const SignUpForm = ({ toggleForm }) => {  // Added toggleForm prop
                             </div>
                         </div>
 
+                        {/* Error message */}
+                        {/* Error messages */}
+                        {formError && <p className="text-red-500">{formError}</p>}
+                        {reduxError && <p className="text-red-500">{reduxError}</p>}
+
                         <button
                             type="submit"
                             className="min-w-min px-8 py-2 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full"
+                            disabled={loading}
                         >
                             <div className="flex items-center justify-center px-2">
-                                Sign Up Now
+                                {loading ? 'Signing Up...' : 'Sign Up Now'}
                             </div>
                         </button>
                     </form>

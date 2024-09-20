@@ -1,21 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import { getUserProfile } from './redux/userSlice'
 
-// Import your page components
+// Import page components
 import HomePage from './pages/HomePage';
 import ShowAllEvents from './pages/ShowAllEvents';
 import ExplorePage from './pages/ExplorePage';
 import ProfilePage from './pages/ProfilePage';
-import LogInPage from './pages/LogInPage';  // New parent component for SignIn/SignUp toggle
+import LogInPage from './pages/LogInPage';
 import SignInPage from './components/SignInForm'
 import SignUpPage from './components/SignUpForm'
 import ContactUsPage from './pages/ContactUsPage';
 import AboutUs from './pages/AboutUs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import PurchasePolicy from './pages/PurchasePolicy';
-import PageNotFound from './pages/PageNotFound';  // Optional: For handling 404 errors
+import PageNotFound from './pages/PageNotFound';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        await dispatch(getUserProfile()).unwrap();
+        console.log('User profile fetched successfully');
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+        // Handle error (e.g., redirect to login page or show an error message)
+      }
+    };
+
+    fetchUserProfile();
+  }, [dispatch]);
+
   return (
     <Router>
       <Routes>
