@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';  // Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { signOut } from '../redux/userSlice';
+
 import { FaUserCircle } from 'react-icons/fa';
 import { FiMenu, FiX } from 'react-icons/fi';
 import logo from '../assets/logo.png';
@@ -7,13 +10,14 @@ import logo from '../assets/logo.png';
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef(null);
+    const { currentUser } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    // Function to toggle the menu when the hamburger icon is clicked
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    // Close the menu when clicking outside of it in mobile mode
     useEffect(() => {
         const handleOutsideClick = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -31,6 +35,24 @@ const NavBar = () => {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
     }, [isMenuOpen]);
+
+    const handleUserClick = () => {
+        if (currentUser) {
+            navigate('/profile');
+        } else {
+            navigate('/login');
+        }
+    };
+
+    const handleSignOut = async () => {
+        try {
+            await dispatch(signOut()).unwrap();
+            navigate('/');
+        } catch (error) {
+            console.error('Failed to sign out:', error);
+        }
+    };
+
 
     return (
         <>
@@ -62,14 +84,21 @@ const NavBar = () => {
                             <li><Link to="/explore" className="hover:text-blue-500 transition duration-300 text-md">Explore</Link></li>
                             <li><Link to="/profile" className="hover:text-blue-500 transition duration-300 text-md">My Bookings</Link></li>
                         </ul>
-                        <div className="flex items-center space-x-2">
-                            <Link to="/login" className="hover:text-blue-500 text-md transition duration-300">Sign In</Link>
+                        <div className="flex items-center space-x-4">
+                            <button onClick={handleUserClick} className="hover:text-blue-500 text-md transition duration-300">
+                                {currentUser ? currentUser.username : "Sign In"}
+                            </button>
+                            {currentUser && (
+                                <button onClick={handleSignOut} className="hover:text-red-500 text-md transition duration-300">
+                                    Sign Out
+                                </button>
+                            )}
                             <FaUserCircle className="h-8 w-8 text-blue-500" />
                         </div>
                     </div>
 
                     {/* Hamburger Icon for Mobile */}
-                    <menu className="md:hidden flex items-center">
+                    <div className="md:hidden flex items-center">
                         <button onClick={toggleMenu}>
                             {isMenuOpen ? (
                                 <FiX className="h-6 w-6 text-blue-500" /> // Close icon
@@ -77,7 +106,7 @@ const NavBar = () => {
                                 <FiMenu className="h-6 w-6 text-blue-500" /> // Hamburger icon
                             )}
                         </button>
-                    </menu>
+                    </div>
 
                     {/* Mobile Menu */}
                     {isMenuOpen && (
@@ -91,16 +120,27 @@ const NavBar = () => {
                                 </div>
 
                                 <ul className="space-y-4">
-                                    <li><Link to="/show-all-events" className="text-lg font-bold">Sports</Link></li>
-                                    <li><Link to="/show-all-events" className="text-lg font-bold">Concerts</Link></li>
-                                    <li><Link to="/show-all-events" className="text-lg font-bold">Theater</Link></li>
-                                    <li><Link to="/show-all-events" className="text-lg font-bold">Festivals</Link></li>
+                                    <li><Link to="/events" className="text-lg font-bold">Sports</Link></li>
+                                    <li><Link to="/events" className="text-lg font-bold">Concerts</Link></li>
+                                    <li><Link to="/events" className="text-lg font-bold">Theater</Link></li>
+                                    <li><Link to="/events" className="text-lg font-bold">Festivals</Link></li>
                                 </ul>
 
                                 <ul className="space-y-4 mt-8">
                                     <li><Link to="/explore" className="text-lg font-bold">Explore</Link></li>
                                     <li><Link to="/profile" className="text-lg font-bold">My Bookings</Link></li>
-                                    <li><Link to="/login" className="text-lg font-bold">Sign In</Link></li>
+                                    <li>
+                                        <button onClick={handleUserClick} className="text-lg font-bold">
+                                            {currentUser ? currentUser.username : "Sign In"}
+                                        </button>
+                                    </li>
+                                    {currentUser && (
+                                        <li>
+                                            <button onClick={handleSignOut} className="text-lg font-bold text-red-500">
+                                                Sign Out
+                                            </button>
+                                        </li>
+                                    )}
                                 </ul>
                             </div>
                         </div>

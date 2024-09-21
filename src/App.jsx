@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
-import { getUserProfile } from './redux/userSlice'
+import { useDispatch } from 'react-redux';
+import { Provider } from 'react-redux';
+import { store } from './redux/store'; // Make sure this path is correct
+import { getUserProfile } from './redux/userSlice';
 
 // Import page components
 import HomePage from './pages/HomePage';
@@ -9,15 +11,15 @@ import ShowAllEvents from './pages/ShowAllEvents';
 import ExplorePage from './pages/ExplorePage';
 import ProfilePage from './pages/ProfilePage';
 import LogInPage from './pages/LogInPage';
-import SignInPage from './components/SignInForm'
-import SignUpPage from './components/SignUpForm'
+import SignInPage from './components/SignInForm';
+import SignUpPage from './components/SignUpForm';
 import ContactUsPage from './pages/ContactUsPage';
 import AboutUs from './pages/AboutUs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import PurchasePolicy from './pages/PurchasePolicy';
 import PageNotFound from './pages/PageNotFound';
 
-const App = () => {
+const AppContent = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <Router>
+    <>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/events" element={<ShowAllEvents />} />
@@ -51,7 +53,17 @@ const App = () => {
         <Route path="/purchase-policy" element={<PurchasePolicy />} />
         <Route path="*" element={<PageNotFound />} /> {/* Optional: Catch-all for undefined routes */}
       </Routes>
-    </Router>
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Router>
+        <AppContent />
+      </Router>
+    </Provider>
   );
 };
 
