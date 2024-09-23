@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Provider } from 'react-redux';
 import { store } from './redux/store'; // Make sure this path is correct
 import { getUserProfile } from './redux/userSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Import page components
 import HomePage from './pages/HomePage';
@@ -19,6 +20,9 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import PurchasePolicy from './pages/PurchasePolicy';
 import PageNotFound from './pages/PageNotFound';
 
+// Testing page
+import TicketmasterTest from './components/TicketmasterTest';
+
 const AppContent = () => {
   const dispatch = useDispatch();
 
@@ -28,13 +32,15 @@ const AppContent = () => {
         await dispatch(getUserProfile()).unwrap();
         console.log('User profile fetched successfully');
       } catch (error) {
-        console.error('Error fetching user profile:', error);
-        // Handle error (e.g., redirect to login page or show an error message)
+        // console.error('Error fetching user profile:', error);
+        // // Handle error (e.g., redirect to login page or show an error message)
       }
     };
 
     fetchUserProfile();
   }, [dispatch]);
+
+
 
   return (
     <>
@@ -51,7 +57,10 @@ const AppContent = () => {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/purchase-policy" element={<PurchasePolicy />} />
-        <Route path="*" element={<PageNotFound />} /> {/* Optional: Catch-all for undefined routes */}
+        <Route path="*" element={<PageNotFound />} />
+
+        {/* Testing page */}
+        <Route path="/ticketmaster" element={<TicketmasterTest />} />
       </Routes>
     </>
   );

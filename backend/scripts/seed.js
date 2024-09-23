@@ -1,20 +1,23 @@
-import {
-  db,
-  User,
-  Event,
-  Booking,
-  Review,
-  Role,
-  Payment,
-} from '../models/index.js';
+import initializeDb from '../models/index.js';
 import bcrypt from 'bcrypt';
 
-// ... rest of your seed.js file remains the same
-
 const seed = async () => {
+  let db;
   try {
+    db = await initializeDb();
+    const {
+      User,
+      Event,
+      Booking,
+      Review,
+      Role,
+      Payment,
+      Venue,
+      Classification,
+    } = db;
+
     // Sync all models with the database
-    await db.sync({ force: true });
+    await db.sequelize.sync({ force: true });
     console.log('Database synced');
 
     // Create roles
@@ -54,25 +57,61 @@ const seed = async () => {
     ]);
     console.log('Users created');
 
+    // Create venues
+    const [venue1, venue2] = await Promise.all([
+      Venue.create({
+        name: 'Central Park',
+        address: 'Central Park, New York, NY 10022',
+        city: 'New York',
+        country: 'United States',
+        ticketmaster_id: 'KovZpZA7AAEA',
+      }),
+      Venue.create({
+        name: 'Convention Center',
+        address: '123 Convention St, San Francisco, CA 94111',
+        city: 'San Francisco',
+        country: 'United States',
+        ticketmaster_id: 'KovZpZAJ6nlA',
+      }),
+    ]);
+    console.log('Venues created');
+
+    // Create classifications
+    const [classification1, classification2] = await Promise.all([
+      Classification.create({
+        segment: 'Music',
+        genre: 'Rock',
+        ticketmaster_id: 'KZFzniwnSyZfZ7v7nJ',
+      }),
+      Classification.create({
+        segment: 'Conference',
+        genre: 'Technology',
+        ticketmaster_id: 'KZFzniwnSyZfZ7v7nE',
+      }),
+    ]);
+    console.log('Classifications created');
+
     // Create events
     const [event1, event2] = await Promise.all([
       Event.create({
         title: 'Summer Concert',
         description: 'A night of great music',
         date: new Date('2023-07-15'),
-        location: 'Central Park',
-        capacity: 1000,
         price: 50.0,
         image_url: 'https://example.com/concert.jpg',
+        ticketmaster_id: 'vvG1iZ4JQe9jhk',
+        venueId: venue1.id,
+        classificationId: classification1.id,
       }),
       Event.create({
         title: 'Tech Conference',
         description: 'Learn about the latest technologies',
         date: new Date('2023-09-20'),
-        location: 'Convention Center',
-        capacity: 500,
         price: 100.0,
         image_url: 'https://example.com/conference.jpg',
+        ticketmaster_id: 'vvG1iZ4JQe9jhl',
+        venueId: venue2.id,
+        classificationId: classification2.id,
       }),
     ]);
     console.log('Events created');
@@ -141,7 +180,7 @@ const seed = async () => {
     // Test Event model
     const testEvent = await Event.findOne({
       where: { title: 'Summer Concert' },
-      include: [Booking, Review],
+      include: [Booking, Review, Venue, Classification],
     });
     console.log('Test Event:', testEvent.toJSON());
 
@@ -166,11 +205,27 @@ const seed = async () => {
     });
     console.log('Test Payment:', testPayment.toJSON());
 
+    // Test Venue model
+    const testVenue = await Venue.findOne({
+      where: { name: 'Central Park' },
+      include: [Event],
+    });
+    console.log('Test Venue:', testVenue.toJSON());
+
+    // Test Classification model
+    const testClassification = await Classification.findOne({
+      where: { segment: 'Music' },
+      include: [Event],
+    });
+    console.log('Test Classification:', testClassification.toJSON());
+
     console.log('Seeding and tests completed successfully');
   } catch (error) {
     console.error('Error seeding database:', error);
   } finally {
-    await db.close();
+    if (db) {
+      await db.sequelize.close();
+    }
   }
 };
 

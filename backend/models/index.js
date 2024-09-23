@@ -1,30 +1,47 @@
 import { Sequelize } from 'sequelize';
 import { connectToDB } from '../config/db.js';
 
-export const db = await connectToDB('postgresql:///event_booking_system');
+// Import model definitions
+import UserModel from './User.js';
+import EventModel from './Event.js';
+import BookingModel from './Booking.js';
+import ReviewModel from './Review.js';
+import RoleModel from './Role.js';
+import PaymentModel from './Payment.js';
+import VenueModel from './Venue.js';
+import ClassificationModel from './Classification.js';
 
-// Import models
-import User from './User.js';
-import Event from './Event.js';
-import Booking from './Booking.js';
-import Review from './Review.js';
-import Role from './Role.js';
-import Payment from './Payment.js';
+const initializeDb = async () => {
+  const sequelize = await connectToDB('postgresql:///event_booking_system');
 
-// Initialize models
-User.init(User.attributes, { sequelize: db, modelName: 'User' });
-Event.init(Event.attributes, { sequelize: db, modelName: 'Event' });
-Booking.init(Booking.attributes, { sequelize: db, modelName: 'Booking' });
-Review.init(Review.attributes, { sequelize: db, modelName: 'Review' });
-Role.init(Role.attributes, { sequelize: db, modelName: 'Role' });
-Payment.init(Payment.attributes, { sequelize: db, modelName: 'Payment' });
+  const db = {
+    sequelize,
+    Sequelize,
+    User: UserModel,
+    Event: EventModel,
+    Booking: BookingModel,
+    Review: ReviewModel,
+    Role: RoleModel,
+    Payment: PaymentModel,
+    Venue: VenueModel,
+    Classification: ClassificationModel,
+  };
 
-// Set up associations
-User.associate(db.models);
-Event.associate(db.models);
-Booking.associate(db.models);
-Review.associate(db.models);
-Role.associate(db.models);
-Payment.associate(db.models);
+  // Initialize models
+  Object.values(db).forEach((model) => {
+    if (model.init) {
+      model.init(sequelize);
+    }
+  });
 
-export { User, Event, Booking, Review, Role, Payment };
+  // Run model associations
+  Object.values(db).forEach((model) => {
+    if (model.associate && typeof model.associate === 'function') {
+      model.associate(db);
+    }
+  });
+
+  return db;
+};
+
+export default initializeDb;

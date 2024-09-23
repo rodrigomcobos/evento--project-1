@@ -4,15 +4,14 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectToDB } from './config/db.js';
 import userRoutes from './routes/userRoutes.js';
-// import viteExpress from 'vite-express';
+import axios from 'axios';
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.VITE_PORT || 5001; // 0 will assign a random available port;
+const PORT = process.env.VITE_PORT || 5001;
 
 // Middleware
-// CORS configuration
 app.use(
   cors({
     origin: process.env.VITE_FRONTEND_URL,
@@ -20,7 +19,6 @@ app.use(
   })
 );
 
-// Body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -41,15 +39,48 @@ app.use(
 // Routes
 app.use('/api/users', userRoutes);
 
+// Ticketmaster API proxy route
+app.get('/api/ticketmaster/*', async (req, res) => {
+  try {
+    const apiKey = process.env.VITE_TICKETMASTER_API_KEY;
+    if (!apiKey) {
+      console.error('Ticketmaster API key is not set');
+      return res.status(500).json({ error: 'Server configuration error' });
+    }
+
+    const path = req.params[0];
+    const apiUrl = `https://app.ticketmaster.com/discovery/v2/${path}`;
+
+    console.log('Proxying request to:', apiUrl);
+    console.log('Query params:', req.query);
+
+    const response = await axios.get(apiUrl, {
+      params: {
+        ...req.query,
+        apikey: apiKey,
+      },
+    });
+
+    console.log('Ticketmaster API response status:', response.status);
+    res.json(response.data);
+  } catch (error) {
+    console.error(
+      'Ticketmaster API error:',
+      error.response ? error.response.data : error.message
+    );
+    res.status(error.response ? error.response.status : 500).json({
+      error: 'An error occurred while fetching data from Ticketmaster',
+      details: error.response ? error.response.data : error.message,
+    });
+  }
+});
+
 // Database connection and server start
 const startServer = async () => {
   try {
     const sequelize = await connectToDB();
-
-    // Sync all models with the database
     await sequelize.sync();
     console.log('All models were synchronized successfully.');
-
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });

@@ -1,6 +1,7 @@
+// models/Venue.js
 import { Model, DataTypes } from 'sequelize';
 
-class Role extends Model {
+class Venue extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -12,21 +13,31 @@ class Role extends Model {
         name: {
           type: DataTypes.STRING,
           allowNull: false,
-          unique: true,
         },
-        description: {
-          type: DataTypes.TEXT,
+        address: {
+          type: DataTypes.STRING,
+        },
+        city: {
+          type: DataTypes.STRING,
+        },
+        country: {
+          type: DataTypes.STRING,
+        },
+        ticketmaster_id: {
+          type: DataTypes.STRING,
+          unique: true,
         },
       },
       {
         sequelize,
-        modelName: 'Role',
+        modelName: 'Venue',
       }
     );
   }
+
   static associate(models) {
-    this.hasMany(models.User);
+    this.hasMany(models.Event);
   }
 }
 
-export default Role;
+export default Venue;

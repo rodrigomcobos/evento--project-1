@@ -1,6 +1,7 @@
+// models/Classification.js
 import { Model, DataTypes } from 'sequelize';
 
-class Role extends Model {
+class Classification extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -9,24 +10,27 @@ class Role extends Model {
           defaultValue: DataTypes.UUIDV4,
           primaryKey: true,
         },
-        name: {
+        segment: {
           type: DataTypes.STRING,
-          allowNull: false,
-          unique: true,
         },
-        description: {
-          type: DataTypes.TEXT,
+        genre: {
+          type: DataTypes.STRING,
+        },
+        ticketmaster_id: {
+          type: DataTypes.STRING,
+          unique: true,
         },
       },
       {
         sequelize,
-        modelName: 'Role',
+        modelName: 'Classification',
       }
     );
   }
+
   static associate(models) {
-    this.hasMany(models.User);
+    this.hasMany(models.Event);
   }
 }
 
-export default Role;
+export default Classification;

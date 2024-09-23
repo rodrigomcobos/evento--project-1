@@ -1,5 +1,16 @@
-import { User } from '../models/index.js';
+import initializeDb from '../models/index.js';
 import bcrypt from 'bcrypt';
+import { Op } from 'sequelize'; // Add this line
+
+let User;
+let sequelize;
+const init = async () => {
+  const db = await initializeDb();
+  User = db.User;
+  sequelize = db.sequelize;
+};
+
+init();
 
 export const userController = {
   // Session check
@@ -30,12 +41,10 @@ export const userController = {
       if (!user) {
         return res.status(401).json({ message: 'Invalid credentials' });
       }
-
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
         return res.status(401).json({ message: 'Invalid credentials' });
       }
-
       req.session.userId = user.id;
       req.session.save((err) => {
         if (err) {
@@ -52,7 +61,6 @@ export const userController = {
     }
   },
 
-  // Sign Up
   async signUp(req, res) {
     const { username, first_name, last_name, email, phone, password } =
       req.body;
@@ -65,20 +73,25 @@ export const userController = {
         phone,
       });
 
+      console.log('Checking for existing user...');
       const existingUser = await User.findOne({
         where: {
-          [User.sequelize.Op.or]: [{ email }, { username }],
+          [Op.or]: [{ email }, { username }],
         },
       });
+
       if (existingUser) {
+        console.log('User already exists');
         return res
           .status(400)
           .json({ message: 'Email or username already in use' });
       }
 
+      console.log('Hashing password...');
       const saltRounds = 10;
       const hashedPassword = await bcrypt.hash(password, saltRounds);
 
+      console.log('Creating new user...');
       const newUser = await User.create({
         first_name,
         last_name,
@@ -87,8 +100,12 @@ export const userController = {
         phone,
         password: hashedPassword,
       });
+      console.log('New user created:', newUser.id);
 
+      console.log('Setting session...');
       req.session.userId = newUser.id;
+
+      console.log('Sending response...');
       res.status(201).json({
         user: {
           id: newUser.id,
@@ -100,9 +117,19 @@ export const userController = {
       });
     } catch (error) {
       console.error('Sign-up error:', error);
-      res
-        .status(500)
-        .json({ message: 'Server error during sign up', error: error.message });
+      console.error('Error name:', error.name);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+      if (error.errors) {
+        console.error('Validation errors:', error.errors);
+      }
+      res.status(500).json({
+        message: 'Server error during sign up',
+        error: error.message,
+        name: error.name,
+        stack: error.stack,
+        details: error.errors ? error.errors : 'No additional details',
+      });
     }
   },
 
@@ -136,12 +163,10 @@ export const userController = {
       res.json(user);
     } catch (error) {
       console.error('Get profile error:', error);
-      res
-        .status(500)
-        .json({
-          message: 'Server error during profile fetch',
-          error: error.message,
-        });
+      res.status(500).json({
+        message: 'Server error during profile fetch',
+        error: error.message,
+      });
     }
   },
 };
