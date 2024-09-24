@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FaCalendarAlt, FaTicketAlt } from 'react-icons/fa';
 import axios from 'axios';
+import { ImSpinner2 } from 'react-icons/im';
+
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 const UpcomingEventsSection = () => {
     const [events, setEvents] = useState([]);
@@ -10,7 +13,20 @@ const UpcomingEventsSection = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                // Format the current date to the required format
+                // Check if we have cached data
+                const cachedData = localStorage.getItem('upcomingEvents');
+                const cachedTimestamp = localStorage.getItem('upcomingEventsTimestamp');
+
+                if (cachedData && cachedTimestamp) {
+                    const now = new Date().getTime();
+                    if (now - parseInt(cachedTimestamp) < CACHE_DURATION) {
+                        setEvents(JSON.parse(cachedData));
+                        setLoading(false);
+                        return;
+                    }
+                }
+
+                // If no valid cached data, fetch from API
                 const currentDate = new Date();
                 const formattedDate = currentDate.toISOString().split('.')[0] + "Z";
 
@@ -21,8 +37,14 @@ const UpcomingEventsSection = () => {
                         startDateTime: formattedDate
                     }
                 });
-                setEvents(response.data._embedded.events);
+
+                const fetchedEvents = response.data._embedded.events;
+                setEvents(fetchedEvents);
                 setLoading(false);
+
+                // Cache the fetched data
+                localStorage.setItem('upcomingEvents', JSON.stringify(fetchedEvents));
+                localStorage.setItem('upcomingEventsTimestamp', new Date().getTime().toString());
             } catch (err) {
                 console.error("Error fetching events:", err);
                 setError('Failed to fetch events');
@@ -33,7 +55,11 @@ const UpcomingEventsSection = () => {
         fetchEvents();
     }, []);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return (
+        <div className="flex items-center justify-center h-screen">
+            <ImSpinner2 className="animate-spin text-black text-4xl" />
+        </div>
+    );
     if (error) return <div>Error: {error}</div>;
 
     return (
@@ -62,7 +88,7 @@ const UpcomingEventsSection = () => {
                                     </h3>
 
                                     <p className="text-sm text-gray-500 mb-4">
-                                        Hosted By: {event._embedded.venues[0].name}
+                                        Hosted By: {event._embedded?.venues?.[0]?.name || 'Venue not specified'}
                                     </p>
 
                                     <div className="flex items-center mb-2 text-gray-600 text-md">

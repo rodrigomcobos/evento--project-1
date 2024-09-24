@@ -19,6 +19,7 @@ import AboutUs from './pages/AboutUs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import PurchasePolicy from './pages/PurchasePolicy';
 import PageNotFound from './pages/PageNotFound';
+import SearchResults from './pages/SearchResults';
 
 // Testing page
 import TicketmasterTest from './components/TicketmasterTest';
@@ -30,10 +31,9 @@ const AppContent = () => {
     const fetchUserProfile = async () => {
       try {
         await dispatch(getUserProfile()).unwrap();
-        console.log('User profile fetched successfully');
+        // console.log('User profile fetched successfully');
       } catch (error) {
         // console.error('Error fetching user profile:', error);
-        // // Handle error (e.g., redirect to login page or show an error message)
       }
     };
 
@@ -57,10 +57,12 @@ const AppContent = () => {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/purchase-policy" element={<PurchasePolicy />} />
+        <Route path="/search-results" element={<SearchResults />} />
         <Route path="*" element={<PageNotFound />} />
 
         {/* Testing page */}
         <Route path="/ticketmaster" element={<TicketmasterTest />} />
+
       </Routes>
     </>
   );

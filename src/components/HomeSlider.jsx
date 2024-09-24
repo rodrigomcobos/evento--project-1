@@ -27,31 +27,31 @@ const HomeSlider = () => {
             category: 'Concerts',
             title: 'Salt Lake City Annual Music Festival',
             image: 'bg-image-1',
-            likes: '2.1K',
+            likes: '3.9K',
         },
         {
             category: 'Sports',
             title: 'FIFA World Cup Championship Semi-Finals',
             image: 'bg-image-2',
-            likes: '2.1K',
+            likes: '10.4K',
+        },
+        {
+            category: 'Rodeo',
+            title: 'PBR National Rodeo 2025',
+            image: 'bg-image-3',
+            likes: '1.2K',
         },
         {
             category: 'Racing',
-            title: 'PBR National Rodeo 2025',
-            image: 'bg-image-3',
-            likes: '2.1K',
-        },
-        {
-            category: 'Tech',
             title: 'NASCAR National Championship Finals',
             image: 'bg-image-4',
-            likes: '2.1K',
+            likes: '4.6K',
         },
         {
-            category: 'Music',
+            category: 'Sports',
             title: 'Wrestlemania 2025 - Salt Lake City Stadium',
             image: 'bg-image-5',
-            likes: '2.1K',
+            likes: '1.8K',
         },
     ];
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaEdit, FaCalendarAlt, FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
 import axios from 'axios';
+import { ImSpinner2 } from 'react-icons/im';
+
 
 const OPENWEATHERMAP_API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
 
@@ -113,7 +115,11 @@ const EventsSection = () => {
         }
     };
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return (
+        <div className="flex items-center justify-center h-screen">
+            <ImSpinner2 className="animate-spin text-black text-4xl" />
+        </div>
+    );
     if (error) return <div>Error: {error}</div>;
 
     return (

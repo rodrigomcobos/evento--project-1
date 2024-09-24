@@ -75,6 +75,32 @@ app.get('/api/ticketmaster/*', async (req, res) => {
   }
 });
 
+// Ticketmaster search route
+app.get('/api/ticketmaster/events', async (req, res) => {
+  try {
+    const { keyword } = req.query;
+    const apiKey = process.env.VITE_TICKETMASTER_API_KEY;
+    const response = await axios.get(
+      'https://app.ticketmaster.com/discovery/v2/events.json',
+      {
+        params: {
+          apikey: apiKey,
+          keyword: keyword,
+          size: 10,
+        },
+      }
+    );
+    // Check if events exist in the response
+    const events = response.data._embedded?.events || [];
+    res.json(events);
+  } catch (error) {
+    console.error('Error searching Ticketmaster events:', error);
+    res
+      .status(500)
+      .json({ message: 'Error searching events', error: error.message });
+  }
+});
+
 // Database connection and server start
 const startServer = async () => {
   try {

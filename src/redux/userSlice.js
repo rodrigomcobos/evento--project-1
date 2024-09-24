@@ -55,9 +55,9 @@ export const getUserProfile = createAsyncThunk(
       const response = await api.get('/api/users/profile');
       return response.data;
     } catch (error) {
-      return rejectWithValue(
-        error.response?.data?.message || 'Failed to fetch user profile'
-      );
+      return rejectWithValue();
+      // Message shown when user is not signed in to view Profile, keep this off, for testing purposes
+      // error.response?.data?.message || 'Failed to fetch user profile'
     }
   }
 );

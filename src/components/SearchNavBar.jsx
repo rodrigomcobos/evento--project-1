@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../redux/userSlice';
+import { performSearch } from '../redux/searchSlice';
 
 import { FaUserCircle, FaSearch } from 'react-icons/fa';
 import { FiMenu, FiX } from 'react-icons/fi';
@@ -10,6 +11,7 @@ import logo from '../assets/logo.png';
 const SearchNavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
     const menuRef = useRef(null);
     const { currentUser } = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -63,6 +65,13 @@ const SearchNavBar = () => {
         }
     };
 
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchTerm.trim()) {
+            dispatch(performSearch(searchTerm));
+            navigate('/search-results');
+        }
+    };
 
     return (
         <>
@@ -83,20 +92,25 @@ const SearchNavBar = () => {
                         <Link to="/">
                             <img src={logo} alt="Logo" className="w-[145px]" />
                         </Link>
-                        {/* Search Bar */}
+
+                        {/* Search Bar Goes Here */}
                         <div className='px-4'>
-                            <div className="flex bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-600 items-center bg-gray-100 rounded-full p-[2px] w-auto sm:w-dvw max-w-[350px] shadow-md">
-                                <div className='rounded-full p-3 bg-white h-full w-full flex items-center justify-between'>
-                                    <FaSearch className="text-gray-500 mr-3" />
-                                    <input
-                                        type="text"
-                                        className="bg-transparent outline-none w-full text-md"
-                                        placeholder={isFocused ? '' : 'Search events, artists, teams, and more'}
-                                        onFocus={handleFocus}
-                                        onBlur={handleBlur}
-                                    />
+                            <form onSubmit={handleSearch}>
+                                <div className="flex bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-600 items-center bg-gray-100 rounded-full p-[2px] w-auto sm:w-dvw max-w-[350px] shadow-md">
+                                    <div className='rounded-full p-3 bg-white h-full w-full flex items-center justify-between'>
+                                        <FaSearch className="text-gray-500 mr-3" />
+                                        <input
+                                            type="text"
+                                            className="bg-transparent outline-none w-full text-md"
+                                            placeholder={isFocused ? '' : 'Search events, artists, teams, and more'}
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                            onFocus={handleFocus}
+                                            onBlur={handleBlur}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
 

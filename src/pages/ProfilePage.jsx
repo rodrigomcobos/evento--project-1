@@ -24,7 +24,6 @@ const ProfilePage = () => {
             try {
                 const resultAction = await dispatch(getUserProfile());
                 if (getUserProfile.rejected.match(resultAction)) {
-                    // If rejected due to 401, redirect to login
                     navigate('/login');
                 }
             } catch (error) {
