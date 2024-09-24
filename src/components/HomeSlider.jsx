@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
-import { FaRegStar } from 'react-icons/fa';
+import { FaRegStar, FaCalendarAlt } from 'react-icons/fa';
+import axios from 'axios';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import '../CustomCSS/CustomSlider.css'; // Import the custom CSS
+import '../CustomCSS/CustomSlider.css';
 
 const HomeSlider = () => {
     const settings = {
@@ -25,31 +26,31 @@ const HomeSlider = () => {
         {
             category: 'Concerts',
             title: 'Salt Lake City Annual Music Festival',
-            imageClass: 'bg-image-1',
+            image: 'bg-image-1',
             likes: '2.1K',
         },
         {
             category: 'Sports',
             title: 'FIFA World Cup Championship Semi-Finals',
-            imageClass: 'bg-image-2',
-            likes: '2.1K',
-        },
-        {
-            category: 'Rodeo',
-            title: 'PBR National Rodeo 2025',
-            imageClass: 'bg-image-3',
+            image: 'bg-image-2',
             likes: '2.1K',
         },
         {
             category: 'Racing',
-            title: 'NASCAR National Championship Finals',
-            imageClass: 'bg-image-4',
+            title: 'PBR National Rodeo 2025',
+            image: 'bg-image-3',
             likes: '2.1K',
         },
         {
-            category: 'Wrestling',
+            category: 'Tech',
+            title: 'NASCAR National Championship Finals',
+            image: 'bg-image-4',
+            likes: '2.1K',
+        },
+        {
+            category: 'Music',
             title: 'Wrestlemania 2025 - Salt Lake City Stadium',
-            imageClass: 'bg-image-5',
+            image: 'bg-image-5',
             likes: '2.1K',
         },
     ];
@@ -60,7 +61,7 @@ const HomeSlider = () => {
                 <div className="relative max-w-[75rem] h-[27rem] mx-auto rounded-[2rem] overflow-hidden shadow-lg">
                     <Slider {...settings}>
                         {slides.map((slide, index) => (
-                            <div key={index} className={`relative h-[27rem] bg-right bg-cover bg-clip-border ${slide.imageClass}`}>
+                            <div key={index} className={`relative h-[27rem] bg-right bg-cover bg-clip-border ${slide.image}`}>
                                 <div className="absolute inset-0 flex flex-col-reverse md:flex-row h-full">
                                     {/* Left side content with slanted edge */}
                                     <div className="bg-gradient-to-r from-indigo-400 to-cyan-400 w-1/2 sm:w-[90%] h-full flex flex-col justify-center p-6 sm:p-10 clip-slant">
