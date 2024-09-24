@@ -86,18 +86,17 @@ app.get('/api/ticketmaster/events', async (req, res) => {
         params: {
           apikey: apiKey,
           keyword: keyword,
-          size: 10,
+          size: 20, // Adjust as needed
         },
       }
     );
-    // Check if events exist in the response
-    const events = response.data._embedded?.events || [];
-    res.json(events);
+    res.json(response.data);
   } catch (error) {
     console.error('Error searching Ticketmaster events:', error);
-    res
-      .status(500)
-      .json({ message: 'Error searching events', error: error.message });
+    res.status(500).json({
+      error: 'Error searching events',
+      details: error.response?.data || error.message,
+    });
   }
 });
 

@@ -6,16 +6,22 @@ import { FaSearch } from 'react-icons/fa';
 
 const SearchBar = () => {
     const [isFocused, setIsFocused] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [error, setError] = useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [searchQuery, setSearchQuery] = useState('');
 
-    const handleSearch = (e) => {
+    const handleSearch = async (e) => {
         e.preventDefault();
         if (searchQuery.trim()) {
-            console.log('Dispatching search for:', searchQuery);
-            dispatch(performSearch(searchQuery));
-            navigate(`/search-results`);
+            try {
+                setError(null);
+                await dispatch(performSearch(searchQuery)).unwrap();
+                navigate(`/search-results`);
+            } catch (err) {
+                console.error('Search failed:', err);
+                setError('Search failed. Please try again.');
+            }
         }
     };
 
@@ -37,6 +43,7 @@ const SearchBar = () => {
                     </div>
                 </div>
             </form>
+            {error && <div className="text-red-500 mt-2">{error}</div>}
         </section>
     );
 };

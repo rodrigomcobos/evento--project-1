@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const SearchFilter = () => {
+const SearchFilter = ({ setCategory, setDate, setPrice, clearFilters }) => {
     const [showMoreCategories, setShowMoreCategories] = useState(false);
     const [showMoreDates, setShowMoreDates] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
@@ -23,6 +23,24 @@ const SearchFilter = () => {
         'Today', 'Tomorrow', 'This weekend', 'This week',
         'Next week', 'This month', 'Next month', 'Pick a date'
     ];
+
+    const handleCategoryClick = (category) => {
+        setCategory(category);
+    };
+
+    const handleDateClick = (date) => {
+        setDate(date);
+        setSelectedFilter(date);
+    };
+
+    const handlePriceClick = (price) => {
+        setPrice(price);
+    };
+
+    const handleDatePickerChange = (date) => {
+        setSelectedDate(date);
+        setDate(date.toISOString());
+    };
 
     return (
         <>
@@ -52,17 +70,25 @@ const SearchFilter = () => {
 
             {/* Mobile Dropdowns */}
             {showFilters && (
-                <div className="lg:hidden  mb-4 p-4 border rounded bg-white shadow-md">
-                    <h2 className="text-xl font-bold">Filters</h2>
+                <div className="lg:hidden mb-4 p-4 border rounded bg-white shadow-md">
+                    <div className="flex justify-between items-center mb-4">
+                        <h2 className="text-xl font-bold">Filters</h2>
+                        <button
+                            onClick={clearFilters}
+                            className="text-sm text-indigo-500 hover:text-indigo-700 underline"
+                        >
+                            Clear Filters
+                        </button>
+                    </div>
                     <div className="mt-2">
                         {/* Category Filter */}
                         <h3 className="text-lg font-semibold">Category</h3>
                         <ul className="mt-2">
                             {categories.slice(0, showMoreCategories ? categories.length : 4).map((category, index) => (
                                 <li key={index} className="text-gray-700 py-1">
-                                    <a href={`#${category.toLowerCase().replace(/\s+/g, '-')}`} className="text-indigo-500 hover:text-indigo-800">
+                                    <button onClick={() => handleCategoryClick(category)} className="text-indigo-500 hover:text-indigo-800">
                                         {category}
-                                    </a>
+                                    </button>
                                 </li>
                             ))}
                         </ul>
@@ -82,7 +108,7 @@ const SearchFilter = () => {
                                         id={date}
                                         name="date"
                                         className="mr-2"
-                                        onChange={() => setSelectedFilter(date)}
+                                        onChange={() => handleDateClick(date)}
                                     />
                                     <label htmlFor={date}>{date}</label>
                                 </li>
@@ -99,7 +125,7 @@ const SearchFilter = () => {
                             <div className="mt-4">
                                 <DatePicker
                                     selected={selectedDate}
-                                    onChange={(date) => setSelectedDate(date)}
+                                    onChange={handleDatePickerChange}
                                     placeholderText="Select a date"
                                     className="border border-gray-300 p-2 rounded w-full"
                                 />
@@ -110,11 +136,11 @@ const SearchFilter = () => {
                         <h3 className="text-lg font-semibold mt-4">Price</h3>
                         <ul className="mt-2">
                             <li className="text-gray-700 py-1">
-                                <input type="radio" id="free" name="price" className="mr-2" />
+                                <input type="radio" id="free" name="price" className="mr-2" onChange={() => handlePriceClick('Free')} />
                                 <label htmlFor="free">Free</label>
                             </li>
                             <li className="text-gray-700 py-1">
-                                <input type="radio" id="paid" name="price" className="mr-2" />
+                                <input type="radio" id="paid" name="price" className="mr-2" onChange={() => handlePriceClick('Paid')} />
                                 <label htmlFor="paid">Paid</label>
                             </li>
                         </ul>
@@ -129,9 +155,9 @@ const SearchFilter = () => {
                     <ul className="mt-2">
                         {categories.slice(0, showMoreCategories ? categories.length : 4).map((category, index) => (
                             <li key={index} className="text-gray-700 py-1">
-                                <a href={`#${category.toLowerCase().replace(/\s+/g, '-')}`} className="text-indigo-500 hover:text-indigo-800">
+                                <button onClick={() => handleCategoryClick(category)} className="text-indigo-500 hover:text-indigo-800">
                                     {category}
-                                </a>
+                                </button>
                             </li>
                         ))}
                     </ul>
@@ -150,7 +176,7 @@ const SearchFilter = () => {
                                     id={date}
                                     name="date"
                                     className="mr-2"
-                                    onChange={() => setSelectedFilter(date)}
+                                    onChange={() => handleDateClick(date)}
                                 />
                                 <label htmlFor={date}>{date}</label>
                             </li>
@@ -162,7 +188,7 @@ const SearchFilter = () => {
                         <div className="mt-4">
                             <DatePicker
                                 selected={selectedDate}
-                                onChange={(date) => setSelectedDate(date)}
+                                onChange={handleDatePickerChange}
                                 placeholderText="Select a date"
                                 className="border border-gray-300 p-2 rounded w-full"
                             />
@@ -177,11 +203,11 @@ const SearchFilter = () => {
                     <h3 className="text-lg font-semibold">Price</h3>
                     <ul className="mt-2">
                         <li className="text-gray-700 py-1">
-                            <input type="radio" id="free" name="price" className="mr-2" />
+                            <input type="radio" id="free" name="price" className="mr-2" onChange={() => handlePriceClick('Free')} />
                             <label htmlFor="free">Free</label>
                         </li>
                         <li className="text-gray-700 py-1">
-                            <input type="radio" id="paid" name="price" className="mr-2" />
+                            <input type="radio" id="paid" name="price" className="mr-2" onChange={() => handlePriceClick('Paid')} />
                             <label htmlFor="paid">Paid</label>
                         </li>
                     </ul>
@@ -190,7 +216,15 @@ const SearchFilter = () => {
 
             {/* Desktop Filters */}
             <section className="hidden lg:block w-full lg:w-1/4 p-4 border-r-2 border-gray-100 mb-14">
-                <h2 className="text-2xl font-bold mb-4">Filters</h2>
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-2xl font-bold">Filters</h2>
+                    <button
+                        onClick={clearFilters}
+                        className="text-sm text-indigo-500 hover:text-indigo-700 underline"
+                    >
+                        Clear Filters
+                    </button>
+                </div>
 
                 {/* Category Filter */}
                 <div className="mb-4">
@@ -198,9 +232,9 @@ const SearchFilter = () => {
                     <ul className="mt-2">
                         {categories.slice(0, showMoreCategories ? categories.length : 4).map((category, index) => (
                             <li key={index} className="text-gray-700 py-1">
-                                <a href={`#${category.toLowerCase().replace(/\s+/g, '-')}`} className="text-indigo-500 hover:text-indigo-800">
+                                <button onClick={() => handleCategoryClick(category)} className="text-indigo-500 hover:text-indigo-800">
                                     {category}
-                                </a>
+                                </button>
                             </li>
                         ))}
                     </ul>
@@ -222,7 +256,7 @@ const SearchFilter = () => {
                                     id={date}
                                     name="date"
                                     className="mr-2"
-                                    onChange={() => setSelectedFilter(date)}
+                                    onChange={() => handleDateClick(date)}
                                 />
                                 <label htmlFor={date}>{date}</label>
                             </li>
@@ -240,7 +274,7 @@ const SearchFilter = () => {
                     <div className="mt-4">
                         <DatePicker
                             selected={selectedDate}
-                            onChange={(date) => setSelectedDate(date)}
+                            onChange={handleDatePickerChange}
                             placeholderText="Select a date"
                             className="border border-gray-300 p-2 rounded w-full"
                         />
@@ -252,11 +286,11 @@ const SearchFilter = () => {
                     <h3 className="text-lg font-semibold">Price</h3>
                     <ul className="mt-2">
                         <li className="text-gray-700 py-1">
-                            <input type="radio" id="free" name="price" className="mr-2" />
+                            <input type="radio" id="free" name="price" className="mr-2" onChange={() => handlePriceClick('Free')} />
                             <label htmlFor="free">Free</label>
                         </li>
                         <li className="text-gray-700 py-1">
-                            <input type="radio" id="paid" name="price" className="mr-2" />
+                            <input type="radio" id="paid" name="price" className="mr-2" onChange={() => handlePriceClick('Paid')} />
                             <label htmlFor="paid">Paid</label>
                         </li>
                     </ul>

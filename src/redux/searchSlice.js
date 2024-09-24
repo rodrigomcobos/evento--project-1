@@ -13,11 +13,14 @@ export const performSearch = createAsyncThunk(
         }
       );
       console.log('Search response:', response.data);
-      // Ensure we're returning an array of events
       return response.data._embedded?.events || [];
     } catch (error) {
       console.error('Search error:', error);
-      return rejectWithValue(error.response?.data || 'An error occurred');
+      return rejectWithValue(
+        error.response?.data?.error ||
+          error.message ||
+          'An unknown error occurred'
+      );
     }
   }
 );
@@ -42,7 +45,7 @@ const searchSlice = createSlice({
       })
       .addCase(performSearch.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload || 'An error occurred during the search';
         console.error('Search rejected:', action.payload);
       });
   },
