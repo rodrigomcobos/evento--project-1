@@ -7,9 +7,10 @@
     "start": "node server.js",
     "dev": "nodemon server.js -w server.js -w src",
     "initdb": "dropdb --if-exists event_booking_system && createdb event_booking_system",
-    "seed": "node scripts/seed.js"
+    "seed": "node scripts/seed.js",
+    "build": "echo 'No build step for backend'"
   },
-  "author": "",
+  "author": "Rodrigo Cobos",
   "license": "ISC",
   "description": "",
   "dependencies": {
