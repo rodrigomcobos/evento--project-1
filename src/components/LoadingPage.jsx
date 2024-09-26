@@ -18,22 +18,22 @@ const LoadingPage = () => {
             <img
                 src={transparentLogo}
                 alt="Logo"
-                className="absolute bottom-10 right-10 z-0 w-[30%] h-auto"
+                className="absolute bottom-10 right-10 z-0 w-auto h-auto max-w-[30%] max-h-[30%]"
             />
             {/* Spinner Container */}
-            <div className="relative w-[10%] h-[10%]">
+            <div className="relative w-[15vmin] h-[15vmin]">
                 {/* Spinning Background */}
                 <img
                     src={Spinner}
                     alt="Spinner"
-                    className="absolute top-0 left-0 w-full h-full animate-spin"
+                    className="absolute top-0 left-0 w-full h-full object-contain animate-spin"
                     style={{ animation: 'spin 2s linear infinite' }}
                 />
                 {/* Static Logo */}
                 <img
                     src={SpinnerLogo}
                     alt="Logo"
-                    className="absolute top-0 left-0 w-full h-full z-10"
+                    className="absolute top-0 left-0 w-full h-full object-contain z-10"
                 />
             </div>
             <style jsx="true">{`

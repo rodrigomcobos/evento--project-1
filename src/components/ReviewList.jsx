@@ -3,12 +3,12 @@ import { FaStar } from 'react-icons/fa';
 
 const reviews = [
     {
-        name: 'John Doe',
+        name: 'Sean Fagan',
         stars: 4,
         comment: 'Great event! Had an amazing time with friends. Highly recommended.'
     },
     {
-        name: 'Jane Smith',
+        name: 'Scott Sutherland',
         stars: 5,
         comment: 'Incredible experience, the organization was top-notch. Will attend again!'
     },
@@ -33,12 +33,15 @@ const ReviewCard = ({ name, stars, comment }) => {
     );
 };
 
-const ReviewList = () => {
+const ReviewList = ({ openReviewModal }) => {
     return (
         <section className="max-w-6xl mx-auto mb-24 px-4">
             <div className="flex justify-between items-center align-middle mb-12">
                 <h2 className='text-2xl font-bold mb-4'>Reviews</h2>
-                <button className="min-w-min px-8 py-3 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full">
+                <button
+                    onClick={openReviewModal}
+                    className="min-w-min px-8 py-3 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full"
+                >
                     Write Review
                 </button>
             </div>

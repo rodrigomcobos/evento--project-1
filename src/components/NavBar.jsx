@@ -96,12 +96,12 @@ const NavBar = () => {
                                     </button>
                                     {isDropdownOpen && (
                                         <div
-                                            className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10"
+                                            className="absolute right-0 mt-2 w-fit bg-white rounded-md shadow-lg py-1 z-10 px-4"
                                             onMouseLeave={() => setIsDropdownOpen(false)}
                                         >
                                             <button
                                                 onClick={handleSignOut}
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:text-red-500 hover:font-bold w-full text-right"
                                             >
                                                 Sign Out
                                             </button>

@@ -8,10 +8,12 @@ import UpcomingEventsSection from '../components/UpcomingEventsSection';
 import EventSeatModal from '../components/EventSeatModal';
 import EventDisclaimer from '../components/EventDisclaimer';
 import ReviewList from '../components/ReviewList';
+import ReviewModal from '../components/ReviewModal';
 import LoadingPage from '../components/LoadingPage';
 
 const EventPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
     const [event, setEvent] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -41,6 +43,14 @@ const EventPage = () => {
         setIsModalOpen(false);
     };
 
+    const openReviewModal = () => {
+        setIsReviewModalOpen(true);
+    };
+
+    const closeReviewModal = () => {
+        setIsReviewModalOpen(false);
+    };
+
     if (loading) return <LoadingPage />;
     if (error) return <div>Error: {error}</div>;
 
@@ -48,10 +58,11 @@ const EventPage = () => {
         <>
             <SearchNavbar />
             {event && <EventDetails event={event} openModal={openModal} />}
-            <ReviewList />
+            <ReviewList openReviewModal={openReviewModal} />
             <EventDisclaimer />
             <UpcomingEventsSection />
             {isModalOpen && <EventSeatModal isOpen={isModalOpen} closeModal={closeModal} />}
+            <ReviewModal isOpen={isReviewModalOpen} onClose={closeReviewModal} />
             <Footer />
         </>
     );
