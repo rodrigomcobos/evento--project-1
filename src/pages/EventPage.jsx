@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import SearchNavbar from '../components/SearchNavBar';
 import Footer from '../components/Footer';
@@ -18,6 +19,8 @@ const EventPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { id } = useParams();
+    const navigate = useNavigate();
+    const { currentUser } = useSelector((state) => state.user);
 
     useEffect(() => {
         const fetchEventDetails = async () => {
@@ -43,8 +46,12 @@ const EventPage = () => {
         setIsModalOpen(false);
     };
 
-    const openReviewModal = () => {
-        setIsReviewModalOpen(true);
+    const handleReviewClick = () => {
+        if (currentUser) {
+            setIsReviewModalOpen(true);
+        } else {
+            navigate(`/login?redirect=/event/${id}`);
+        }
     };
 
     const closeReviewModal = () => {
@@ -58,11 +65,11 @@ const EventPage = () => {
         <>
             <SearchNavbar />
             {event && <EventDetails event={event} openModal={openModal} />}
-            <ReviewList openReviewModal={openReviewModal} />
+            <ReviewList openReviewModal={handleReviewClick} isUserLoggedIn={!!currentUser} />
             <EventDisclaimer />
             <UpcomingEventsSection />
             {isModalOpen && <EventSeatModal isOpen={isModalOpen} closeModal={closeModal} />}
-            <ReviewModal isOpen={isReviewModalOpen} onClose={closeReviewModal} />
+            {isReviewModalOpen && <ReviewModal isOpen={isReviewModalOpen} onClose={closeReviewModal} />}
             <Footer />
         </>
     );

@@ -33,7 +33,7 @@ const ReviewCard = ({ name, stars, comment }) => {
     );
 };
 
-const ReviewList = ({ openReviewModal }) => {
+const ReviewList = ({ openReviewModal, isUserLoggedIn }) => {
     return (
         <section className="max-w-6xl mx-auto mb-24 px-4">
             <div className="flex justify-between items-center align-middle mb-12">
@@ -42,7 +42,7 @@ const ReviewList = ({ openReviewModal }) => {
                     onClick={openReviewModal}
                     className="min-w-min px-8 py-3 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full"
                 >
-                    Write Review
+                    {isUserLoggedIn ? 'Write Review' : 'Sign In to Review'}
                 </button>
             </div>
 
