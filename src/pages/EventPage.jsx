@@ -8,6 +8,7 @@ import UpcomingEventsSection from '../components/UpcomingEventsSection';
 import EventSeatModal from '../components/EventSeatModal';
 import EventDisclaimer from '../components/EventDisclaimer';
 import ReviewList from '../components/ReviewList';
+import LoadingPage from '../components/LoadingPage';
 
 const EventPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,7 +41,7 @@ const EventPage = () => {
         setIsModalOpen(false);
     };
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <LoadingPage />;
     if (error) return <div>Error: {error}</div>;
 
     return (
