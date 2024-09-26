@@ -31,11 +31,11 @@ const EventDetails = ({ event, openModal }) => {
                 <section className="md:w-2/3 w-full md:pr-8 mb-10 md:mb-0">
                     <h1 className="text-2xl sm:text-4xl font-bold mb-4">{event.name}</h1>
 
-                    {/* Rating */}
-                    <div className="flex items-center mb-4">
+                    {/* Rating - Ticketmaster does not support this */}
+                    {/* <div className="flex items-center mb-4">
                         <FaStar className="text-yellow-500" />
                         <span className="ml-2 text-md text-gray-700">{event.popularity || 'N/A'}</span>
-                    </div>
+                    </div> */}
 
                     {/* Event Image */}
                     <div className="w-full h-[32rem] bg-gray-200 rounded-lg mb-6 overflow-hidden">

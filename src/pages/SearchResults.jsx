@@ -1,31 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import SearchNavBar from '../components/SearchNavBar';
 import Footer from '../components/Footer';
 import UpcomingEventsSection from '../components/UpcomingEventsSection';
 import { FaCalendarAlt, FaMapMarkerAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import SearchFilter from '../components/SearchFilter';
 import { performSearch } from '../redux/searchSlice';
+import LoadingPage from '../components/LoadingPage';
 
 const ITEMS_PER_PAGE = 20;
 
 const SearchResults = () => {
     const dispatch = useDispatch();
+    const location = useLocation();
     const { results, loading, error } = useSelector((state) => state.search);
     const [currentPage, setCurrentPage] = useState(1);
     const [filteredResults, setFilteredResults] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
     // Filter states
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedPrice, setSelectedPrice] = useState('');
 
+
     const clearFilters = () => {
         setSelectedCategory('');
         setSelectedDate('');
         setSelectedPrice('');
     };
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const query = queryParams.get('q');
+        if (query) {
+            setSearchQuery(query);
+            dispatch(performSearch(query));
+        }
+    }, [location, dispatch]);
 
     useEffect(() => {
         setCurrentPage(1);
@@ -117,9 +130,7 @@ const SearchResults = () => {
     };
 
     const renderContent = () => {
-        if (loading) {
-            return <div className="text-center py-8">Loading...</div>;
-        }
+        if (loading) return <LoadingPage />;
 
         if (error) {
             return <div className="text-center py-8 text-red-500">Error: {error}</div>;

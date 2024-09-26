@@ -33,6 +33,8 @@ const ShowAllEvents = () => {
                     </div>
                 </div>
             </section>
+
+
             <Footer />
         </>
     )

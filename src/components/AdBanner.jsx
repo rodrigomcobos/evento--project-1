@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import placeholderImage from '../assets/slides/adbanner.jpg';
 
 const AdBanner = () => {
@@ -16,9 +17,12 @@ const AdBanner = () => {
                     <p className="text-md mt-2">with Special Guest <span className="font-bold uppercase">Declan McKenna</span></p>
                     <p className="text-lg mt-2 font-bold">Sat 26th July 2025</p>
                     <p className="text-lg mt-2">Salt Lake City Stadium Utah</p>
-                    <button className="mt-4 px-6 py-2 bg-red-500 text-white font-bold text-md rounded-full hover:bg-red-700 transition duration-300">
+                    <Link
+                        to="/search-results?q=Imagine Dragons"
+                        className="mt-4 px-6 py-2 bg-red-500 text-white font-bold text-md rounded-full hover:bg-red-700 transition duration-300"
+                    >
                         Get Tickets Today
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>
