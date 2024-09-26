@@ -36,7 +36,7 @@ const LoadingPage = () => {
                     className="absolute top-0 left-0 w-full h-full z-10"
                 />
             </div>
-            <style jsx>{`
+            <style jsx="true">{`
                 @keyframes spin {
                     from {
                         transform: rotate(0deg);

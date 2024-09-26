@@ -5,6 +5,8 @@ import Footer from '../components/Footer';
 import { FaCalendarAlt, FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
 import axios from 'axios';
 import LoadingPage from '../components/LoadingPage';
+import { BsEmojiDizzy } from "react-icons/bs";
+
 
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 const CATEGORIES = [
@@ -166,21 +168,21 @@ const ExplorePage = () => {
                                             </div>
                                         </button>
                                         {isDropdownOpen && (
-                                            <div className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-300 rounded-md shadow-lg z-50">
+                                            <div className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-300 rounded-3xl shadow-lg z-10">
                                                 <div className="p-2">
                                                     <input
                                                         type="text"
                                                         placeholder="Enter city or zip code"
                                                         value={searchInput}
                                                         onChange={(e) => setSearchInput(e.target.value)}
-                                                        className="w-full p-2 border border-gray-300 rounded-md"
+                                                        className="w-full p-2 border border-gray-300 rounded-full"
                                                     />
                                                     <button
                                                         onClick={handleLocationSearch}
-                                                        className="mt-2 w-full bg-indigo-500 text-white p-2 rounded-md hover:bg-indigo-600 transition duration-300"
+                                                        className="mt-2 w-full bg-indigo-500 text-white p-2 rounded-full hover:bg-indigo-600 transition duration-300"
                                                     >
                                                         <FaSearch className="inline mr-2" />
-                                                        Search
+                                                        Update Location
                                                     </button>
                                                 </div>
                                             </div>

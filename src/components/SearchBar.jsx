@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { performSearch } from '../redux/searchSlice';
 import { FaSearch } from 'react-icons/fa';
+import { SlMagicWand } from "react-icons/sl";
+
 
 const SearchBar = () => {
     const [isFocused, setIsFocused] = useState(false);

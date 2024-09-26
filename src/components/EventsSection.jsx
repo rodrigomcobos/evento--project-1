@@ -3,6 +3,8 @@ import { FaEdit, FaCalendarAlt, FaMapMarkerAlt, FaSearch } from 'react-icons/fa'
 import axios from 'axios';
 import { ImSpinner2 } from 'react-icons/im';
 import { Link } from 'react-router-dom';
+import { BsEmojiDizzy } from "react-icons/bs";
+
 
 
 const OPENWEATHERMAP_API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
@@ -137,7 +139,11 @@ const EventsSection = () => {
             <ImSpinner2 className="animate-spin text-black text-4xl" />
         </div>
     );
-    if (error) return <div>Error: {error}</div>;
+    if (error) return <div className="flex items-center flex-col justify-center min-h-96">
+        <BsEmojiDizzy className="text-red-500 animate-bounce text-6xl mb-5" />
+        <p className="font-bold text-red-500 ml-5 text-center mb-1">Ops! Failed to Load Events.</p>
+        <p className="font-bold text-red-500 ml-5 text-center">Please refresh page.</p>
+    </div>;
 
     return (
         <section className="max-w-6xl mx-auto mt-24 mb-24">
@@ -151,21 +157,21 @@ const EventsSection = () => {
                         {location.city}, {location.state} <FaEdit className="ml-2" />
                     </button>
                     {isDropdownOpen && (
-                        <div className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-300 rounded-md shadow-lg z-10">
+                        <div className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-300 rounded-3xl shadow-lg z-10">
                             <div className="p-2">
                                 <input
                                     type="text"
                                     placeholder="Enter city or zip code"
                                     value={searchInput}
                                     onChange={(e) => setSearchInput(e.target.value)}
-                                    className="w-full p-2 border border-gray-300 rounded-md"
+                                    className="w-full p-2 border border-gray-300 rounded-full"
                                 />
                                 <button
                                     onClick={handleLocationSearch}
-                                    className="mt-2 w-full bg-indigo-500 text-white p-2 rounded-md hover:bg-indigo-600 transition duration-300"
+                                    className="mt-2 w-full bg-indigo-500 text-white p-2 rounded-full hover:bg-indigo-600 transition duration-300"
                                 >
                                     <FaSearch className="inline mr-2" />
-                                    Search
+                                    Update Location
                                 </button>
                             </div>
                         </div>

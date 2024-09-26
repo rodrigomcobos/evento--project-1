@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { FaCalendarAlt, FaTicketAlt } from 'react-icons/fa';
 import axios from 'axios';
 import { ImSpinner2 } from 'react-icons/im';
+import { BsEmojiDizzy } from "react-icons/bs";
 
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+
+const CACHE_DURATION = 5 * 60 * 1000;
 
 const UpcomingEventsSection = () => {
     const [events, setEvents] = useState([]);
@@ -61,7 +63,11 @@ const UpcomingEventsSection = () => {
             <ImSpinner2 className="animate-spin text-black text-4xl" />
         </div>
     );
-    if (error) return <div>Error: {error}</div>;
+    if (error) return <div className="flex items-center flex-col justify-center min-h-96">
+        <BsEmojiDizzy className="text-red-500 animate-bounce text-6xl mb-5" />
+        <p className="font-bold text-red-500 ml-5 text-center mb-1">Ops! Failed to Load Events.</p>
+        <p className="font-bold text-red-500 ml-5 text-center">Please refresh page.</p>
+    </div>;
 
     return (
         <section className="max-w-6xl mx-auto mb-14">
