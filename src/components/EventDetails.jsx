@@ -24,18 +24,22 @@ const EventDetails = ({ event, openModal }) => {
         }
     }, [event]);
 
+    const getEventDescription = () => {
+        if (event.info) {
+            return event.info;
+        } else if (event._embedded && event._embedded.attractions && event._embedded.attractions[0] && event._embedded.attractions[0].description) {
+            return event._embedded.attractions[0].description;
+        } else {
+            return 'No details available for this event.';
+        }
+    };
+
     return (
         <div className="flex flex-col mt-14 mb-32">
             <div className="flex flex-col max-w-7xl mx-auto md:flex-row p-6 md:px-20 md:py-10">
                 {/* Left Column */}
                 <section className="md:w-2/3 w-full md:pr-8 mb-10 md:mb-0">
                     <h1 className="text-2xl sm:text-4xl font-bold mb-4">{event.name}</h1>
-
-                    {/* Rating - Ticketmaster does not support this */}
-                    {/* <div className="flex items-center mb-4">
-                        <FaStar className="text-yellow-500" />
-                        <span className="ml-2 text-md text-gray-700">{event.popularity || 'N/A'}</span>
-                    </div> */}
 
                     {/* Event Image */}
                     <div className="w-full h-[32rem] bg-gray-200 rounded-lg mb-6 overflow-hidden">
@@ -49,7 +53,7 @@ const EventDetails = ({ event, openModal }) => {
                     {/* Details */}
                     <div>
                         <h2 className="text-xl font-semibold mb-2">Details</h2>
-                        <p className="text-gray-600 text-md leading-relaxed">{event.info || 'No details available.'}</p>
+                        <p className="text-gray-600 text-md leading-relaxed">{getEventDescription()}</p>
                     </div>
                 </section>
 

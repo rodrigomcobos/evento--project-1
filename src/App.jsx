@@ -19,10 +19,11 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import PurchasePolicy from './pages/PurchasePolicy';
 import PageNotFound from './pages/PageNotFound';
 import SearchResults from './pages/SearchResults';
-import EventPage from './pages/EventPage'; // Import the new EventPage component
+import EventPage from './pages/EventPage';
 
 // Testing page
 import TicketmasterTest from './components/TicketmasterTest';
+import LoadingPage from './components/LoadingPage';
 
 const AppContent = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ const AppContent = () => {
 
         {/* Testing page */}
         <Route path="/ticketmaster" element={<TicketmasterTest />} />
+        <Route path="/loading" element={<LoadingPage />} />
       </Routes>
     </>
   );

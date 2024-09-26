@@ -137,10 +137,11 @@ const NavBar = () => {
                                 </div>
 
                                 <ul className="space-y-4">
-                                    <li><Link to="/events" className="text-lg font-bold">Sports</Link></li>
-                                    <li><Link to="/events" className="text-lg font-bold">Concerts</Link></li>
-                                    <li><Link to="/events" className="text-lg font-bold">Theater</Link></li>
-                                    <li><Link to="/events" className="text-lg font-bold">Festivals</Link></li>
+                                    <li><Link to="/events?category=Sports" className="text-lg font-bold">Sports</Link></li>
+                                    <li><Link to="/events?category=Music" className="text-lg font-bold">Music</Link></li>
+                                    <li><Link to="/events?category=Arts & Theatre" className="text-lg font-bold">Arts & Theatre</Link></li>
+                                    <li><Link to="/events?category=Film" className="text-lg font-bold">Film</Link></li>
+                                    <li><Link to="/events?category=Miscellaneous" className="text-lg font-bold">Miscellaneous</Link></li>
                                 </ul>
 
                                 <ul className="space-y-4 mt-8">

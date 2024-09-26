@@ -11,6 +11,9 @@ import PurchasePolicy from './pages/PurchasePolicy.jsx';
 import PageNotFound from './pages/PageNotFound.jsx';
 import EventPage from './pages/EventPage.jsx';
 
+// Testing page
+import LoadingPage from './components/LoadingPage.jsx';
+
 const routes = [
   { path: '/', component: HomePage },
   { path: '/events', component: ShowAllEvents },
@@ -24,6 +27,9 @@ const routes = [
   { path: '/purchase-policy', component: PurchasePolicy },
   { path: '/event/:id', component: EventPage },
   { path: '*', component: PageNotFound },
+
+  // Testing page
+  { path: '/loading', component: LoadingPage },
 ];
 
 export default routes;

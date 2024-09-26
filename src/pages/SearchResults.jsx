@@ -5,6 +5,7 @@ import SearchNavBar from '../components/SearchNavBar';
 import Footer from '../components/Footer';
 import UpcomingEventsSection from '../components/UpcomingEventsSection';
 import { FaCalendarAlt, FaMapMarkerAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { ImSpinner2 } from 'react-icons/im';
 import SearchFilter from '../components/SearchFilter';
 import { performSearch } from '../redux/searchSlice';
 import LoadingPage from '../components/LoadingPage';
@@ -130,7 +131,11 @@ const SearchResults = () => {
     };
 
     const renderContent = () => {
-        if (loading) return <LoadingPage />;
+        if (loading) return (
+            <div className="flex items-center justify-center h-screen">
+                <ImSpinner2 className="animate-spin text-black text-4xl" />
+            </div>
+        );
 
         if (error) {
             return <div className="text-center py-8 text-red-500">Error: {error}</div>;

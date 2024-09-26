@@ -94,7 +94,7 @@ const SearchNavBar = () => {
                             <form onSubmit={handleSearch}>
                                 <div className="flex bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-600 items-center bg-gray-100 rounded-full p-[2px] w-auto sm:w-dvw max-w-[350px] shadow-md">
                                     <div className='rounded-full p-3 bg-white h-full w-full flex items-center justify-between'>
-                                        <FaSearch className="text-gray-500 mr-3" />
+                                        <FaSearch className="text-gray-500 mr-3 ml-1" />
                                         <input
                                             type="text"
                                             className="bg-transparent outline-none w-full text-md"
@@ -169,10 +169,11 @@ const SearchNavBar = () => {
                                 </div>
 
                                 <ul className="space-y-4">
-                                    <li><Link to="/events" className="text-lg font-bold">Sports</Link></li>
-                                    <li><Link to="/events" className="text-lg font-bold">Concerts</Link></li>
-                                    <li><Link to="/events" className="text-lg font-bold">Theater</Link></li>
-                                    <li><Link to="/events" className="text-lg font-bold">Festivals</Link></li>
+                                    <li><Link to="/events?category=Sports" className="text-lg font-bold">Sports</Link></li>
+                                    <li><Link to="/events?category=Music" className="text-lg font-bold">Music</Link></li>
+                                    <li><Link to="/events?category=Arts & Theatre" className="text-lg font-bold">Arts & Theatre</Link></li>
+                                    <li><Link to="/events?category=Film" className="text-lg font-bold">Film</Link></li>
+                                    <li><Link to="/events?category=Miscellaneous" className="text-lg font-bold">Miscellaneous</Link></li>
                                 </ul>
 
                                 <ul className="space-y-4 mt-8">

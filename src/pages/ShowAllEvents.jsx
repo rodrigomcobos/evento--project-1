@@ -32,6 +32,7 @@ const ShowAllEvents = () => {
         { name: 'Miscellaneous', id: 'KZFzniwnSyZfZ7v7n1' },
     ];
 
+    // Returns the category ID based on the category name
     const getCategoryId = (category) => {
         switch (category) {
             case 'Sports':
@@ -49,12 +50,14 @@ const ShowAllEvents = () => {
         }
     };
 
+    // Sets the event category based on the URL parameter 'category'
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const category = params.get('category') || 'All Events';
         setEventCategory(category);
     }, [location]);
 
+    // Fetches events based on the current location and event category
     useEffect(() => {
         if (currentLocation.lat && currentLocation.lon) {
             fetchEvents(currentLocation.lat, currentLocation.lon);
@@ -63,6 +66,7 @@ const ShowAllEvents = () => {
         }
     }, [eventCategory, currentLocation.lat, currentLocation.lon]);
 
+    // Gets the user's location and fetches the location name
     const getUserLocation = () => {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
@@ -77,6 +81,7 @@ const ShowAllEvents = () => {
         }
     };
 
+    // Fetches the location name based on the latitude and longitude
     const fetchLocationName = async (lat, lon) => {
         try {
             const response = await axios.get(`https://api.openweathermap.org/geo/1.0/reverse`, {
@@ -95,6 +100,7 @@ const ShowAllEvents = () => {
         }
     };
 
+    // Fetches events based on the latitude, longitude, and event category
     const fetchEvents = async (lat, lon) => {
         setLoading(true);
         const cacheKey = `${eventCategory},${lat},${lon}`;
@@ -142,6 +148,7 @@ const ShowAllEvents = () => {
         }
     };
 
+    // Handles the location search based on the search input
     const handleLocationSearch = async () => {
         try {
             const response = await axios.get(`http://api.openweathermap.org/geo/1.0/direct`, {
@@ -164,6 +171,7 @@ const ShowAllEvents = () => {
         }
     };
 
+    // Closes the dropdown when clicking outside of it
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
