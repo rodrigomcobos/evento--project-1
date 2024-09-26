@@ -200,13 +200,12 @@ const ExplorePage = () => {
                             <h2 className="text-2xl font-bold">{category.name}</h2>
                         </div>
                         <Link
-                            to="/events"
+                            to={`/events?category=${category.name}`}
                             className="hover:text-indigo-500 transition duration-300 text-md font-bold"
                         >
                             See all events
                         </Link>
                     </section>
-
                     <section className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-12 px-10">
                         {events[category.name] && events[category.name].length > 0 ? (
                             events[category.name].map((event) => (
@@ -223,17 +222,14 @@ const ExplorePage = () => {
                                                 className="w-full h-full object-cover"
                                             />
                                         </div>
-
                                         <h3 className="font-bold text-lg mb-2 mt-4 hover:text-indigo-600 transition-colors duration-300">
                                             {event.name}
                                         </h3>
-
                                         <p className="text-sm text-gray-500 mb-4">
                                             Hosted by:{' '}
                                             {event._embedded?.venues?.[0]?.name ||
                                                 'Venue not specified'}
                                         </p>
-
                                         <div className="flex items-center mb-2 text-gray-600 text-md">
                                             <FaCalendarAlt className="mr-2" />
                                             <span>

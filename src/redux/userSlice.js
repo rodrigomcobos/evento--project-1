@@ -1,18 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// Create an instance of axios with the base URL and withCredentials set to true
 const api = axios.create({
   baseURL: 'http://localhost:5001',
   withCredentials: true,
 });
 
+// Define an async thunk for signing in a user
 export const signIn = createAsyncThunk(
   'user/signIn',
   async (credentials, { rejectWithValue }) => {
     try {
+      // Make a POST request to the /api/users/signin endpoint with the credentials
       const response = await api.post('/api/users/signin', credentials);
+      // Return the response data
       return response.data;
     } catch (error) {
+      // If an error occurs, return a rejected promise with the error message
       return rejectWithValue(
         error.response?.data?.message || 'An error occurred during sign in'
       );
@@ -20,13 +25,17 @@ export const signIn = createAsyncThunk(
   }
 );
 
+// Define an async thunk for signing up a user
 export const signUp = createAsyncThunk(
   'user/signUp',
   async (userData, { rejectWithValue }) => {
     try {
+      // Make a POST request to the /api/users/signup endpoint with the user data
       const response = await api.post('/api/users/signup', userData);
+      // Return the response data
       return response.data;
     } catch (error) {
+      // If an error occurs, return a rejected promise with the error message
       return rejectWithValue(
         error.response?.data?.message || 'An error occurred during sign up'
       );
@@ -34,13 +43,17 @@ export const signUp = createAsyncThunk(
   }
 );
 
+// Define an async thunk for signing out a user
 export const signOut = createAsyncThunk(
   'user/signOut',
   async (_, { rejectWithValue }) => {
     try {
+      // Make a POST request to the /api/users/signout endpoint
       const response = await api.post('/api/users/signout');
+      // Return the response data
       return response.data;
     } catch (error) {
+      // If an error occurs, return a rejected promise with the error message
       return rejectWithValue(
         error.response?.data?.message || 'An error occurred during sign out'
       );
@@ -48,20 +61,26 @@ export const signOut = createAsyncThunk(
   }
 );
 
+// Define an async thunk for getting the current user's profile
 export const getUserProfile = createAsyncThunk(
   'user/getProfile',
   async (_, { rejectWithValue }) => {
     try {
+      // Make a GET request to the /api/users/profile endpoint
       const response = await api.get('/api/users/profile');
+      // Return the response data
       return response.data;
     } catch (error) {
+      // If an error occurs, return a rejected promise with the error message
       return rejectWithValue();
-      // Message shown when user is not signed in to view Profile, keep this off, for testing purposes
+      // If the user is not signed in, show a message indicating that
+      // I keep this error off so it won't show up in the console
       // error.response?.data?.message || 'Failed to fetch user profile'
     }
   }
 );
 
+// Create a slice for the user state
 const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -71,10 +90,12 @@ const userSlice = createSlice({
   },
   reducers: {
     clearError: (state) => {
+      // Clear any error messages
       state.error = null;
     },
   },
   extraReducers: (builder) => {
+    // Handle the loading and error states for each of the async thunks
     builder
       .addCase(signIn.pending, (state) => {
         state.loading = true;

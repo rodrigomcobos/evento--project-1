@@ -25,13 +25,13 @@ const EventsSection = () => {
                     position => fetchLocationName(position.coords.latitude, position.coords.longitude),
                     error => {
                         console.error("Error getting location:", error);
-                        setLocation({ city: 'Lehi', state: 'UT' });
-                        fetchEvents(40.3916, -111.8508);
+                        setLocation({ city: 'Salt Lake City', state: 'Utah' });
+                        fetchEvents(40.7608, -111.8910);
                     }
                 );
             } else {
-                setLocation({ city: 'Lehi', state: 'UT' });
-                fetchEvents(40.3916, -111.8508);
+                setLocation({ city: 'Salt Lake City', state: 'Utah' });
+                fetchEvents(40.7608, -111.8910);
             }
         };
 
@@ -64,8 +64,8 @@ const EventsSection = () => {
             fetchEvents(lat, lon);
         } catch (error) {
             console.error("Error fetching location name:", error);
-            setLocation({ city: 'Lehi', state: 'UT' });
-            fetchEvents(40.3916, -111.8508);
+            setLocation({ city: 'Salt Lake City', state: 'Utah' });
+            fetchEvents(40.7608, -111.8910);
         }
     };
 
@@ -86,7 +86,7 @@ const EventsSection = () => {
             const response = await axios.get('http://localhost:5001/api/ticketmaster/events', {
                 params: {
                     latlong: `${lat},${lon}`,
-                    radius: '50',
+                    radius: '100',
                     unit: 'miles',
                     size: 6,
                     sort: 'date,asc',
@@ -171,9 +171,10 @@ const EventsSection = () => {
                         </div>
                     )}
                 </div>
-                <a href="#all-events" className="hover:text-indigo-500 transition duration-300 text-md font-bold">
+                <Link to="/explore" className="hover:text-indigo-500 transition duration-300 text-md font-bold"> See all events </Link>
+                {/* <a href="#all-events" className="hover:text-indigo-500 transition duration-300 text-md font-bold">
                     See all events
-                </a>
+                </a> */}
             </section>
 
             <section className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-12 px-10">
