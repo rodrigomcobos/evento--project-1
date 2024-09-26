@@ -133,18 +133,18 @@ const SearchResults = () => {
             <>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {currentItems.map((event) => (
-                        <Link to={`/event/${event.id}`} key={event.id} className="bg-white rounded-lg shadow-md p-4 flex hover:shadow-lg hover:text-indigo-600 transition-colors duration-300">
+                        <Link to={`/event/${event.id}`} key={event.id} className="bg-white rounded-lg shadow-md p-4 flex hover:shadow-lg transition-all duration-300">
                             <div className="w-1/3">
-                                <div className="bg-gray-300 rounded-lg h-full overflow-hidden">
+                                <div className="bg-gray-200 rounded-lg h-40 overflow-hidden">
                                     <img
                                         src={event.images && event.images[0] ? event.images[0].url : 'placeholder-image-url'}
                                         alt={event.name}
-                                        className="w-full h-full object-cover rounded-lg"
+                                        className="w-full h-full object-cover"
                                     />
                                 </div>
                             </div>
                             <div className="w-2/3 pl-4 flex flex-col justify-between">
-                                <h3 className="text-lg font-bold">{event.name}</h3>
+                                <h3 className="text-lg font-bold hover:text-indigo-600 transition-colors duration-300">{event.name}</h3>
                                 <div className="text-gray-600 flex items-center mt-2">
                                     <FaCalendarAlt className="mr-2" />
                                     {event.dates && event.dates.start ? new Date(event.dates.start.dateTime).toLocaleDateString() : 'Date TBA'}

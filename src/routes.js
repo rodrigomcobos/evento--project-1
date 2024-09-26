@@ -1,4 +1,3 @@
-// src/routes.js
 import HomePage from './pages/HomePage.jsx';
 import ShowAllEvents from './pages/ShowAllEvents.jsx';
 import ExplorePage from './pages/ExplorePage.jsx';
@@ -9,11 +8,12 @@ import ContactUsPage from './pages/ContactUsPage.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import PurchasePolicy from './pages/PurchasePolicy.jsx';
-import PageNotFound from './pages/PageNotFound.jsx'; // Optional: For handling 404 errors
+import PageNotFound from './pages/PageNotFound.jsx';
+import EventPage from './pages/EventPage.jsx';
 
 const routes = [
   { path: '/', component: HomePage },
-  { path: '/events', component: ShowAllEvents }, // Updated route with dynamic category
+  { path: '/events', component: ShowAllEvents },
   { path: '/explore', component: ExplorePage },
   { path: '/profile', component: ProfilePage },
   { path: '/login', component: LogInPage },
@@ -22,7 +22,8 @@ const routes = [
   { path: '/about', component: AboutUs },
   { path: '/privacy', component: PrivacyPolicy },
   { path: '/purchase-policy', component: PurchasePolicy },
-  { path: '*', component: PageNotFound }, // Optional: Catch-all for undefined routes
+  { path: '/event/:id', component: EventPage },
+  { path: '*', component: PageNotFound },
 ];
 
 export default routes;

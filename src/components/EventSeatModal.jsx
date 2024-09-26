@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ArenaMap from '../assets/slides/arenamap.png'
 
 const EventSeatModal = ({ isOpen, closeModal }) => {
     const [tickets, setTickets] = useState(1);
@@ -68,7 +69,7 @@ const EventSeatModal = ({ isOpen, closeModal }) => {
                     <div className="col-span-2">
                         <div className="overflow-hidden rounded-lg">
                             <img
-                                src="src/assets/slides/arenamap.png"
+                                src={ArenaMap}
                                 alt="Arena Map"
                                 className="w-full h-auto transition-transform duration-300 ease-in-out transform hover:scale-125"
                             />

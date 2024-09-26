@@ -3,13 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../redux/userSlice';
 
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle, FaChevronDown } from 'react-icons/fa';
 import { FiMenu, FiX } from 'react-icons/fi';
 import logo from '../assets/logo.png';
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const menuRef = useRef(null);
+    const dropdownRef = useRef(null);
     const { currentUser } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -23,18 +25,16 @@ const NavBar = () => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
                 setIsMenuOpen(false);
             }
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
         };
 
-        if (isMenuOpen) {
-            document.addEventListener('mousedown', handleOutsideClick);
-        } else {
-            document.removeEventListener('mousedown', handleOutsideClick);
-        }
-
+        document.addEventListener('mousedown', handleOutsideClick);
         return () => {
             document.removeEventListener('mousedown', handleOutsideClick);
         };
-    }, [isMenuOpen]);
+    }, []);
 
     const handleUserClick = () => {
         if (currentUser) {
@@ -53,7 +53,6 @@ const NavBar = () => {
         }
     };
 
-
     return (
         <>
             <div className="flex gap-2 max-sm:flex-col items-center justify-center text-center bg-gradient-to-r from-indigo-400 to-cyan-400 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/25%)]  px-4 py-2 font-[sans-serif]">
@@ -67,7 +66,6 @@ const NavBar = () => {
             </div>
             <div className='px-4'>
                 <nav className="bg-white max-w-6xl mx-auto pt-6 flex justify-between align-middle">
-                    {/* Left Side: Logo and Event Links */}
                     <div className="flex items-center">
                         <img src={logo} alt="Logo" className="w-[145px] mr-6" />
                         <ul className="hidden md:flex space-x-4">
@@ -78,41 +76,58 @@ const NavBar = () => {
                         </ul>
                     </div>
 
-                    {/* Right Side: User Links */}
                     <div className="hidden md:flex items-center justify-between space-x-4">
                         <ul className="flex space-x-4">
                             <li><Link to="/explore" className="hover:text-blue-500 transition duration-300 text-md">Explore</Link></li>
                             <li><Link to="/profile" className="hover:text-blue-500 transition duration-300 text-md">My Bookings</Link></li>
                         </ul>
                         <div className="flex items-center space-x-4">
-                            <button onClick={handleUserClick} className="hover:text-blue-500 text-md transition duration-300">
-                                {currentUser ? currentUser.username : "Sign In"}
-                            </button>
-                            {currentUser && (
-                                <button onClick={handleSignOut} className="hover:text-red-500 text-md transition duration-300">
-                                    Sign Out
+                            {currentUser ? (
+                                <div className="relative" ref={dropdownRef}>
+                                    <button
+                                        onClick={handleUserClick}
+                                        onMouseEnter={() => setIsDropdownOpen(true)}
+                                        className="flex items-center hover:text-blue-500 text-md transition duration-300"
+                                    >
+                                        {currentUser.username}
+                                        <FaChevronDown className="ml-1" />
+                                    </button>
+                                    {isDropdownOpen && (
+                                        <div
+                                            className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10"
+                                            onMouseLeave={() => setIsDropdownOpen(false)}
+                                        >
+                                            <button
+                                                onClick={handleSignOut}
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                                            >
+                                                Sign Out
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <button onClick={handleUserClick} className="hover:text-blue-500 text-md transition duration-300">
+                                    Sign In
                                 </button>
                             )}
                             <FaUserCircle className="h-8 w-8 text-blue-500" />
                         </div>
                     </div>
 
-                    {/* Hamburger Icon for Mobile */}
                     <div className="md:hidden flex items-center">
                         <button onClick={toggleMenu}>
                             {isMenuOpen ? (
-                                <FiX className="h-6 w-6 text-blue-500" /> // Close icon
+                                <FiX className="h-6 w-6 text-blue-500" />
                             ) : (
-                                <FiMenu className="h-6 w-6 text-blue-500" /> // Hamburger icon
+                                <FiMenu className="h-6 w-6 text-blue-500" />
                             )}
                         </button>
                     </div>
 
-                    {/* Mobile Menu */}
                     {isMenuOpen && (
                         <div ref={menuRef} className="fixed top-0 right-0 w-1/2 h-full bg-white shadow-lg z-50 transition-transform transform translate-x-0">
                             <div className="flex flex-col p-6 space-y-4">
-                                {/* Close button */}
                                 <div className="flex justify-end">
                                     <button onClick={toggleMenu}>
                                         <FiX className="h-6 w-6 text-blue-500" />

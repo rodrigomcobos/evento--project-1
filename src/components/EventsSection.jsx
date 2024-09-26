@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaEdit, FaCalendarAlt, FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
 import axios from 'axios';
 import { ImSpinner2 } from 'react-icons/im';
+import { Link } from 'react-router-dom';
 
 
 const OPENWEATHERMAP_API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
-
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 const EventsSection = () => {
     const [events, setEvents] = useState([]);
@@ -15,6 +16,7 @@ const EventsSection = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [searchInput, setSearchInput] = useState('');
     const dropdownRef = useRef(null);
+    const cacheRef = useRef({});
 
     useEffect(() => {
         const getUserLocation = () => {
@@ -35,7 +37,6 @@ const EventsSection = () => {
 
         getUserLocation();
 
-        // Close dropdown when clicking outside
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setIsDropdownOpen(false);
@@ -69,6 +70,15 @@ const EventsSection = () => {
     };
 
     const fetchEvents = async (lat, lon) => {
+        const cacheKey = `${lat},${lon}`;
+        const cachedData = cacheRef.current[cacheKey];
+
+        if (cachedData && Date.now() - cachedData.timestamp < CACHE_DURATION) {
+            setEvents(cachedData.events);
+            setLoading(false);
+            return;
+        }
+
         try {
             const currentDate = new Date();
             const formattedDate = currentDate.toISOString().split('.')[0] + "Z";
@@ -83,8 +93,15 @@ const EventsSection = () => {
                     startDateTime: formattedDate
                 }
             });
-            setEvents(response.data._embedded.events);
+            const fetchedEvents = response.data._embedded.events;
+            setEvents(fetchedEvents);
             setLoading(false);
+
+            // Cache the fetched data
+            cacheRef.current[cacheKey] = {
+                events: fetchedEvents,
+                timestamp: Date.now()
+            };
         } catch (err) {
             console.error("Error fetching events:", err);
             setError('Failed to fetch events');
@@ -162,7 +179,7 @@ const EventsSection = () => {
             <section className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-12 px-10">
                 {events.map((event) => (
                     <div className='border-[10px] border-white' key={event.id}>
-                        <a href={event.url} target="_blank" rel="noopener noreferrer" className="block bg-white rounded-lg hover:text-indigo-600">
+                        <Link to={`/event/${event.id}`} className="block bg-white rounded-lg hover:text-indigo-600">
                             <img
                                 src={event.images[0].url}
                                 alt={event.name}
@@ -181,7 +198,7 @@ const EventsSection = () => {
                                 <FaCalendarAlt className="mr-2" />
                                 <span>{new Date(event.dates.start.dateTime).toLocaleString()}</span>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 ))}
             </section>
