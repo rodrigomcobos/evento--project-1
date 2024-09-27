@@ -169,4 +169,57 @@ export const userController = {
       });
     }
   },
+
+  // Update User Profile
+  async updateProfile(req, res) {
+    console.log('updateProfile method called');
+    console.log('Session ID:', req.session.userId);
+    console.log('Request body:', req.body);
+
+    if (!req.session.userId) {
+      return res.status(401).json({ message: 'User not authenticated' });
+    }
+
+    try {
+      const user = await User.findByPk(req.session.userId);
+      if (!user) {
+        console.log('User not found for ID:', req.session.userId);
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      console.log('User found:', user.toJSON());
+
+      const { first_name, last_name, username, email, phone, password } =
+        req.body;
+
+      if (first_name) user.first_name = first_name;
+      if (last_name) user.last_name = last_name;
+      if (username) user.username = username;
+      if (email) user.email = email;
+      if (phone) user.phone = phone;
+      if (password) {
+        const saltRounds = 10;
+        user.password = await bcrypt.hash(password, saltRounds);
+      }
+
+      await user.save();
+
+      console.log('User updated:', user.toJSON());
+
+      res.json({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        phone: user.phone,
+      });
+    } catch (error) {
+      console.error('Update profile error:', error);
+      res.status(500).json({
+        message: 'Server error during profile update',
+        error: error.message,
+      });
+    }
+  },
 };

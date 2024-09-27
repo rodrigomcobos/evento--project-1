@@ -8,5 +8,6 @@ router.post('/signin', userController.signIn);
 router.post('/signup', userController.signUp);
 router.get('/profile', authMiddleware, userController.getProfile);
 router.post('/signout', authMiddleware, userController.signOut);
+router.put('/profile', authMiddleware, userController.updateProfile);
 
 export default router;

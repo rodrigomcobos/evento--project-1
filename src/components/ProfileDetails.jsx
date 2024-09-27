@@ -1,68 +1,111 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserProfile } from '../redux/userSlice';
 
 const ProfileDetails = () => {
-    //UseStates for password validation, strength, and password input
+    const dispatch = useDispatch();
+    const { currentUser, loading, error } = useSelector((state) => state.user);
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [strength, setStrength] = useState('');
     const [isInvalidPassword, setIsInvalidPassword] = useState(false);
 
-    // Function to toggle password visibility when clicking on show
+    useEffect(() => {
+        if (currentUser) {
+            setFirstName(currentUser.first_name || '');
+            setLastName(currentUser.last_name || '');
+            setUsername(currentUser.username || '');
+            setEmail(currentUser.email || '');
+            setPhone(currentUser.phone || '');
+        }
+    }, [currentUser]);
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
-    // Function to validate password criteria
     const validatePassword = (value) => {
         setPassword(value);
         const hasLetter = /[A-Za-z]/.test(value);
         const digitMatches = value.match(/\d/g);
         const digitCount = digitMatches ? digitMatches.length : 0;
 
-        // Check if the password meets the criteria by showing the password strength
         if (value.length >= 8 && hasLetter && digitCount >= 2) {
-            setIsInvalidPassword(false); // Password is valid
+            setIsInvalidPassword(false);
             if (digitCount > 4) {
                 setStrength('Strong');
             } else if (digitCount >= 2) {
                 setStrength('Medium');
             }
         } else {
-            setIsInvalidPassword(true); // Password does not meet criteria
+            setIsInvalidPassword(true);
             setStrength('Weak');
         }
     };
 
-    // Function that updates the password in the database, for now it console logs
-    const handlePasswordUpdate = () => {
+    const handleUpdateDetails = async () => {
+        try {
+            const result = await dispatch(updateUserProfile({ first_name: firstName, last_name: lastName })).unwrap();
+            console.log('Update result:', result);
+        } catch (error) {
+            console.error('Failed to update details:', error);
+            console.error('Error details:', error.response?.data);
+        }
+    };
+
+    const handleUpdateUsername = async () => {
+        try {
+            await dispatch(updateUserProfile({ username })).unwrap();
+            console.log('Username updated successfully');
+        } catch (error) {
+            console.error('Failed to update username:', error);
+        }
+    };
+
+    const handleUpdateEmail = async () => {
+        try {
+            await dispatch(updateUserProfile({ email })).unwrap();
+            console.log('Email updated successfully');
+        } catch (error) {
+            console.error('Failed to update email:', error);
+        }
+    };
+
+    const handlePasswordUpdate = async () => {
         if (!isInvalidPassword) {
-            console.log('Password updated:', password);
+            try {
+                await dispatch(updateUserProfile({ password })).unwrap();
+                console.log('Password updated successfully');
+                setPassword('');
+                setStrength('');
+            } catch (error) {
+                console.error('Failed to update password:', error);
+            }
         } else {
             console.log('Password does not meet the criteria');
         }
     };
 
-    // Function that updates the user details in the database, for now it console logs
-    const handleUpdateDetails = () => {
-        console.log('Details updated: First Name and Last Name');
-        // Add logic to update user details here
+    const handleUpdateNumber = async () => {
+        try {
+            await dispatch(updateUserProfile({ phone })).unwrap();
+            console.log('Phone number updated successfully');
+        } catch (error) {
+            console.error('Failed to update phone number:', error);
+        }
     };
 
-    // Function that updates the user email in the database, for now it console logs
-    const handleUpdateEmail = () => {
-        console.log('Email updated');
-        // Add logic to update email in the database here
-    };
-
-    // Function that updates the user phone number in the database, for now it console logs
-    const handleUpdateNumber = () => {
-        console.log('Phone number updated');
-        // Add logic to update phone number in the database here
-    };
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
 
     return (
         <>
-            {/* Right Content */}
             <div className="min-w-[50dvw] p-10">
                 <h1 className="text-3xl font-semibold mb-8">Profile Details</h1>
 
@@ -70,9 +113,20 @@ const ProfileDetails = () => {
                 <section className="mb-8">
                     <h2 className="text-xl font-semibold mb-4">My Info</h2>
                     <div className="grid grid-cols-2 gap-6 mb-4">
-                        {/* Need to change database when user updates details */}
-                        <input type="text" className="border p-3 rounded-md text-md" placeholder="Rodrigo" />
-                        <input type="text" className="border p-3 rounded-md text-md" placeholder="Cobos" />
+                        <input
+                            type="text"
+                            className="border p-3 rounded-md text-md"
+                            placeholder="First Name"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            className="border p-3 rounded-md text-md"
+                            placeholder="Last Name"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                        />
                     </div>
                     <button
                         onClick={handleUpdateDetails}
@@ -84,13 +138,35 @@ const ProfileDetails = () => {
 
                 <hr className="my-8" />
 
+                {/* Username Section */}
+                <section className="mb-8">
+                    <h2 className="text-xl font-semibold mb-4">Username</h2>
+                    <input
+                        type="text"
+                        className="border p-3 w-full rounded-md text-md"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <button
+                        onClick={handleUpdateUsername}
+                        className="mt-4 px-4 py-2 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full"
+                    >
+                        Update Username
+                    </button>
+                </section>
+
+                <hr className="my-8" />
+
                 {/* Email Section */}
                 <section className="mb-8">
                     <h2 className="text-xl font-semibold mb-4">Email Address</h2>
                     <input
                         type="email"
                         className="border p-3 w-full rounded-md text-md"
-                        placeholder="test@testemail.com"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <button
                         onClick={handleUpdateEmail}
@@ -108,7 +184,6 @@ const ProfileDetails = () => {
                     <div className="relative">
                         <input
                             type={showPassword ? 'text' : 'password'}
-                            //  If password is invalid, show red border
                             className={`border p-3 w-full rounded-md text-md ${isInvalidPassword ? 'border-red-500' : 'border-gray-300'}`}
                             placeholder="New Password"
                             value={password}
@@ -126,7 +201,6 @@ const ProfileDetails = () => {
                         It has to have at least one letter and two digits.
                     </p>
 
-                    {/* Password Strength Indicator */}
                     {password && (
                         <p className="mt-2 ml-1 text-sm text-gray-500">
                             Password Strength: <span className={`font-semibold ${strength === 'Strong' ? 'text-green-500' : strength === 'Medium' ? 'text-yellow-500' : 'text-red-500'}`}>
@@ -148,7 +222,13 @@ const ProfileDetails = () => {
                 {/* Phone Number Section */}
                 <section className="mb-8">
                     <h2 className="text-xl font-semibold mb-4">Phone Number</h2>
-                    <input type="tel" className="border p-3 w-full rounded-md text-md" placeholder="***-***-****" />
+                    <input
+                        type="tel"
+                        className="border p-3 w-full rounded-md text-md"
+                        placeholder="Phone Number"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                    />
                     <button
                         onClick={handleUpdateNumber}
                         className="mt-4 px-4 py-2 bg-indigo-500 text-white text-md hover:bg-indigo-600 hover:shadow-md hover:shadow-indigo-300 transition rounded-full"

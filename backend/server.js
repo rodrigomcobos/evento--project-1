@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectToDB } from './config/db.js';
 import userRoutes from './routes/userRoutes.js';
+import { userController } from './controllers/userController.js';
 import axios from 'axios';
 
 dotenv.config();

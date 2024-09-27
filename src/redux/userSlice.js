@@ -80,6 +80,22 @@ export const getUserProfile = createAsyncThunk(
   }
 );
 
+export const updateUserProfile = createAsyncThunk(
+  'user/updateProfile',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await api.put('/api/users/profile', userData);
+      console.log('Profile update response:', response.data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message ||
+          'An error occurred while updating profile'
+      );
+    }
+  }
+);
+
 // Create a slice for the user state
 const userSlice = createSlice({
   name: 'user',
@@ -138,6 +154,19 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(getUserProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateUserProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentUser = { ...state.currentUser, ...action.payload };
+        console.log('Updated user in Redux store:', state.currentUser);
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
