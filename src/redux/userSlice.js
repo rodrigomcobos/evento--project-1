@@ -173,5 +173,7 @@ const userSlice = createSlice({
   },
 });
 
+// Export the actions and reducers
+
 export const { clearError } = userSlice.actions;
 export default userSlice.reducer;
