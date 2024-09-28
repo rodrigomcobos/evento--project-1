@@ -14,7 +14,7 @@ class Review extends Model {
           allowNull: false,
         },
         event_id: {
-          type: DataTypes.UUID,
+          type: DataTypes.STRING,
           allowNull: false,
         },
         rating: {
@@ -28,6 +28,9 @@ class Review extends Model {
         comment: {
           type: DataTypes.TEXT,
         },
+        title: {
+          type: DataTypes.STRING,
+        },
       },
       {
         sequelize,
@@ -36,8 +39,9 @@ class Review extends Model {
     );
   }
   static associate(models) {
-    this.belongsTo(models.User);
-    this.belongsTo(models.Event);
+    this.belongsTo(models.User, { foreignKey: 'user_id' });
+    // Remove the association with Event model
+    // this.belongsTo(models.Event, { foreignKey: 'event_id' });
   }
 }
 

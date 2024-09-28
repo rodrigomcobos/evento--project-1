@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectToDB } from './config/db.js';
 import userRoutes from './routes/userRoutes.js';
+import reviewRoutes from './routes/reviewRoutes.js';
 import { userController } from './controllers/userController.js';
 import axios from 'axios';
 
@@ -39,6 +40,7 @@ app.use(
 
 // Routes
 app.use('/api/users', userRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 // Ticketmaster API proxy route
 app.get('/api/ticketmaster/*', async (req, res) => {

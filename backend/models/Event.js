@@ -1,4 +1,3 @@
-// models/Event.js
 import { Model, DataTypes } from 'sequelize';
 
 class Event extends Model {
@@ -44,7 +43,8 @@ class Event extends Model {
     this.belongsTo(models.Venue, { foreignKey: 'venueId' });
     this.belongsTo(models.Classification, { foreignKey: 'classificationId' });
     this.hasMany(models.Booking, { foreignKey: 'event_id' });
-    this.hasMany(models.Review);
+    // Remove the association with Review model
+    // this.hasMany(models.Review);
   }
 }
 

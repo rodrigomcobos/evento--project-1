@@ -1,26 +1,33 @@
 import initializeDb from '../models/index.js';
 import bcrypt from 'bcrypt';
-import { Op } from 'sequelize'; // Add this line
+import { Op } from 'sequelize';
 
 let User;
 let sequelize;
+// Initialize the database connection and load the User model and Sequelize instance
 const init = async () => {
+  // Call the initializeDb function to connect to the database and load the models
   const db = await initializeDb();
+  // Store the User model and Sequelize instance in the User and sequelize variables
   User = db.User;
   sequelize = db.sequelize;
 };
 
+// Call the init function to initialize the database connection and load the User model
 init();
 
 export const userController = {
   // Session check
   async sessionCheck(req, res) {
+    // Check if the user is logged in by checking if the session ID exists in the session store
     if (req.session.userId) {
       try {
+        // Find the user by the session ID
         const user = await User.findByPk(req.session.userId, {
           attributes: { exclude: ['password'] },
         });
         if (user) {
+          // Return the user object without the password
           return res.json({ isLoggedIn: true, user });
         }
       } catch (error) {
@@ -30,27 +37,36 @@ export const userController = {
           .json({ message: 'Server error during session check' });
       }
     }
+    // If the user is not logged in, return false
     res.json({ isLoggedIn: false });
   },
 
   // Sign In
   async signIn(req, res) {
+    // Get the email and password from the request body
     const { email, password } = req.body;
     try {
+      // Find the user by the email
       const user = await User.findOne({ where: { email } });
       if (!user) {
+        // If the user is not found, return an error
         return res.status(401).json({ message: 'Invalid credentials' });
       }
+      // Compare the password from the request body with the password in the database
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
+        // If the password is invalid, return an error
         return res.status(401).json({ message: 'Invalid credentials' });
       }
+      // Set the session ID to the user ID
       req.session.userId = user.id;
+      // Save the session
       req.session.save((err) => {
         if (err) {
           console.error('Session save error:', err);
           return res.status(500).json({ message: 'Error creating session' });
         }
+        // Return the user object without the password
         res.json({
           user: { id: user.id, username: user.username, email: user.email },
         });
@@ -62,6 +78,7 @@ export const userController = {
   },
 
   async signUp(req, res) {
+    // Get the username, first name, last name, email, phone, and password from the request body
     const { username, first_name, last_name, email, phone, password } =
       req.body;
     try {
@@ -73,6 +90,7 @@ export const userController = {
         phone,
       });
 
+      // Check if the user already exists
       console.log('Checking for existing user...');
       const existingUser = await User.findOne({
         where: {
@@ -81,16 +99,19 @@ export const userController = {
       });
 
       if (existingUser) {
+        // If the user already exists, return an error
         console.log('User already exists');
         return res
           .status(400)
           .json({ message: 'Email or username already in use' });
       }
 
+      // Hash the password
       console.log('Hashing password...');
       const saltRounds = 10;
       const hashedPassword = await bcrypt.hash(password, saltRounds);
 
+      // Create a new user
       console.log('Creating new user...');
       const newUser = await User.create({
         first_name,
@@ -102,10 +123,10 @@ export const userController = {
       });
       console.log('New user created:', newUser.id);
 
-      console.log('Setting session...');
+      // Set the session ID to the user ID
       req.session.userId = newUser.id;
 
-      console.log('Sending response...');
+      // Return the user object without the password
       res.status(201).json({
         user: {
           id: newUser.id,
@@ -135,6 +156,7 @@ export const userController = {
 
   // Sign Out
   async signOut(req, res) {
+    // Destroy the session
     if (req.session) {
       req.session.destroy((err) => {
         if (err) {
@@ -143,23 +165,28 @@ export const userController = {
             .status(500)
             .json({ message: 'Could not log out, please try again' });
         }
-        res.clearCookie('connect.sid'); // clear the session cookie
+        // Clear the session cookie
+        res.clearCookie('connect.sid');
         return res.json({ message: 'Logged out successfully' });
       });
     } else {
+      // If the session is not found, return a success message
       res.status(200).json({ message: 'Already logged out' });
     }
   },
 
   // Get User Profile
   async getProfile(req, res) {
+    // Find the user by the session ID
     try {
       const user = await User.findByPk(req.session.userId, {
         attributes: { exclude: ['password'] },
       });
       if (!user) {
+        // If the user is not found, return an error
         return res.status(404).json({ message: 'User not found' });
       }
+      // Return the user object without the password
       res.json(user);
     } catch (error) {
       console.error('Get profile error:', error);
@@ -177,18 +204,22 @@ export const userController = {
     console.log('Request body:', req.body);
 
     if (!req.session.userId) {
+      // If the user is not logged in, return an error
       return res.status(401).json({ message: 'User not authenticated' });
     }
 
     try {
+      // Find the user by the session ID
       const user = await User.findByPk(req.session.userId);
       if (!user) {
+        // If the user is not found, return an error
         console.log('User not found for ID:', req.session.userId);
         return res.status(404).json({ message: 'User not found' });
       }
 
       console.log('User found:', user.toJSON());
 
+      // Update the user properties
       const { first_name, last_name, username, email, phone, password } =
         req.body;
 
@@ -198,14 +229,17 @@ export const userController = {
       if (email) user.email = email;
       if (phone) user.phone = phone;
       if (password) {
+        // Hash the password
         const saltRounds = 10;
         user.password = await bcrypt.hash(password, saltRounds);
       }
 
+      // Save the user
       await user.save();
 
       console.log('User updated:', user.toJSON());
 
+      // Return the user object without the password
       res.json({
         id: user.id,
         username: user.username,
@@ -223,3 +257,4 @@ export const userController = {
     }
   },
 };
+

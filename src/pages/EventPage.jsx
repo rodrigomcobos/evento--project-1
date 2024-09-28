@@ -65,11 +65,21 @@ const EventPage = () => {
         <>
             <SearchNavbar />
             {event && <EventDetails event={event} openModal={openModal} />}
-            <ReviewList openReviewModal={handleReviewClick} isUserLoggedIn={!!currentUser} />
+            <ReviewList
+                eventId={id}
+                openReviewModal={handleReviewClick}
+                isUserLoggedIn={!!currentUser}
+            />
             <EventDisclaimer />
             <UpcomingEventsSection />
             {isModalOpen && <EventSeatModal isOpen={isModalOpen} closeModal={closeModal} />}
-            {isReviewModalOpen && <ReviewModal isOpen={isReviewModalOpen} onClose={closeReviewModal} />}
+            {isReviewModalOpen && (
+                <ReviewModal
+                    isOpen={isReviewModalOpen}
+                    onClose={closeReviewModal}
+                    eventId={id}
+                />
+            )}
             <Footer />
         </>
     );

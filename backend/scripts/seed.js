@@ -29,7 +29,7 @@ const seed = async () => {
 
     // Create users
     const passwordHash = await bcrypt.hash('password123', 10);
-    const [admin, user1, user2] = await Promise.all([
+    const [admin, user1, user2, rodrigo] = await Promise.all([
       User.create({
         username: 'admin',
         email: 'admin@example.com',
@@ -52,6 +52,14 @@ const seed = async () => {
         password: passwordHash,
         first_name: 'Jane',
         last_name: 'Smith',
+        role_id: userRole.id,
+      }),
+      User.create({
+        username: 'rodrigomcobos',
+        email: 'rodrigomcobos@gmail.com',
+        password: passwordHash,
+        first_name: 'Rodrigo',
+        last_name: 'Cobos',
         role_id: userRole.id,
       }),
     ]);
@@ -135,15 +143,17 @@ const seed = async () => {
     await Promise.all([
       Review.create({
         user_id: user1.id,
-        event_id: event1.id,
+        event_id: event1.ticketmaster_id, // Use ticketmaster_id instead of id
         rating: 5,
         comment: 'Great concert!',
+        title: 'Awesome show',
       }),
       Review.create({
         user_id: user2.id,
-        event_id: event2.id,
+        event_id: event2.ticketmaster_id, // Use ticketmaster_id instead of id
         rating: 4,
         comment: 'Informative conference',
+        title: 'Learned a lot',
       }),
     ]);
     console.log('Reviews created');
@@ -180,7 +190,7 @@ const seed = async () => {
     // Test Event model
     const testEvent = await Event.findOne({
       where: { title: 'Summer Concert' },
-      include: [Booking, Review, Venue, Classification],
+      include: [Booking, Venue, Classification], // Removed Review from here
     });
     console.log('Test Event:', testEvent.toJSON());
 
@@ -194,7 +204,7 @@ const seed = async () => {
     // Test Review model
     const testReview = await Review.findOne({
       where: { rating: 5 },
-      include: [User, Event],
+      include: [User], // Removed Event from here
     });
     console.log('Test Review:', testReview.toJSON());
 
