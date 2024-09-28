@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaStar } from 'react-icons/fa';
 import { FaQuoteRight } from "react-icons/fa6";
-import { fetchEventReviews } from '../redux/reviewSlice'; // Assume we have this action
+import { fetchEventReviews } from '../redux/reviewSlice';
 
 const ReviewCard = ({ username, title, stars, comment }) => {
     return (
@@ -28,6 +28,14 @@ const ReviewCard = ({ username, title, stars, comment }) => {
     );
 };
 
+const NoReviews = () => (
+    <div className="text-center py-10">
+        <FaQuoteRight className="mx-auto text-indigo-200 text-5xl mb-4" />
+        <p className="text-xl font-semibold text-gray-600 mb-2">There are no reviews yet.</p>
+        <p className="text-gray-500">Be the first one to share your experience!</p>
+    </div>
+);
+
 const ReviewList = ({ eventId, openReviewModal, isUserLoggedIn }) => {
     const dispatch = useDispatch();
     const { reviews, loading } = useSelector(state => state.review);
@@ -50,9 +58,7 @@ const ReviewList = ({ eventId, openReviewModal, isUserLoggedIn }) => {
                 </button>
             </div>
 
-            {loading ? (
-                <div>Loading reviews...</div>
-            ) : reviews.length > 0 ? (
+            {reviews.length > 0 ? (
                 reviews.map((review) => (
                     <ReviewCard
                         key={review.id}
@@ -63,11 +69,7 @@ const ReviewList = ({ eventId, openReviewModal, isUserLoggedIn }) => {
                     />
                 ))
             ) : (
-                <div className="text-center py-10">
-                    <FaQuoteRight className="mx-auto text-indigo-200 text-5xl mb-4" />
-                    <p className="text-xl font-semibold text-gray-600 mb-2">There are no reviews yet.</p>
-                    <p className="text-gray-500">Be the first one to share your experience!</p>
-                </div>
+                <NoReviews />
             )}
         </section>
     );

@@ -16,6 +16,7 @@ const init = async () => {
 init().catch(console.error);
 
 export const reviewController = {
+  // Submit Review (POST)
   async submitReview(req, res) {
     try {
       console.log('Received review data:', req.body);
@@ -54,6 +55,7 @@ export const reviewController = {
     }
   },
 
+  // Edit Review (PUT)
   async editReview(req, res) {
     try {
       const { id } = req.params;
@@ -79,6 +81,7 @@ export const reviewController = {
     }
   },
 
+  // Delete Review (DELETE)
   async deleteReview(req, res) {
     try {
       const { id } = req.params;
@@ -99,12 +102,13 @@ export const reviewController = {
     }
   },
 
+  // Get User Reviews (READ)
   async getUserReviews(req, res) {
     try {
       const userId = req.session.userId;
       const reviews = await Review.findAll({
         where: { user_id: userId },
-        order: [['createdAt', 'DESC']], // Sort by most recent first
+        order: [['updatedAt', 'DESC']], // Use updatedAt instead of createdAt
       });
       res.json(reviews);
     } catch (error) {
@@ -113,6 +117,7 @@ export const reviewController = {
     }
   },
 
+  // Get Event Reviews (READ)
   async getEventReviews(req, res) {
     try {
       const { eventId } = req.params;

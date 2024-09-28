@@ -21,10 +21,11 @@ app.use(
   })
 );
 
+// Exoress middleware to parse JSON request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Session configuration
+// Session configuration and middleware
 app.use(
   session({
     secret: process.env.VITE_SESSION_SECRET || 'fallback_secret',
@@ -42,7 +43,7 @@ app.use(
 app.use('/api/users', userRoutes);
 app.use('/api/reviews', reviewRoutes);
 
-// Ticketmaster API proxy route
+// Ticketmaster API proxy route for other API calls that don't have a dedicated route
 app.get('/api/ticketmaster/*', async (req, res) => {
   try {
     const apiKey = process.env.VITE_TICKETMASTER_API_KEY;
@@ -78,7 +79,7 @@ app.get('/api/ticketmaster/*', async (req, res) => {
   }
 });
 
-// Ticketmaster search route
+// Ticketmaster search route for events by keyword
 app.get('/api/ticketmaster/events', async (req, res) => {
   try {
     const { keyword } = req.query;
@@ -103,15 +104,22 @@ app.get('/api/ticketmaster/events', async (req, res) => {
   }
 });
 
-// Database connection and server start
+// Database connection and server start function
 const startServer = async () => {
   try {
+    // Connect to the database
     const sequelize = await connectToDB();
+
+    // Synchronize all models
     await sequelize.sync();
     console.log('All models were synchronized successfully.');
+
+    // Start the server on the specified port
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
+
+    // Error handling middleware for unhandled errors
   } catch (error) {
     console.error('Failed to start server:', error);
     process.exit(1);

@@ -35,13 +35,12 @@ class Review extends Model {
       {
         sequelize,
         modelName: 'Review',
+        timestamps: true, // this will add createdAt and updatedAt fields
       }
     );
   }
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id' });
-    // Remove the association with Event model
-    // this.belongsTo(models.Event, { foreignKey: 'event_id' });
   }
 }
 

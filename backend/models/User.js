@@ -47,8 +47,14 @@ class User extends Model {
 
   static associate(models) {
     // Define associations here
+    // The User model has a BelongsTo relationship with the Role model
+    // The foreign key is role_id
     this.belongsTo(models.Role, { foreignKey: 'role_id' });
+    // The User model has a HasMany relationship with the Booking model
+    // The foreign key is user_id
     this.hasMany(models.Booking);
+    // The User model has a HasMany relationship with the Review model
+    // The foreign key is user_id
     this.hasMany(models.Review);
   }
 }

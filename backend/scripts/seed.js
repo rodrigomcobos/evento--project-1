@@ -143,17 +143,21 @@ const seed = async () => {
     await Promise.all([
       Review.create({
         user_id: user1.id,
-        event_id: event1.ticketmaster_id, // Use ticketmaster_id instead of id
+        event_id: event1.ticketmaster_id,
         rating: 5,
         comment: 'Great concert!',
-        title: 'Awesome show',
+        title: 'Amazing experience',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }),
       Review.create({
         user_id: user2.id,
-        event_id: event2.ticketmaster_id, // Use ticketmaster_id instead of id
+        event_id: event2.ticketmaster_id,
         rating: 4,
         comment: 'Informative conference',
         title: 'Learned a lot',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }),
     ]);
     console.log('Reviews created');
