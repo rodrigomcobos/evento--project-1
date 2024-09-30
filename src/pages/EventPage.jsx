@@ -72,7 +72,7 @@ const EventPage = () => {
             />
             <EventDisclaimer />
             <UpcomingEventsSection />
-            {isModalOpen && <EventSeatModal isOpen={isModalOpen} closeModal={closeModal} />}
+            {isModalOpen && <EventSeatModal isOpen={isModalOpen} closeModal={closeModal} event={event} />}
             {isReviewModalOpen && (
                 <ReviewModal
                     isOpen={isReviewModalOpen}

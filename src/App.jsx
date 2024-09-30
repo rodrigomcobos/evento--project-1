@@ -17,6 +17,7 @@ import ContactUsPage from './pages/ContactUsPage';
 import AboutUs from './pages/AboutUs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import PurchasePolicy from './pages/PurchasePolicy';
+import PaymentPage from './pages/PaymentPage';
 import PageNotFound from './pages/PageNotFound';
 import SearchResults from './pages/SearchResults';
 import EventPage from './pages/EventPage';
@@ -55,7 +56,8 @@ const AppContent = () => {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/purchase-policy" element={<PurchasePolicy />} />
         <Route path="/search-results" element={<SearchResults />} />
-        <Route path="/event/:id" element={<EventPage />} /> {/* Add the new route for EventPage */}
+        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/event/:id" element={<EventPage />} />
         <Route path="*" element={<PageNotFound />} />
 
         {/* Testing page */}

@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { connectToDB } from './config/db.js';
 import userRoutes from './routes/userRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
+import bookingRoutes from './routes/bookingRoutes.js';
 import { userController } from './controllers/userController.js';
 import axios from 'axios';
 
@@ -42,6 +43,7 @@ app.use(
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/bookings', bookingRoutes);
 
 // Ticketmaster API proxy route for other API calls that don't have a dedicated route
 app.get('/api/ticketmaster/*', async (req, res) => {

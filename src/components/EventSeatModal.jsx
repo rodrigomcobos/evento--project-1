@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ArenaMap from '../assets/slides/arenamap.png'
+import { useNavigate } from 'react-router-dom';
 
-const EventSeatModal = ({ isOpen, closeModal }) => {
+const EventSeatModal = ({ isOpen, closeModal, event }) => {
     const [tickets, setTickets] = useState(1);
     const [seatZone, setSeatZone] = useState('WU');
     const [zoneNumber, setZoneNumber] = useState(1);
+    const navigate = useNavigate();
 
     const modalRef = useRef();
 
@@ -46,11 +48,34 @@ const EventSeatModal = ({ isOpen, closeModal }) => {
     // Handle "Continue" button click
     //Will use this to push the data to the booking confirmation page
     const handleContinue = () => {
-        console.log({
-            tickets: tickets,
-            seatZone: seatZone,
-            zoneNumber: zoneNumber,
-        });
+        const ticketPrice = getPriceForZone(seatZone);
+        const bookingDetails = {
+            eventId: event.id,
+            eventName: event.name,
+            eventDate: event.dates.start.localDate,
+            eventTime: event.dates.start.localTime,
+            eventLocation: `${event._embedded.venues[0].name}, ${event._embedded.venues[0].city.name}`,
+            eventImage: event.images[0].url,
+            tickets,
+            seatZone,
+            zoneNumber,
+            ticketPrice,
+            totalPrice: tickets * ticketPrice,
+            transactionId: 'TXN' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+        };
+
+        navigate('/payment', { state: { bookingDetails } });
+        closeModal();
+    };
+
+    const getPriceForZone = (zone) => {
+        const prices = {
+            'WU': 199, 'NU': 199, 'SU': 199, 'EU': 199,
+            'WM': 299, 'NM': 299, 'SM': 299, 'EM': 299,
+            'WL': 499, 'NL': 499, 'SL': 499, 'EL': 499,
+            'FLOOR': 699
+        };
+        return prices[zone] || 0;
     };
 
     return (
@@ -135,8 +160,12 @@ const EventSeatModal = ({ isOpen, closeModal }) => {
 
                         <button
                             onClick={() => {
-                                handleContinue();
-                                closeModal();
+                                if (event) {
+                                    handleContinue();
+                                } else {
+                                    console.error('Event data is missing');
+                                    closeModal();
+                                }
                             }}
                             className="mt-4 px-6 py-3 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 transition"
                         >

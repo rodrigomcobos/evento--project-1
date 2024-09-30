@@ -79,8 +79,8 @@ const AboutUs = () => {
                         <p className='text-md text-center'>
                             Read the full policy&nbsp;
                         </p>
-                        <Link to="/purchase-policy" >
-                            <a className='text-indigo-500' href="/purchase-policy">here</a>.
+                        <Link to="/purchase-policy" className='text-indigo-500'>
+                            here.
                         </Link>
                     </div>
 
@@ -192,10 +192,8 @@ const AboutUs = () => {
                         <p className="text-md text-gray-600 mb-4 text-center">
                             Are you ready to help us connect people with the world of live experiences? We’re always on the lookout for candidates who are driven, courageous, inventive, diverse and live the Evento brand. But let's not forget that this company is fictional, sorry there are no jobs. <br />But want to learn web development? Then contact DevMountain <a className='text-indigo-500' href="https://devmountain.com/" target='_blank'>on this link here.</a>
                         </p>
-                        <Link to="/contact">
-                            <a href="/contact" className="text-indigo-500 text-xl">
-                                Contact Us to Join
-                            </a>
+                        <Link to="/contact" className="text-indigo-500 text-xl">
+                            Contact Us to Join
                         </Link>
 
                     </div>

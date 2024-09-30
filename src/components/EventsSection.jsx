@@ -8,7 +8,7 @@ import { BsEmojiDizzy } from "react-icons/bs";
 
 
 const OPENWEATHERMAP_API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+const CACHE_DURATION = 24 * 60 * 60 * 1000;
 
 const EventsSection = () => {
     const [events, setEvents] = useState([]);

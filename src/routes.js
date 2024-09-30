@@ -10,6 +10,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import PurchasePolicy from './pages/PurchasePolicy.jsx';
 import PageNotFound from './pages/PageNotFound.jsx';
 import EventPage from './pages/EventPage.jsx';
+import PaymentPage from './pages/PaymentPage.jsx';
 
 // Testing page
 import LoadingPage from './components/LoadingPage.jsx';
@@ -26,6 +27,7 @@ const routes = [
   { path: '/privacy', component: PrivacyPolicy },
   { path: '/purchase-policy', component: PurchasePolicy },
   { path: '/event/:id', component: EventPage },
+  { path: '/payment', component: PaymentPage },
   { path: '*', component: PageNotFound },
 
   // Testing page

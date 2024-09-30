@@ -128,12 +128,30 @@ const seed = async () => {
     const [booking1, booking2] = await Promise.all([
       Booking.create({
         user_id: user1.id,
-        event_id: event1.id,
+        event_id: event1.ticketmaster_id,
+        transaction_id: 'TXN123456',
+        event_name: event1.title,
+        event_date: event1.date,
+        event_time: '19:00',
+        event_location: `${venue1.name}, ${venue1.city}`,
+        ticket_quantity: 2,
+        seat_zone: 'WU',
+        zone_number: 1,
+        image_url: event1.image_url,
         status: 'confirmed',
       }),
       Booking.create({
         user_id: user2.id,
-        event_id: event2.id,
+        event_id: event2.ticketmaster_id,
+        transaction_id: 'TXN789012',
+        event_name: event2.title,
+        event_date: event2.date,
+        event_time: '10:00',
+        event_location: `${venue2.name}, ${venue2.city}`,
+        ticket_quantity: 1,
+        seat_zone: 'EM',
+        zone_number: 2,
+        image_url: event2.image_url,
         status: 'pending',
       }),
     ]);
@@ -194,21 +212,21 @@ const seed = async () => {
     // Test Event model
     const testEvent = await Event.findOne({
       where: { title: 'Summer Concert' },
-      include: [Booking, Venue, Classification], // Removed Review from here
+      include: [Venue, Classification],
     });
     console.log('Test Event:', testEvent.toJSON());
 
     // Test Booking model
     const testBooking = await Booking.findOne({
       where: { status: 'confirmed' },
-      include: [User, Event, Payment],
+      include: [User, Payment],
     });
     console.log('Test Booking:', testBooking.toJSON());
 
     // Test Review model
     const testReview = await Review.findOne({
       where: { rating: 5 },
-      include: [User], // Removed Event from here
+      include: [User],
     });
     console.log('Test Review:', testReview.toJSON());
 
