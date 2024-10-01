@@ -19,7 +19,7 @@ const PaymentPage = () => {
     }, [location.state]);
 
     const handlePaymentSuccess = (details) => {
-        console.log("Payment details received:", details);
+        // console.log("Payment details received:", details);
         setPaymentDetails(details);
         setCurrentStep('confirmation');
     };

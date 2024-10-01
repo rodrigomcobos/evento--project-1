@@ -5,17 +5,17 @@ export const performSearch = createAsyncThunk(
   'search/performSearch',
   async (searchTerm, { rejectWithValue }) => {
     try {
-      console.log('Performing search for:', searchTerm);
+      // console.log('Performing search for:', searchTerm);
       const response = await axios.get(
         `http://localhost:5001/api/ticketmaster/events`,
         {
           params: { keyword: searchTerm },
         }
       );
-      console.log('Search response:', response.data);
+      // console.log('Search response:', response.data);
       return response.data._embedded?.events || [];
     } catch (error) {
-      console.error('Search error:', error);
+      // console.error('Search error:', error);
       return rejectWithValue(
         error.response?.data?.error ||
           error.message ||
@@ -46,7 +46,7 @@ const searchSlice = createSlice({
       .addCase(performSearch.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'An error occurred during the search';
-        console.error('Search rejected:', action.payload);
+        // console.error('Search rejected:', action.payload);
       });
   },
 });

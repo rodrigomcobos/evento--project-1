@@ -11,7 +11,7 @@ const api = axios.create({
 
 const PaymentConfirmation = ({ paymentDetails }) => {
     const dispatch = useDispatch();
-    console.log("Received payment details:", paymentDetails);
+    // console.log("Received payment details:", paymentDetails);
 
     if (!paymentDetails) {
         return <div>No payment details available</div>;
@@ -33,10 +33,10 @@ const PaymentConfirmation = ({ paymentDetails }) => {
                     image_url: paymentDetails.eventImage,
                 };
 
-                console.log('Sending booking data:', bookingData);
+                // console.log('Sending booking data:', bookingData);
 
                 const response = await api.post('/api/bookings', bookingData);
-                console.log('Booking saved successfully:', response.data);
+                // console.log('Booking saved successfully:', response.data);
             } catch (error) {
                 console.error('Failed to save booking:', error.response?.data || error.message);
             }

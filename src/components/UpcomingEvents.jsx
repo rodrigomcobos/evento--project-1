@@ -12,7 +12,7 @@ const UpcomingEvents = () => {
         dispatch(fetchUpcomingEvents());
     }, [dispatch]);
 
-    console.log('Upcoming Events:', upcomingEvents);
+    // console.log('Upcoming Events:', upcomingEvents);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;

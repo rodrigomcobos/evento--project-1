@@ -10,14 +10,14 @@ export const submitReview = createAsyncThunk(
   'review/submit',
   async (reviewData, { rejectWithValue }) => {
     try {
-      console.log('Submitting review data:', reviewData);
+      // console.log('Submitting review data:', reviewData);
       const response = await api.post('/api/reviews', reviewData);
       return response.data;
     } catch (error) {
-      console.error(
-        'Error submitting review:',
-        error.response?.data || error.message
-      );
+      // console.error(
+      //   'Error submitting review:',
+      //   error.response?.data || error.message
+      // );
       return rejectWithValue(error.response?.data || 'Failed to submit review');
     }
   }

@@ -57,10 +57,10 @@ const PaymentForm = ({ bookingDetails, onPaymentSuccess }) => {
                 paymentDate: new Date().toISOString(),
             };
 
-            console.log("Submitting payment details:", paymentDetails);  // Add this line for debugging
+            // console.log("Submitting payment details:", paymentDetails);
             onPaymentSuccess(paymentDetails);
         } else {
-            console.log('Validation failed!');
+            // console.log('Validation failed!');
         }
     };
 

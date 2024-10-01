@@ -78,7 +78,7 @@ const ExplorePage = () => {
                     }
                 );
 
-                console.log(`API Response for ${category.name}:`, response.data);
+                // console.log(`API Response for ${category.name}:`, response.data);
 
                 if (response.data._embedded && response.data._embedded.events) {
                     newEvents[category.name] = response.data._embedded.events;
@@ -91,7 +91,7 @@ const ExplorePage = () => {
                         new Date().getTime().toString()
                     );
                 } else {
-                    console.log(`No events found for ${category.name}`);
+                    // console.log(`No events found for ${category.name}`);
                     newEvents[category.name] = [];
                 }
 
@@ -102,7 +102,7 @@ const ExplorePage = () => {
             }
         }
 
-        console.log('All fetched events:', newEvents);
+        // console.log('All fetched events:', newEvents);
         setEvents(newEvents);
         setLoading(false);
     };

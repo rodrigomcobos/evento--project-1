@@ -25,7 +25,7 @@ const SignInForm = ({ toggleForm }) => {
         e.preventDefault();
         try {
             const resultAction = await dispatch(signIn({ email, password })).unwrap();
-            console.log('Successfully Signed In');
+            // console.log('Successfully Signed In');
             navigate('/profile');
         } catch (err) {
             console.error('Failed to sign in:', err);

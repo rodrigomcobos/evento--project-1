@@ -85,7 +85,7 @@ export const updateUserProfile = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await api.put('/api/users/profile', userData);
-      console.log('Profile update response:', response.data);
+      // console.log('Profile update response:', response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -164,7 +164,7 @@ const userSlice = createSlice({
       .addCase(updateUserProfile.fulfilled, (state, action) => {
         state.loading = false;
         state.currentUser = { ...state.currentUser, ...action.payload };
-        console.log('Updated user in Redux store:', state.currentUser);
+        // console.log('Updated user in Redux store:', state.currentUser);
       })
       .addCase(updateUserProfile.rejected, (state, action) => {
         state.loading = false;

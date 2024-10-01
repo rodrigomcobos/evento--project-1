@@ -54,10 +54,10 @@ const ReviewModal = ({ isOpen, onClose, eventId, reviewToEdit = null }) => {
 
             if (reviewToEdit) {
                 await dispatch(editReview({ reviewId: reviewToEdit.id, reviewData })).unwrap();
-                console.log('Review updated successfully');
+                // console.log('Review updated successfully');
             } else {
                 await dispatch(submitReview(reviewData)).unwrap();
-                console.log('Review submitted successfully');
+                // console.log('Review submitted successfully');
             }
             onClose();
         } catch (error) {

@@ -52,7 +52,7 @@ const ProfileDetails = () => {
     const handleUpdateDetails = async () => {
         try {
             const result = await dispatch(updateUserProfile({ first_name: firstName, last_name: lastName })).unwrap();
-            console.log('Update result:', result);
+            // console.log('Update result:', result);
         } catch (error) {
             console.error('Failed to update details:', error);
             console.error('Error details:', error.response?.data);
@@ -62,7 +62,7 @@ const ProfileDetails = () => {
     const handleUpdateUsername = async () => {
         try {
             await dispatch(updateUserProfile({ username })).unwrap();
-            console.log('Username updated successfully');
+            // console.log('Username updated successfully');
         } catch (error) {
             console.error('Failed to update username:', error);
         }
@@ -71,7 +71,7 @@ const ProfileDetails = () => {
     const handleUpdateEmail = async () => {
         try {
             await dispatch(updateUserProfile({ email })).unwrap();
-            console.log('Email updated successfully');
+            // console.log('Email updated successfully');
         } catch (error) {
             console.error('Failed to update email:', error);
         }
@@ -81,21 +81,21 @@ const ProfileDetails = () => {
         if (!isInvalidPassword) {
             try {
                 await dispatch(updateUserProfile({ password })).unwrap();
-                console.log('Password updated successfully');
+                // console.log('Password updated successfully');
                 setPassword('');
                 setStrength('');
             } catch (error) {
                 console.error('Failed to update password:', error);
             }
         } else {
-            console.log('Password does not meet the criteria');
+            // console.log('Password does not meet the criteria');
         }
     };
 
     const handleUpdateNumber = async () => {
         try {
             await dispatch(updateUserProfile({ phone })).unwrap();
-            console.log('Phone number updated successfully');
+            // console.log('Phone number updated successfully');
         } catch (error) {
             console.error('Failed to update phone number:', error);
         }

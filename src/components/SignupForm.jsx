@@ -47,7 +47,7 @@ const SignUpForm = ({ toggleForm }) => {  // Added toggleForm prop
                 password
             })).unwrap();
 
-            console.log('Sign-up successful:', resultAction);
+            // console.log('Sign-up successful:', resultAction);
             navigate('/profile');
         } catch (err) {
             console.error('Error during sign-up:', err);

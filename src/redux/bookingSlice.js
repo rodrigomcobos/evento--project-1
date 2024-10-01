@@ -11,10 +11,10 @@ export const fetchUpcomingEvents = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.get('/api/bookings/upcoming');
-      console.log('Fetched upcoming events:', response.data);
+      // console.log('Fetched upcoming events:', response.data);
       return response.data;
     } catch (error) {
-      console.error('Error fetching upcoming events:', error);
+      // console.error('Error fetching upcoming events:', error);
       return rejectWithValue(
         error.response?.data?.message || 'Failed to fetch upcoming events'
       );

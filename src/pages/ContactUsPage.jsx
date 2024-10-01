@@ -32,7 +32,7 @@ const ContactUsPage = () => {
 
         send(import.meta.env.VITE_EMAILJS_SERVICE_ID, import.meta.env.VITE_EMAILJS_TEMPLATE_ID, formData)
             .then(() => {
-                console.log('Email sent successfully');
+                // console.log('Email sent successfully');
                 setIsSent(true);
                 setIsError(false);
                 setFormData({
@@ -45,7 +45,7 @@ const ContactUsPage = () => {
             .catch(() => {
                 setIsError(true);
                 setIsSent(false);
-                console.log('Error sending email');
+                // console.log('Error sending email');
             });
         e.target.reset();  // Clear form after submission
     };
