@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+
+// react-icons
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
+
+// Components
 import TransparentLogo from '../assets/slides/transparentlogo.png';
 
 const api = axios.create({
@@ -17,6 +21,7 @@ const PaymentConfirmation = ({ paymentDetails }) => {
         return <div>No payment details available</div>;
     }
 
+    // Save booking details to database when payment is successful
     useEffect(() => {
         const saveBooking = async () => {
             try {
@@ -35,6 +40,7 @@ const PaymentConfirmation = ({ paymentDetails }) => {
 
                 // console.log('Sending booking data:', bookingData);
 
+                // Save booking data to database using API
                 const response = await api.post('/api/bookings', bookingData);
                 // console.log('Booking saved successfully:', response.data);
             } catch (error) {

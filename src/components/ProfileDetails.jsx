@@ -6,6 +6,7 @@ const ProfileDetails = () => {
     const dispatch = useDispatch();
     const { currentUser, loading, error } = useSelector((state) => state.user);
 
+    // States for form validation
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
@@ -16,6 +17,7 @@ const ProfileDetails = () => {
     const [strength, setStrength] = useState('');
     const [isInvalidPassword, setIsInvalidPassword] = useState(false);
 
+    // Update user details on mount or when currentUser changes
     useEffect(() => {
         if (currentUser) {
             setFirstName(currentUser.first_name || '');
@@ -26,16 +28,19 @@ const ProfileDetails = () => {
         }
     }, [currentUser]);
 
+    // Toggle password visibility function for password input
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
+    // Validate password function for password input field
     const validatePassword = (value) => {
         setPassword(value);
         const hasLetter = /[A-Za-z]/.test(value);
         const digitMatches = value.match(/\d/g);
         const digitCount = digitMatches ? digitMatches.length : 0;
 
+        // Validate password strength and set strength state based on the result so that it can be displayed
         if (value.length >= 8 && hasLetter && digitCount >= 2) {
             setIsInvalidPassword(false);
             if (digitCount > 4) {
@@ -49,6 +54,7 @@ const ProfileDetails = () => {
         }
     };
 
+    // Update user details function for each field
     const handleUpdateDetails = async () => {
         try {
             const result = await dispatch(updateUserProfile({ first_name: firstName, last_name: lastName })).unwrap();
@@ -59,6 +65,7 @@ const ProfileDetails = () => {
         }
     };
 
+    // Update user username function for each field
     const handleUpdateUsername = async () => {
         try {
             await dispatch(updateUserProfile({ username })).unwrap();
@@ -68,6 +75,7 @@ const ProfileDetails = () => {
         }
     };
 
+    // Update user email function for each field
     const handleUpdateEmail = async () => {
         try {
             await dispatch(updateUserProfile({ email })).unwrap();
@@ -77,6 +85,7 @@ const ProfileDetails = () => {
         }
     };
 
+    // Update user password function for each field
     const handlePasswordUpdate = async () => {
         if (!isInvalidPassword) {
             try {
@@ -92,6 +101,7 @@ const ProfileDetails = () => {
         }
     };
 
+    // Update user phone number function for each field
     const handleUpdateNumber = async () => {
         try {
             await dispatch(updateUserProfile({ phone })).unwrap();

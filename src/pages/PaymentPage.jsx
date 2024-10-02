@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+
+// Components
 import SearchNavbar from '../components/SearchNavBar';
-import Footer from '../components/Footer';
 import BookingConfirmation from '../components/BookingConfirmation';
 import PaymentForm from '../components/PaymentForm';
 import PaymentConfirmation from '../components/PaymentConfirmation';
@@ -51,7 +52,6 @@ const PaymentPage = () => {
         <>
             <SearchNavbar />
             {renderStep()}
-            <Footer />
         </>
     );
 };

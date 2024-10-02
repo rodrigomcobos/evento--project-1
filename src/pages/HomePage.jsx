@@ -7,7 +7,6 @@ import HomeSlider from '../components/HomeSlider';
 import EventsSection from '../components/EventsSection';
 import UpcomingEventsSection from '../components/UpcomingEventsSection';
 import AdBanner from '../components/AdBanner';
-import Footer from '../components/Footer';
 
 const HomePage = () => {
     return (
@@ -18,7 +17,6 @@ const HomePage = () => {
             <EventsSection />
             <UpcomingEventsSection />
             <AdBanner />
-            <Footer />
         </>
     )
 }

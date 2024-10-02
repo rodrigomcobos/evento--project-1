@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import SearchNavbar from '../components/SearchNavBar';
-import Footer from '../components/Footer';
-import { FaCalendarAlt, FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
 import axios from 'axios';
-import LoadingPage from '../components/LoadingPage';
+
+// react-icons
+import { FaCalendarAlt, FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
 import { BsEmojiDizzy } from "react-icons/bs";
+
+// Components
+import SearchNavbar from '../components/SearchNavBar';
+import LoadingPage from '../components/LoadingPage';
 
 
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
@@ -247,8 +250,6 @@ const ExplorePage = () => {
                     </section>
                 </section>
             ))}
-
-            <Footer />
         </>
     );
 };

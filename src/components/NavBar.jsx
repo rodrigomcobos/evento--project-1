@@ -3,8 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../redux/userSlice';
 
+// react-icons
 import { FaUserCircle, FaChevronDown } from 'react-icons/fa';
 import { FiMenu, FiX } from 'react-icons/fi';
+
+// Components
 import logo from '../assets/logo.png';
 
 const NavBar = () => {
@@ -16,10 +19,12 @@ const NavBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    // Toggle menu function to open/close menu
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    // Toggle dropdown function to open/close dropdown menu
     useEffect(() => {
         const handleOutsideClick = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -36,6 +41,7 @@ const NavBar = () => {
         };
     }, []);
 
+    // Function to handle user click event
     const handleUserClick = () => {
         if (currentUser) {
             navigate('/profile');
@@ -44,6 +50,7 @@ const NavBar = () => {
         }
     };
 
+    // Function to handle sign out and navigate to the home page
     const handleSignOut = async () => {
         try {
             await dispatch(signOut()).unwrap();

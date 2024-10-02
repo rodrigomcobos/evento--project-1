@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub, FaMailBulk } from 'react-icons/fa';
 import { init, send } from 'emailjs-com'; // Import EmailJS functions
+
+// react-icons
+import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub, FaMailBulk } from 'react-icons/fa';
+
+// Components
 import SearchNavBar from '../components/SearchNavBar';
 import TransparentLogo from '../assets/slides/transparentlogo.png';
-import Footer from '../components/Footer';
 
 // Initialize EmailJS with your service ID and user ID from .env file
 init(import.meta.env.VITE_EMAILJS_USER_ID);
@@ -156,7 +159,6 @@ const ContactUsPage = () => {
                     {isError && <p className="text-red-500">Failed to send message. Please try again.</p>}
                 </form>
             </div>
-            <Footer />
         </>
     );
 };

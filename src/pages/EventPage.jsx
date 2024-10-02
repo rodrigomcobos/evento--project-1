@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+
+// Components
 import SearchNavbar from '../components/SearchNavBar';
-import Footer from '../components/Footer';
 import EventDetails from '../components/EventDetails';
 import UpcomingEventsSection from '../components/UpcomingEventsSection';
 import EventSeatModal from '../components/EventSeatModal';
@@ -11,6 +12,7 @@ import EventDisclaimer from '../components/EventDisclaimer';
 import ReviewList from '../components/ReviewList';
 import ReviewModal from '../components/ReviewModal';
 import LoadingPage from '../components/LoadingPage';
+import EventList from '../components/EventList';
 
 const EventPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -65,6 +67,7 @@ const EventPage = () => {
         <>
             <SearchNavbar />
             {event && <EventDetails event={event} openModal={openModal} />}
+            {event && <EventList currentEvent={event} />}
             <ReviewList
                 eventId={id}
                 openReviewModal={handleReviewClick}
@@ -80,7 +83,6 @@ const EventPage = () => {
                     eventId={id}
                 />
             )}
-            <Footer />
         </>
     );
 };

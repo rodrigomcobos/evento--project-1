@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signIn, clearError } from '../redux/userSlice';
+
+// react-icons
 import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub } from 'react-icons/fa';
+
+// Components
 import backgroundImage from '../assets/slides/loginbackground.png';
 import transparentLogo from '../assets/slides/transparentlogo.png';
 
@@ -16,11 +20,12 @@ const SignInForm = ({ toggleForm }) => {
     const navigate = useNavigate();
     const { loading, error } = useSelector((state) => state.user);
 
+    // Clear any existing errors when the component mounts
     useEffect(() => {
-        // Clear any existing errors when the component mounts
         dispatch(clearError());
     }, [dispatch]);
 
+    // Function to handle form submission and sign in
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

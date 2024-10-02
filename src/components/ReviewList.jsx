@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { fetchEventReviews } from '../redux/reviewSlice';
+
+// react-icons
 import { FaStar } from 'react-icons/fa';
 import { FaQuoteRight } from "react-icons/fa6";
-import { fetchEventReviews } from '../redux/reviewSlice';
 
 const ReviewCard = ({ username, title, stars, comment }) => {
     return (

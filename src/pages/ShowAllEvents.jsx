@@ -1,18 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { FaEdit, FaCalendarAlt, FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
 import axios from 'axios';
-import { ImSpinner2 } from 'react-icons/im';
+
+// react-icons
+import { FaEdit, FaCalendarAlt, FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
+
+// Components
 import SearchNavBar from '../components/SearchNavBar'
 import LoadingPage from '../components/LoadingPage';
-import Footer from '../components/Footer'
 import TransparentLogo from '../assets/slides/transparentlogo.png'
 
 const OPENWEATHERMAP_API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 const ShowAllEvents = () => {
+    // Get the current location from the useLocation hook
     const location = useLocation();
+
+    // State variables
     const [eventCategory, setEventCategory] = useState('All Events');
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -23,6 +28,7 @@ const ShowAllEvents = () => {
     const dropdownRef = useRef(null);
     const cacheRef = useRef({});
 
+    // List of categories and their IDs for the dropdown
     const categories = [
         { name: 'All Events', id: null },
         { name: 'Sports', id: 'KZFzniwnSyZfZ7v7nE' },
@@ -82,6 +88,7 @@ const ShowAllEvents = () => {
     };
 
     // Fetches the location name based on the latitude and longitude
+    // and sets the current location state using the fetched data if successful
     const fetchLocationName = async (lat, lon) => {
         try {
             const response = await axios.get(`https://api.openweathermap.org/geo/1.0/reverse`, {
@@ -93,9 +100,11 @@ const ShowAllEvents = () => {
                 }
             });
             const { name, state } = response.data[0];
+            // Set the current location state using the fetched data in this format
             setCurrentLocation({ city: name, state, lat, lon });
         } catch (error) {
             console.error("Error fetching location name:", error);
+            // Set the current location state if the fetch fails to Lehi as default
             setCurrentLocation({ city: 'Lehi', state: 'UT', lat: 40.3916, lon: -111.8508 });
         }
     };
@@ -106,6 +115,7 @@ const ShowAllEvents = () => {
         const cacheKey = `${eventCategory},${lat},${lon}`;
         const cachedData = cacheRef.current[cacheKey];
 
+        // Check if the cached data is still valid and if so, use it
         if (cachedData && Date.now() - cachedData.timestamp < CACHE_DURATION) {
             setEvents(cachedData.events);
             setLoading(false);
@@ -116,6 +126,7 @@ const ShowAllEvents = () => {
             const currentDate = new Date();
             const formattedDate = currentDate.toISOString().split('.')[0] + "Z";
 
+            // Set the parameters for the API call based on the event category
             const params = {
                 latlong: `${lat},${lon}`,
                 radius: '100',
@@ -125,6 +136,7 @@ const ShowAllEvents = () => {
                 startDateTime: formattedDate,
             };
 
+            // Set the segment ID based on the event category if it is not 'All Events'
             const categoryId = getCategoryId(eventCategory);
             if (categoryId) {
                 params.segmentId = categoryId;
@@ -292,8 +304,6 @@ const ShowAllEvents = () => {
                     ))}
                 </section>
             </section>
-
-            <Footer />
         </>
     )
 }

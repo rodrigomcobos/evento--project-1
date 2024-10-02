@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { performSearch } from '../redux/searchSlice';
 import { Link, useLocation } from 'react-router-dom';
-import SearchNavBar from '../components/SearchNavBar';
-import Footer from '../components/Footer';
-import UpcomingEventsSection from '../components/UpcomingEventsSection';
+
+// react-icons
 import { FaCalendarAlt, FaMapMarkerAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { ImSpinner2 } from 'react-icons/im';
+
+// Components
 import SearchFilter from '../components/SearchFilter';
-import { performSearch } from '../redux/searchSlice';
-import LoadingPage from '../components/LoadingPage';
+import SearchNavBar from '../components/SearchNavBar';
+import UpcomingEventsSection from '../components/UpcomingEventsSection';
 
 const ITEMS_PER_PAGE = 20;
 
@@ -193,7 +195,6 @@ const SearchResults = () => {
                 </div>
             </div>
             <UpcomingEventsSection />
-            <Footer />
         </>
     );
 }

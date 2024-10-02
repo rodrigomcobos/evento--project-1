@@ -3,16 +3,19 @@ import { FaStar, FaCalendarAlt, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
+// Custom component to change view on map click
 function ChangeView({ center, zoom }) {
     const map = useMap();
     map.setView(center, zoom);
     return null;
 }
 
+// Custom component to display marker on map click with popup
 const EventDetails = ({ event, openModal }) => {
     const [eventCoordinates, setEventCoordinates] = useState([40.7608, -111.8910]);
     const [mapKey, setMapKey] = useState(0);
 
+    // Update event coordinates based on venue location if available
     useEffect(() => {
         if (event._embedded && event._embedded.venues && event._embedded.venues[0]) {
             const venue = event._embedded.venues[0];
@@ -24,6 +27,7 @@ const EventDetails = ({ event, openModal }) => {
         }
     }, [event]);
 
+    // Get event description based on available information or default to 'No details available for this event.'
     const getEventDescription = () => {
         if (event.info) {
             return event.info;
@@ -35,7 +39,7 @@ const EventDetails = ({ event, openModal }) => {
     };
 
     return (
-        <div className="flex flex-col mt-14 mb-32">
+        <div className="flex flex-col mt-14 mb-14">
             <div className="flex flex-col max-w-7xl mx-auto md:flex-row p-6 md:px-20 md:py-10">
                 {/* Left Column */}
                 <section className="md:w-2/3 w-full md:pr-8 mb-10 md:mb-0">

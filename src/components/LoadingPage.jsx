@@ -1,6 +1,8 @@
 import React from 'react';
 import backgroundImage from '../assets/slides/loginbackground.png';
 import transparentLogo from '../assets/slides/transparentlogo.png';
+
+// Spinner images
 import Spinner from '../assets/slides/spinner.png';
 import SpinnerLogo from '../assets/slides/whitelogo.png';
 

@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaEdit, FaCalendarAlt, FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
-import axios from 'axios';
-import { ImSpinner2 } from 'react-icons/im';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+// react-icons
+import { FaEdit, FaCalendarAlt, FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
+import { ImSpinner2 } from 'react-icons/im';
 import { BsEmojiDizzy } from "react-icons/bs";
 
 
-
+// API keys for OpenWeatherMap
 const OPENWEATHERMAP_API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
+// Cache duration in milliseconds (24 hours)
 const CACHE_DURATION = 24 * 60 * 60 * 1000;
 
+// Fetch events from OpenWeatherMap API based on user's location
 const EventsSection = () => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -20,6 +24,7 @@ const EventsSection = () => {
     const dropdownRef = useRef(null);
     const cacheRef = useRef({});
 
+    // Get user's current location and fetch events
     useEffect(() => {
         const getUserLocation = () => {
             if ("geolocation" in navigator) {
@@ -39,6 +44,7 @@ const EventsSection = () => {
 
         getUserLocation();
 
+        // Add event listener to the document to detect clicks outside the dropdown menu
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setIsDropdownOpen(false);
@@ -51,6 +57,8 @@ const EventsSection = () => {
         };
     }, []);
 
+    // Fetches the location name based on the latitude and longitude
+    // and sets the current location state using the fetched data if successful
     const fetchLocationName = async (lat, lon) => {
         try {
             const response = await axios.get(`https://api.openweathermap.org/geo/1.0/reverse`, {
@@ -71,6 +79,7 @@ const EventsSection = () => {
         }
     };
 
+    // Fetches events based on the latitude and longitude and sets the events state
     const fetchEvents = async (lat, lon) => {
         const cacheKey = `${lat},${lon}`;
         const cachedData = cacheRef.current[cacheKey];
@@ -111,6 +120,7 @@ const EventsSection = () => {
         }
     };
 
+    // Handles search input change and location search based on the search input
     const handleLocationSearch = async () => {
         try {
             const response = await axios.get(`http://api.openweathermap.org/geo/1.0/direct`, {

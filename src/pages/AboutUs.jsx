@@ -1,8 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+
+// react-icons
 import { FaDiscord, FaGithub, FaLinkedinIn, FaBehance } from 'react-icons/fa';
+
+// Components
 import SearchNavBar from '../components/SearchNavBar'
-import Footer from '../components/Footer'
-import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 
 
 // Photo/Img Imports
@@ -218,7 +221,6 @@ const AboutUs = () => {
                 </section>
             </div>
 
-            <Footer />
         </>
     )
 }

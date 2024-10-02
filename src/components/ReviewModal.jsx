@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { FaStar, FaTimes } from 'react-icons/fa';
 import { submitReview, editReview } from '../redux/reviewSlice';
+
+// react-icons
+import { FaStar, FaTimes } from 'react-icons/fa';
 
 const ReviewModal = ({ isOpen, onClose, eventId, reviewToEdit = null }) => {
     const dispatch = useDispatch();
@@ -12,8 +14,10 @@ const ReviewModal = ({ isOpen, onClose, eventId, reviewToEdit = null }) => {
     const maxTitleChars = 60;
     const maxReviewChars = 5000;
 
+    // Ref for modal
     const modalRef = useRef();
 
+    // Handle modal for editing when using the edit button
     useEffect(() => {
         if (reviewToEdit) {
             setReviewTitle(reviewToEdit.title || '');
@@ -26,6 +30,7 @@ const ReviewModal = ({ isOpen, onClose, eventId, reviewToEdit = null }) => {
         }
     }, [reviewToEdit]);
 
+    // Handle modal close when clicking outside the modal
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -42,6 +47,7 @@ const ReviewModal = ({ isOpen, onClose, eventId, reviewToEdit = null }) => {
         };
     }, [isOpen, onClose]);
 
+    // Handle form submission and validation for reviews
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

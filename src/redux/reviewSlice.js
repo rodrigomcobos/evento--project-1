@@ -6,6 +6,7 @@ const api = axios.create({
   withCredentials: true,
 });
 
+// Define an async thunk for submitting a review (READ)
 export const submitReview = createAsyncThunk(
   'review/submit',
   async (reviewData, { rejectWithValue }) => {
@@ -23,6 +24,7 @@ export const submitReview = createAsyncThunk(
   }
 );
 
+// Define an async thunk for editing a review (READ)
 export const editReview = createAsyncThunk(
   'review/editReview',
   async ({ reviewId, reviewData }, { rejectWithValue }) => {
@@ -37,6 +39,7 @@ export const editReview = createAsyncThunk(
   }
 );
 
+// Define an async thunk for deleting a review (READ)
 export const deleteReview = createAsyncThunk(
   'review/delete',
   async (reviewId, { rejectWithValue }) => {
@@ -51,6 +54,7 @@ export const deleteReview = createAsyncThunk(
   }
 );
 
+// Define an async thunk for fetching user reviews (READ)
 export const fetchUserReviews = createAsyncThunk(
   'review/fetchUserReviews',
   async (_, { rejectWithValue }) => {
@@ -65,6 +69,7 @@ export const fetchUserReviews = createAsyncThunk(
   }
 );
 
+// Define an async thunk for fetching event reviews (READ)
 export const fetchEventReviews = createAsyncThunk(
   'review/fetchEventReviews',
   async (eventId, { rejectWithValue }) => {
@@ -79,6 +84,7 @@ export const fetchEventReviews = createAsyncThunk(
   }
 );
 
+// Create a slice for the review state
 const reviewSlice = createSlice({
   name: 'review',
   initialState: {

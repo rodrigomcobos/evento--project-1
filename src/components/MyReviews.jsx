@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { FaStar, FaEdit, FaTrash } from 'react-icons/fa';
 import { fetchUserReviews, deleteReview } from '../redux/reviewSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+// react-icons
+import { FaStar, FaEdit, FaTrash } from 'react-icons/fa';
+
+// Components
 import ReviewModal from './ReviewModal';
 
 const ReviewCard = ({ title, stars, comment, onEdit, onDelete }) => {
@@ -32,15 +36,22 @@ const ReviewCard = ({ title, stars, comment, onEdit, onDelete }) => {
 };
 
 const MyReviews = () => {
+    // Redux
     const dispatch = useDispatch();
+
+    // Redux state
     const { reviews, loading, error } = useSelector(state => state.review);
+
+    // Modal and review state
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [reviewToEdit, setReviewToEdit] = useState(null);
 
+    // Fetch user reviews on mount
     useEffect(() => {
         dispatch(fetchUserReviews());
     }, [dispatch]);
 
+    // Handle edit and delete functions
     const handleEdit = (review) => {
         setReviewToEdit(review);
         setIsModalOpen(true);
@@ -55,6 +66,7 @@ const MyReviews = () => {
         }
     };
 
+    // Handle modal close
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setReviewToEdit(null);

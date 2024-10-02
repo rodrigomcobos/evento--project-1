@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import '../CustomCSS/CustomSlider.css';
+
+// Components
 import TransparentLogo from '../assets/slides/transparentlogo.png';
 
 const PaymentForm = ({ bookingDetails, onPaymentSuccess }) => {
+
+    // States for form validation
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -17,6 +21,7 @@ const PaymentForm = ({ bookingDetails, onPaymentSuccess }) => {
         cvv: '',
     });
 
+    // States for error handling for form validation
     const [errors, setErrors] = useState({
         zipCode: false,
         cardNumber: false,
@@ -24,11 +29,13 @@ const PaymentForm = ({ bookingDetails, onPaymentSuccess }) => {
         cvv: false,
     });
 
+    // Handle form input changes and validation
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
+    // Validate form fields and return true if all fields are valid
     const validateFields = () => {
         let valid = true;
         const newErrors = {
@@ -43,6 +50,7 @@ const PaymentForm = ({ bookingDetails, onPaymentSuccess }) => {
         return valid;
     };
 
+    // Handle form submission and generate transaction ID and payment details
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateFields()) {

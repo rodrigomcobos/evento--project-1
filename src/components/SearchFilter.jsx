@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+// react-datepicker setup
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -12,6 +14,7 @@ const SearchFilter = ({ setCategory, setDate, setPrice, clearFilters }) => {
     const [showDate, setShowDate] = useState(false);
     const [showPrice, setShowPrice] = useState(false);
 
+    // Filter options by category
     const categories = [
         'Business', 'Food & Drink', 'Health', 'Music', 'Charity & Causes',
         'Community', 'Family & Education', 'Fashion', 'Film & Media', 'Hobbies',
@@ -19,24 +22,29 @@ const SearchFilter = ({ setCategory, setDate, setPrice, clearFilters }) => {
         'School Activities', 'Science & Tech', 'Holidays', 'Sports', 'Travel & Outdoor', 'Other'
     ];
 
+    // Filter options by date
     const dates = [
         'Today', 'Tomorrow', 'This weekend', 'This week',
         'Next week', 'This month', 'Next month', 'Pick a date'
     ];
 
+    // Handle filter options by category
     const handleCategoryClick = (category) => {
         setCategory(category);
     };
 
+    // Handle filter options by date
     const handleDateClick = (date) => {
         setDate(date);
         setSelectedFilter(date);
     };
 
+    // Handle filter options by price
     const handlePriceClick = (price) => {
         setPrice(price);
     };
 
+    // Using react-datepicker to select date
     const handleDatePickerChange = (date) => {
         setSelectedDate(date);
         setDate(date.toISOString());

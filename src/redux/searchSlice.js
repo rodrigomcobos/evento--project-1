@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// Define an async thunk for performing search (READ)
 export const performSearch = createAsyncThunk(
   'search/performSearch',
   async (searchTerm, { rejectWithValue }) => {

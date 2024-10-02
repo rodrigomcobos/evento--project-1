@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../redux/userSlice';
 import { performSearch } from '../redux/searchSlice';
 
+// react-icons
 import { FaUserCircle, FaSearch, FaChevronDown } from 'react-icons/fa';
 import { FiMenu, FiX } from 'react-icons/fi';
 import logo from '../assets/logo.png';
@@ -19,10 +20,12 @@ const SearchNavBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    // Toggle menu function to open/close menu
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    // Handle focus and blur events
     const handleFocus = () => {
         setIsFocused(true);
     };
@@ -31,6 +34,7 @@ const SearchNavBar = () => {
         setIsFocused(false);
     };
 
+    // Handle outside click event to close menu
     useEffect(() => {
         const handleOutsideClick = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -47,6 +51,7 @@ const SearchNavBar = () => {
         };
     }, []);
 
+    // Function to handle user click event
     const handleUserClick = () => {
         if (currentUser) {
             navigate('/profile');
@@ -55,6 +60,7 @@ const SearchNavBar = () => {
         }
     };
 
+    // Function to handle sign out and navigate to the home page
     const handleSignOut = async () => {
         try {
             await dispatch(signOut()).unwrap();
@@ -64,6 +70,7 @@ const SearchNavBar = () => {
         }
     };
 
+    // Function to handle search input change and search based on the search input
     const handleSearch = (e) => {
         e.preventDefault();
         if (searchTerm.trim()) {

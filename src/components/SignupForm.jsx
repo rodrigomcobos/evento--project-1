@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signUp } from '../redux/userSlice';
+
+// react-icons
 import { FaDiscord, FaLinkedinIn, FaBehance, FaGithub } from 'react-icons/fa';
+
+// Components
 import backgroundImage from '../assets/slides/loginbackground.png';
 import transparentLogo from '../assets/slides/transparentlogo.png';
 
@@ -22,8 +26,7 @@ const SignUpForm = ({ toggleForm }) => {  // Added toggleForm prop
     const navigate = useNavigate();
     const { loading, error: reduxError } = useSelector((state) => state.user);  // Renamed to reduxError
 
-    // ... rest of your component
-
+    // Handle submit function for sign-up form
     const handleSubmit = async (e) => {
         e.preventDefault();
 

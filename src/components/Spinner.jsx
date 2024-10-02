@@ -1,4 +1,6 @@
 import React from 'react'
+
+// Spinner images
 import Spinner from '../assets/slides/colorspinner.png';
 import Logo from '../assets/slides/colorlogo.png';
 

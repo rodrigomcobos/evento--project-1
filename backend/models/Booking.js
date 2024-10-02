@@ -19,7 +19,7 @@ class Booking extends Model {
         },
         transaction_id: {
           type: DataTypes.STRING,
-          allowNull: false,
+          allowNull: true,
         },
         event_name: {
           type: DataTypes.STRING,

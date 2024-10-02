@@ -15,6 +15,7 @@ import PaymentPage from './pages/PaymentPage.jsx';
 // Testing page
 import LoadingPage from './components/LoadingPage.jsx';
 
+// Array of routes with their corresponding components
 const routes = [
   { path: '/', component: HomePage },
   { path: '/events', component: ShowAllEvents },

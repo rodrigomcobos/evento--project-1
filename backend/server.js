@@ -40,10 +40,11 @@ app.use(
   })
 );
 
-// Routes
+// Routes for user, review, and booking APIs
 app.use('/api/users', userRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/bookings', bookingRoutes);
+console.log('Booking routes middleware registered');
 
 // Ticketmaster API proxy route for other API calls that don't have a dedicated route
 app.get('/api/ticketmaster/*', async (req, res) => {

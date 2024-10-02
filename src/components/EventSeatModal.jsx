@@ -24,12 +24,14 @@ const EventSeatModal = ({ isOpen, closeModal, event }) => {
         }
     };
 
+    // Function to get price for selected seat zone and number of tickets
     const handleClickOutside = (event) => {
         if (modalRef.current && !modalRef.current.contains(event.target)) {
             closeModal();
         }
     };
 
+    // Add event listener to the document to detect clicks outside the modal
     useEffect(() => {
         if (isOpen) {
             document.addEventListener('mousedown', handleClickOutside);
@@ -68,6 +70,7 @@ const EventSeatModal = ({ isOpen, closeModal, event }) => {
         closeModal();
     };
 
+    // Function to get price for selected seat zone and number of tickets
     const getPriceForZone = (zone) => {
         const prices = {
             'WU': 199, 'NU': 199, 'SU': 199, 'EU': 199,

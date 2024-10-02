@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { performSearch } from '../redux/searchSlice';
+
+// react-icons
 import { FaSearch } from 'react-icons/fa';
-import { SlMagicWand } from "react-icons/sl";
 
 
 const SearchBar = () => {
@@ -13,6 +14,7 @@ const SearchBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    // Handle search input change and search based on the search input
     const handleSearch = async (e) => {
         e.preventDefault();
         if (searchQuery.trim()) {

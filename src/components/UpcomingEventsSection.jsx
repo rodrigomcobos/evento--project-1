@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaCalendarAlt, FaTicketAlt } from 'react-icons/fa';
 import axios from 'axios';
+
+// react-icons
+import { FaCalendarAlt, FaTicketAlt } from 'react-icons/fa';
 import { ImSpinner2 } from 'react-icons/im';
 import { BsEmojiDizzy } from "react-icons/bs";
 
