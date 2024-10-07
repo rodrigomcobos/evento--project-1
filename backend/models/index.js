@@ -11,9 +11,11 @@ import PaymentModel from './Payment.js';
 import VenueModel from './Venue.js';
 import ClassificationModel from './Classification.js';
 
+// Initialize the database connection
 const initializeDb = async () => {
   const sequelize = await connectToDB('postgresql:///event_booking_system');
 
+  // Define the database models
   const db = {
     sequelize,
     Sequelize,

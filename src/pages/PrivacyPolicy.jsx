@@ -119,7 +119,7 @@ const PrivacyPolicy = () => {
                         <img
                             src={TransparentLogo}
                             alt="Logo"
-                            className="object-cover opacity-25"
+                            className="object-cover opacity-25%"
                             style={{
                                 position: 'absolute',
                                 bottom: '-30px',
