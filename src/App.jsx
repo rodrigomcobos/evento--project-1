@@ -6,28 +6,28 @@ import { store } from '@/redux/store';
 import { getUserProfile } from '@/redux/userSlice';
 
 // Import page components
-import HomePage from '@/pages/HomePage';
-import ShowAllEvents from '@/pages/ShowAllEvents';
-import ExplorePage from '@/pages/ExplorePage';
-import ProfilePage from '@/pages/ProfilePage';
-import LogInPage from '@/pages/LogInPage';
-import SignInPage from '@/components/SignInForm';
-import SignUpPage from '@/components/SignUpForm';
-import ContactUsPage from '@/pages/ContactUsPage';
-import AboutUs from '@/pages/AboutUs';
-import PrivacyPolicy from '@/pages/PrivacyPolicy';
-import PurchasePolicy from '@/pages/PurchasePolicy';
-import PaymentPage from '@/pages/PaymentPage';
-import PageNotFound from '@/pages/PageNotFound';
-import SearchResults from '@/pages/SearchResults';
-import EventPage from '@/pages/EventPage';
+import HomePage from './pages/HomePage';
+import ShowAllEvents from './pages/ShowAllEvents';
+import ExplorePage from './pages/ExplorePage';
+import ProfilePage from './pages/ProfilePage';
+import LogInPage from './pages/LogInPage';
+import SignInPage from './components/SignInForm';
+import SignUpPage from './components/SignUpForm';
+import ContactUsPage from './pages/ContactUsPage';
+import AboutUs from './pages/AboutUs';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import PurchasePolicy from './pages/PurchasePolicy';
+import PaymentPage from './pages/PaymentPage';
+import PageNotFound from './pages/PageNotFound';
+import SearchResults from './pages/SearchResults';
+import EventPage from './pages/EventPage';
 
 // Testing page
-import TicketmasterTest from '@/components/TicketmasterTest';
-import LoadingPage from '@/components/LoadingPage';
+import TicketmasterTest from './components/TicketmasterTest';
+import LoadingPage from './components/LoadingPage';
 
 // Import Footer component
-import Footer from '@/components/Footer';
+import Footer from './components/Footer';
 
 const AppContent = () => {
   const dispatch = useDispatch();

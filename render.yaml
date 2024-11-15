@@ -21,10 +21,11 @@ services:
       - key: FRONTEND_URL
         sync: false
 
-  # Frontend Service
+# Frontend Service
   - type: web
     name: evento-frontend
     env: static
+    rootDir: .  # Add this line
     buildCommand: npm install && npm run build
     staticPublishing: true
     publishDirectory: dist
@@ -35,6 +36,7 @@ services:
         - index.html
         - package.json
         - vite.config.js
+        - jsconfig.json
     headers:
       - path: /*
         name: Cache-Control
