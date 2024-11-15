@@ -1,9 +1,10 @@
 services:
+  # Backend Service
   - type: web
     name: evento-backend
     env: node
-    buildCommand: npm install
-    startCommand: node server.js
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node server.js
     envVars:
       - key: NODE_ENV
         value: production
@@ -20,6 +21,35 @@ services:
       - key: FRONTEND_URL
         sync: false
 
+  # Frontend Service
+  - type: web
+    name: evento-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishing: true
+    publishDirectory: dist
+    buildFilter:
+      paths:
+        - src/**/*.{js,jsx,ts,tsx}
+        - public/**/*
+        - index.html
+        - package.json
+        - vite.config.js
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_BACKEND_URL
+        value: https://evento-backend.onrender.com
+      - key: VITE_TICKETMASTER_API_KEY
+        sync: false
+
+# Database Service
 databases:
   - name: evento-db
     databaseName: event_booking_system
