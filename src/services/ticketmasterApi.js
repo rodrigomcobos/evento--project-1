@@ -1,50 +1,44 @@
-// src/services/ticketmasterApi.js
 import axios from 'axios';
 
-// Access frontend environment variables
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
-const API_KEY = import.meta.env.VITE_TICKETMASTER_API_KEY;
+const BACKEND_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
 
 const ticketmasterApi = axios.create({
-  baseURL: `${BACKEND_URL}/api/ticketmaster`,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  // Use the backend URL as the base URL
+  // for all requests to the Ticketmaster API
+  baseURL: `${BACKEND_BASE_URL}/api/ticketmaster`,
 });
 
-// Add request interceptor for debugging
-ticketmasterApi.interceptors.request.use(
-  (config) => {
-    console.log('Making request to:', `${config.baseURL}${config.url}`);
-    return config;
-  },
-  (error) => {
-    console.error('Request error:', error);
-    return Promise.reject(error);
-  }
-);
-
+// Search for events on Ticketmaster
+// using the supplied parameters
 export const searchEvents = async (params) => {
   try {
-    const response = await ticketmasterApi.get('/events', {
-      params: {
-        ...params,
-        apikey: API_KEY,
-      },
-    });
+    const response = await ticketmasterApi.get('/events', { params });
+    // Return the response data
     return response.data;
   } catch (error) {
-    console.error('Error searching events:', error);
+    // Log the error and rethrow it
+    console.error(
+      'Error searching Ticketmaster events:',
+      error.response ? error.response.data : error.message
+    );
     throw error;
   }
 };
 
+// Fetch event details from Ticketmaster
+// using the supplied event ID
 export const getEventDetails = async (eventId) => {
   try {
     const response = await ticketmasterApi.get(`/events/${eventId}`);
+    // Return the response data
     return response.data;
   } catch (error) {
-    console.error('Error fetching event details:', error);
+    // Log the error and rethrow it
+    console.error(
+      'Error fetching Ticketmaster event details:',
+      error.response ? error.response.data : error.message
+    );
     throw error;
   }
 };

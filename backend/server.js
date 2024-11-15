@@ -12,20 +12,17 @@ import axios from 'axios';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || process.env.VITE_PORT || 5001;
+const PORT = process.env.VITE_PORT || 5001;
 
 // Middleware
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === 'production'
-        ? process.env.VITE_FRONTEND_URL
-        : ['http://localhost:5173', 'http://localhost:5174'],
+    origin: process.env.VITE_FRONTEND_URL,
     credentials: true,
   })
 );
 
-// Express middleware to parse JSON request bodies
+// Exoress middleware to parse JSON request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -36,12 +33,10 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === 'production',
+      secure: process.env.VITE_NODE_ENV === 'production',
       httpOnly: true,
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
     },
-    proxy: process.env.NODE_ENV === 'production', // trust the reverse proxy in production
   })
 );
 
@@ -54,23 +49,10 @@ console.log('Booking routes middleware registered');
 // Ticketmaster API proxy route for other API calls that don't have a dedicated route
 app.get('/api/ticketmaster/*', async (req, res) => {
   try {
-    // Check both environment variables for the API key
-    const apiKey =
-      process.env.TICKETMASTER_API_KEY || process.env.VITE_TICKETMASTER_API_KEY;
-
+    const apiKey = process.env.VITE_TICKETMASTER_API_KEY;
     if (!apiKey) {
-      console.error('Ticketmaster API key is not set in environment variables');
-      console.log('Available environment variables:', {
-        TICKETMASTER_API_KEY: process.env.TICKETMASTER_API_KEY
-          ? 'set'
-          : 'not set',
-        VITE_TICKETMASTER_API_KEY: process.env.VITE_TICKETMASTER_API_KEY
-          ? 'set'
-          : 'not set',
-      });
-      return res
-        .status(500)
-        .json({ error: 'Server configuration error - API key not found' });
+      console.error('Ticketmaster API key is not set');
+      return res.status(500).json({ error: 'Server configuration error' });
     }
 
     const path = req.params[0];
@@ -104,16 +86,7 @@ app.get('/api/ticketmaster/*', async (req, res) => {
 app.get('/api/ticketmaster/events', async (req, res) => {
   try {
     const { keyword } = req.query;
-    const apiKey =
-      process.env.TICKETMASTER_API_KEY || process.env.VITE_TICKETMASTER_API_KEY;
-
-    if (!apiKey) {
-      console.error('Ticketmaster API key is not set in environment variables');
-      return res
-        .status(500)
-        .json({ error: 'Server configuration error - API key not found' });
-    }
-
+    const apiKey = process.env.VITE_TICKETMASTER_API_KEY;
     const response = await axios.get(
       'https://app.ticketmaster.com/discovery/v2/events.json',
       {
@@ -145,11 +118,11 @@ const startServer = async () => {
     console.log('All models were synchronized successfully.');
 
     // Start the server on the specified port
-    app.listen(PORT, '0.0.0.0', () => {
-      console.log(
-        `Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`
-      );
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
     });
+
+    // Error handling middleware for unhandled errors
   } catch (error) {
     console.error('Failed to start server:', error);
     process.exit(1);
