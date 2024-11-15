@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Provider } from 'react-redux';
-import { store } from '@/redux/store';
-import { getUserProfile } from '@/redux/userSlice';
+import { store } from './redux/store';
+import { getUserProfile } from './redux/userSlice';
 
 // Import page components
 import HomePage from './pages/HomePage';
@@ -39,7 +39,6 @@ const AppContent = () => {
       try {
         await dispatch(getUserProfile()).unwrap();
       } catch (error) {
-        // Error handling can be added here if needed
         console.error('Error fetching user profile:', error);
       }
     };

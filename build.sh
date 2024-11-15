@@ -3,19 +3,29 @@
 # Exit on error
 set -e
 
-echo "Current directory: $(pwd)"
-echo "Directory contents: $(ls -la)"
-echo "Node version: $(node --version)"
-echo "NPM version: $(npm --version)"
+# Print debugging information
+echo "Current working directory: $(pwd)"
+echo "Directory contents:"
+ls -la
 
-# Clean install
+# Ensure we're in the correct directory
+if [ -f "package.json" ]; then
+    echo "Found package.json"
+else
+    echo "Error: package.json not found in current directory"
+    exit 1
+fi
+
+# Install dependencies
 echo "Installing dependencies..."
-rm -rf node_modules package-lock.json
-npm install
+npm ci
 
 # Build the project
 echo "Building the project..."
-npm run build
+VITE_APP_ROOT=$(pwd) npm run build
+
+# Verify build output
+echo "Build completed. Checking dist directory:"
+ls -la dist
 
 echo "Build completed successfully!"
-echo "Dist directory contents: $(ls -la dist)"
